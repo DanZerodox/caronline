@@ -2,6 +2,10 @@ import { Component } from "react";
 import React from 'react';
 import { Table, Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Footer } from '../componentes/Footer';
+import {Banner} from '../componentes/Banner';
+
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export class Productos extends React.Component{
     constructor(props){
@@ -37,7 +41,7 @@ export class Productos extends React.Component{
                 </div></div>
             </div>
             </div>
-           
+            <Banner></Banner>
             <div class="cell large-3 hide-for-xlarge paging-information">
                     <div class="clp-all-title">
                     <span>Todo</span>
@@ -106,7 +110,7 @@ export class Productos extends React.Component{
                 </div>     
             </div>
             </div>
-        
+            <Footer></Footer>  
 
             </div>
             </>
