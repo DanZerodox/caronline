@@ -4,9 +4,6 @@ import { Table, Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Footer } from '../componentes/Footer';
 import {Banner} from '../componentes/Banner';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 export class Productos extends React.Component{
     constructor(props){
         super(props);
