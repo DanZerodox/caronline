@@ -1,7 +1,140 @@
 .App {
-  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+	background:#e5e8f0;
 }
-
+body{
+  font-family: 'Open Sans', sans-serif;
+  background: #e5e8f0;
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.content-top{
+	margin:2% 0;
+}
+.content-bottom{
+	margin-bottom:5%;
+}
+/* .view {
+  overflow: hidden;
+  position: relative;
+} */
+.view-fifth .mask {
+  -webkit-transform: translateX(-391px);
+  -moz-transform: translateX(-391px);
+  -o-transform: translateX(-391px);
+  -ms-transform: translateX(-391px);
+  transform: translateX(-391px);
+}
+.view-fifth img {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.top_box {
+  padding: 10px;
+}
+/* .wrap{
+	width:90%;
+	margin:0 auto;
+	-moz-transition:all .2s linear;
+	-webkit-transition:all .2s linear; 
+	-o-transition:all .2s linear; 
+	-ms-transition:all .2s linear;
+	
+    padding: 0px 0 0 40px;
+} */
+.svg-wrapper{
+  width:10px; 
+  height:10px;
+}
+.segundo{
+	font-family: Ubisoft Sans Regular,Arial,sans-serif;
+    font-size: .6875rem;
+    color: #929db6;
+    padding: 4px 0;
+    margin: 0;
+}
+.icono{
+	padding: 0px 5px;
+    width: 8px;
+}
+.flecha{
+	position: relative;
+	float: left;
+}
+.breadcrumb-controls{
+	padding: 10px;
+}
+.breadcrumb-controls ul li a{
+	font-family: Ubisoft Sans Regular,Arial,sans-serif;
+    font-size: .6875rem;
+    color: #929db6;
+    padding: 4px 0;
+    margin: 0;
+}
+.header-top{
+	background:#10266b;
+	padding: 10px 0;
+}
+.clear{clear:both;}
+.logo{
+	float:left;
+	margin-right: 46.5%;
+}
+.imagenlogo{
+	width:100px;
+}
+/* .cssmenu {
+  float:right;
+	margin-top:16px;
+} */
+.cssmenu ul li {
+	display: inline-block;
+}
+/* .division{
+	padding: 0px 64px;
+} */
+.filtros{
+	background-color: #008aa4;
+    height: 33px;
+}
+.cssmenu ul li a {
+	color: #fff;
+	display: block;
+	margin: 0px 10px;
+	text-transform: uppercase;
+	font-size: 0.8125em;
+}
+/* .clp-all-title{
+  padding: 6px 63px;
+  font-size: 20px;
+} */
+.cssmenu ul li a:hover{
+	color:#555;
+}
+.header-banner-container{
+	background: #24905e;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+	justify-content: center;
+	height: 30px;
+    font-family: fantasy;
+    font-size: 22px;
+}
+.encabezado{
+  color: white; 
+  text-transform:"uppercase";
+  text-decoration: none;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +168,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.gridproducto{
+  padding: 0px 90px;
+}
+
+.tabla{
+  width: 1200px;
 }
