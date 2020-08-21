@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {HeadTop} from './componentes/HeadTop';
+// import {HeadTop} from './componentes/HeadTop';
 import {HeadBanner} from './componentes/HeadBanner';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <>
-    <HeadTop/>
+    {/* <HeadTop/> */}
     <HeadBanner></HeadBanner>
     <App />
     </>
