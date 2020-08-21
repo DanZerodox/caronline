@@ -1,12 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Productos } from './componentes/Productos';
 
 class App extends React.Component{
   render(){
     return(
-      <Productos></Productos>  
+      <BrowserRouter>
+      <Productos></Productos>
+      </BrowserRouter>  
      )
   }
 
