@@ -6,8 +6,8 @@ import { Productos } from './componentes/Productos';
 class App extends React.Component{
   render(){
     return(
-      <p>Hola Mundo</p>
-    )
+      <Productos></Productos>  
+     )
   }
 
 }
