@@ -4203,7 +4203,7 @@ body{
 	}
 }
 
-@media (max-width:720px){
+@media (max-width:360px){
 	.view {
 		overflow: hidden;
 		position: relative;
