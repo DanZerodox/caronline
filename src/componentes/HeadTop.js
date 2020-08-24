@@ -48,6 +48,9 @@ export class HeadTop extends React.Component{
                     <li><a href="checkout.html">Mi Carrito</a></li> 
                     </ul>
                 </div>
+                <div className="menu-respon">
+                    <img className="cssimagen" src={require('../images/menu.png')}></img>
+                </div>
                 <div className="clear"></div>
                 </div>
             </div>

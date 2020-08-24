@@ -38,6 +38,10 @@ body{
 	display: none;
 }
 
+.menu-respon{
+	display: none;
+}
+
 .wrap-head{
 	/* width:80%; */
 		margin:0 auto;
@@ -3469,7 +3473,7 @@ body{
 	    float:none;
 	}
 }
-@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+@media (max-width:480px){
 	.view {
 		overflow: hidden;
 		position: relative;
@@ -4199,7 +4203,7 @@ body{
 	}
 }
 
-@media only screen and (max-width: 320px), only screen and (max-device-width: 320px) {
+@media (max-width:720px){
 	.view {
 		overflow: hidden;
 		position: relative;
@@ -4247,7 +4251,7 @@ body{
 	.btnagrecarritoresponsive{
 		display: block;
 		background-color: #f7f7f7;
-    width: 100%;
+    width: 84%;
     max-width: 353px;
     position: relative;
     color: #24905e;
@@ -4257,6 +4261,15 @@ body{
     padding: 21px;
     bottom: -2rem;
     float: left;
+	}
+	.menu-respon{
+		display: block;
+	}
+	.cssimagen{
+		width: 25px;
+		left: 43px;
+		position: relative;
+		top: 17px;
 	}
 	.imagen-resumen{
 		position: relative;
@@ -4926,5 +4939,9 @@ body{
 	}
 	.icon1 ul {
 		right: -100px;
+	}
+
+	.cssmenu{
+		display: none;
 	}
 }
