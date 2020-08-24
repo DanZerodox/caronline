@@ -2167,6 +2167,9 @@ body{
 		top: -110px;
 		height: 70px;
 	}
+	.rec .rec-pagination{
+		display: none;
+	}
 	.btnfin-resumen{
 		margin-bottom: 20px;
 		padding: 14px 15px;
@@ -4664,9 +4667,12 @@ body{
 		align-items: center;
 		height: 68px;
 		overflow: hidden;
-		width: 348px;
+		width: 301px;
 		background-color: #fff;
 		font-size: 30px;
+	}
+	.sc-AxjAm{
+		display: none;
 	}
 	.btnagregarnum{
 		color: #0176d5;
@@ -4940,8 +4946,63 @@ body{
 	.icon1 ul {
 		right: -100px;
 	}
-
 	.cssmenu{
 		display: none;
 	}
-}
+	.direccion-primer-resumen {
+		font-weight: 600;
+    	padding: 11px 48px 0px;
+	}
+	.direccion-segundo-resumen{
+		padding: 0px 48px;
+	}
+	.li-articulo{
+		display: inline;
+		position: relative;
+		left: 176px;
+	}
+	.imagen-resumen{
+		position: relative;
+		top: -105px;
+		height: 70px;
+		left: -12px;
+	}
+	.procantidadcarritoresponsive{
+		border: 1px solid #cacaca;
+		border-radius: 4px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		overflow: hidden;
+		width: 114px;
+		height: 37px;
+		float: right;
+		margin: 24px 0px 0px 0px;
+		background-color: #fff;
+		position: relative;
+		top: -7px;
+		left: 57px;
+	}
+	.precio-resumen-detalle{
+		position: relative;
+		top: -143px;
+		left: 226px;
+	}
+	.btnpagar{
+		font-size: 24px;
+    height: 64px;
+    padding: 14px 15px;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    border: 0;
+    border-radius: 4px;
+    background-color: #10266b;
+    color: #fff;
+    width: 304px;
+	}
+	}
+
+
