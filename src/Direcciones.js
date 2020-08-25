@@ -96,7 +96,7 @@ export class Direcciones extends React.Component{
                             <button class="btnregistro">Continuar</button>
                             </Link>
                             <Link to={'/contenidocarrito'}>
-                                            <a href="#" className="regresar"  class="regresar">Volver a mi Carrito</a>
+                                            <a href="#" className="regresar"  class="regresar">Regresar</a>
                                             </Link>
                             {this.state.redirect==true?
                               <Redirect push to={'/direcciones'}></Redirect>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box } from '@material-ui/core';
+import { Card, CardContent, Typography, Box, colors } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -16,7 +16,10 @@ export class FormularioRegistro extends React.Component{
             confirmcontrasena:'',
             respuesta:[],
             mostrar:false,
-            tipomensaje:false
+            tipomensaje:false,
+            errormensaje:false,
+            errormensajelocal:false,
+            MensajeLocal:''
 
         }
         this.handleChangeNombre=this.handleChangeNombre.bind(this);
@@ -83,6 +86,20 @@ export class FormularioRegistro extends React.Component{
                                           &nbsp;
                                           <Field name="contrasena2" type="password" onChange={this.handleChangeConfirmContrasena} value={this.state.confirmcontrasena}  component={TextField} label="Confirma Contraseña"></Field> 
                                           </Box>
+                                          {this.state.errormensajelocal==true?
+                                             <>
+                                             <br></br>
+                                             <label class="error_mensaje">{this.state.MensajeLocal} </label>
+                                             </>   
+                                            :null
+                                            }
+                                            {this.state.errormensaje==true?
+                                            <>
+                                                  <br></br>
+                                             <label class="error_mensaje">{this.state.respuesta.Mensaje} </label>    
+                                            </>
+                                            :null
+                                            }
                                     </div>
                                                 
 
@@ -128,9 +145,28 @@ export class FormularioRegistro extends React.Component{
     }
 
     ValidarDatosUsuario(){
-        if(this.state.contrasena != this.state.confirmcontrasena){
-
+        if(this.state.correo == ''){
+            var mensaje='El correo no puede ir vacío';
+            this.setState({
+                MensajeLocal:mensaje,
+                errormensajelocal:true
+            })    
         }
+        else if(this.state.contrasena==''){
+            var mensaje='Contraseña no puede ir vacío';
+            this.setState({
+                MensajeLocal:mensaje,
+                errormensajelocal:true
+            })    
+        }
+        else if(this.state.contrasena != this.state.confirmcontrasena){
+            var mensaje='Las contraseñas no coinciden';
+            this.setState({
+                MensajeLocal:mensaje,
+                errormensajelocal:true
+            })    
+        }
+       
         else{
            this.RegistrarUsuario().then(result=>{
                 this.setState({
@@ -141,6 +177,11 @@ export class FormularioRegistro extends React.Component{
                             mostrar:true,
                             tipomensaje:true
                         })    
+                    }
+                    else{
+                        this.setState({
+                            errormensaje:true
+                        })
                     }
                 })
            });

@@ -24,7 +24,9 @@ export class Productos extends React.Component{
                 <div className="breadcrumb breadcrumbs-outer"><div class="breadcrumb-refinement breadcrumb-controls" data-divider="y">
                 <ul>
                 <li className="flecha">
-                <a href="https://store.ubi.com/ofertas/home?lang=es_MX" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
+                <Link to={'/'}> 
+                <a href="#" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
+                </Link>   
                 </li>
                 <li>
                 <span className="svg-wrapper">

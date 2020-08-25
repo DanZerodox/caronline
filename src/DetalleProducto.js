@@ -41,7 +41,9 @@ export class DetalleProducto extends React.Component{
                 <div className="breadcrumb breadcrumbs-outer"><div class="breadcrumb-refinement breadcrumb-controls" data-divider="y">
                 <ul>
                 <li className="flecha">
-                <a href="https://store.ubi.com/ofertas/home?lang=es_MX" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
+                    <Link to={'/'}>
+                <a href="#" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
+                </Link>
                 </li>
                 <li>
                 <span className="svg-wrapper">
@@ -140,7 +142,9 @@ export class DetalleProducto extends React.Component{
                                     </div>
                                  
                                         <div class="price">SKU: {item.ArtSku}</div>
-                                        <button class="btnver">Ver</button>
+                                        <Link to={'/detalleproducto/'+item.ArtSku}>
+                                        <button onClick={()=>this.Refrescar()} class="btnver">Ver</button>
+                                        </Link>
                                 </div>
                              </div>
                                 </div>
@@ -262,6 +266,9 @@ export class DetalleProducto extends React.Component{
             mostrarresponsive:true
         })
 
+    }
+    Refrescar(){
+        window.location.reload();
     }
     CargarProductosSugeridos(){
         var pro=[];

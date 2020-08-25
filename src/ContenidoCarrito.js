@@ -32,7 +32,7 @@ export class ContenidoCarrito extends React.Component{
                                         <article class="articulo-carrito">
                                            
                                             <figure class="img-responsive">
-                                                <img width={48} height={80} src={item.Url}></img>
+                                                <img className="studio" width={48} height={80} src={item.Url}></img>
                                             </figure>
                                             <div>
                                                 <div>
@@ -53,7 +53,13 @@ export class ContenidoCarrito extends React.Component{
                                             </div>
                                             <div class="seccion-articulo-bajo">
                                                 <ul>
-                                                    <li class="li-articulo"><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></li>
+                                                <Link to={'/'}>
+                                                    <li class="li-articulo">
+                                                        
+                                                        <a class="parte-title-bajo" href="#">Mas productos de Jumex</a>
+                                                        </li>
+                                                        </Link>
+
                                                     <li class="li-articulo"><a class="parte-title-bajo" href="#">Detalle</a></li>
                                                     <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li>
                                                     <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
@@ -62,7 +68,7 @@ export class ContenidoCarrito extends React.Component{
                                             </div>
                                             <div class="seccion-articulo-bajo-responsive">
                                                 <ul>
-                                                    <li class="li-articulo"><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></li>
+                                                    <li class="li-articulo"><Link to={'/'}><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></Link></li>
 
                                                     <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
 
@@ -89,9 +95,9 @@ export class ContenidoCarrito extends React.Component{
                                    
                         </CardContent>
                     </Card>    
+                    <Footer></Footer>
                   </div>  
 
-                  <Footer></Footer>
                   {this.state.redirect==true?
                     <Redirect push to={'/direcciones'}></Redirect>
                     :null

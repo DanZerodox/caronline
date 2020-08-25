@@ -68,8 +68,10 @@ export class FormularioCompra extends React.Component{
                                          &nbsp;
                                          &nbsp;
                                         <Field id="txtp1" name="contrasena" type="password" onChange={this.handleChangeContrasena} value={this.state.contrasena} component={TextField} label="Contraseña"></Field>
-                                      
+                                        
                                      </div>
+                                        <label className="error_mensaje">{this.state.token.Mensaje}</label>
+
                                      <Link to={"/registrocuenta"}> <p class="registrarse">¿No tienes cuenta? Registrate Aquí</p></Link>
                                      {/* <div class="omitir"><a href="#" onClick={()=>this.MostrarDireccion()}>Omitir</a></div> */}
                                  </Form>

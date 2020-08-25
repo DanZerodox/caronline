@@ -2,27 +2,32 @@ import React from 'react';
 import {render} from 'react-dom';
 import { Component } from "react";
 // import '../App.css';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 export class HeadTop extends React.Component{
     constructor(props){
         super(props);
         this.state={
             mostrar:false,
             perfil:[],
+            redirect:false
         }
     }
     render(){
         return(
             <BrowserRouter>
+            <Route>
              <>
              
             {this.state.mostrar==true?
             <div className="header-top">
                 <div className="wrap-head"> 
                 <div className="logo">
-                <Link to={"/"}>
-                    <img className="imagenlogo" src={require('../images/logo.png')} alt=""/>
-                </Link>
+              
+                    <img className="imagenlogo" onClick={()=>this.RegresarInicio()} src={require('../images/logo.png')} alt=""/>
+                    {this.state.redirect==true?
+                        <Redirect push to={'/'}></Redirect>
+                        :null
+                    }
                 </div>
                 <div className="cssmenu">
                     <ul>
@@ -37,9 +42,12 @@ export class HeadTop extends React.Component{
                 <div className="header-top">
                 <div className="wrap-head"> 
                 <div className="logo">
-                <Link to={"/"}>
+             
                     <img className="imagenlogo" src={require('../images/logo.png')} alt=""/>
-                </Link>
+                    {this.state.redirect==true?
+                        <Redirect push to={'/'}></Redirect>
+                        :null
+                    }
                 </div>
                 <div className="cssmenu">
                     <ul>
@@ -56,6 +64,7 @@ export class HeadTop extends React.Component{
             </div>
             }
              </>
+             </Route>
             </BrowserRouter>
         );
     }
@@ -67,12 +76,20 @@ export class HeadTop extends React.Component{
                     perfil:item,
                     mostrar:true
                 },()=>{
-                    console.log(this.state.perfil.UsrNombre)
+                    console.log("aqui esta el nombre",this.state.perfil.UsrNombre)
                     localStorage.setItem("nombre-usuario",this.state.perfil.UsrNombre);
+                    
                 })
             })    
            
         }
+    }
+    RegresarInicio(){
+        this.setState({
+            redirect:true
+        },()=>{
+            window.location.reload();
+        })
     }
 
     CargarPerfil(token){
