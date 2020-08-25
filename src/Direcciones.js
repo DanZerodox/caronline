@@ -147,7 +147,7 @@ export class Direcciones extends React.Component{
                             </Formik>
                             <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
                                             <Link to={'/contenidocarrito'}>
-                                            <a href="#" className="regresar"  class="regresar">Volver a mi Carrito</a>
+                                            <a href="#" className="regresar"  class="regresar">Regresar</a>
                                             </Link>
                         </CardContent>
                     </Card>  

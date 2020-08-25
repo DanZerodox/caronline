@@ -7,7 +7,9 @@ import {HeadTop} from './componentes/HeadTop';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+  
   <React.StrictMode>
+
     <>
     <HeadTop/>
     {/* <HeadBanner></HeadBanner> */}
