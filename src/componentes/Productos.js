@@ -83,8 +83,8 @@ export class Productos extends React.Component{
                                 </div>
                                
                              </div>
-                             {/* <span class="rating">{this.Califacion(item.ArtPuntuacion)}</span> */}
-{/*                             
+                             <span class="rating">{this.Califacion(item.ArtPuntuacion)}</span>
+                            <Link to={'/detalleproducto/'+item.ArtSku}>
                              <ul className="list">
                                 <li className="btnagregar">
                                     <label class="takemeon"/>
@@ -98,8 +98,8 @@ export class Productos extends React.Component{
                                     </ul>
 
                                 </li>
-                                </ul> */}
-                               
+                                </ul>
+                                </Link>
                                 <div class="clear"></div>
                                 </a>
                              </div>

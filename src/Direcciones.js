@@ -20,7 +20,8 @@ export class Direcciones extends React.Component{
             mensaje:[],
             nombre:'',
             redirect: false,
-            direccion_id:''
+            direccion_id:'',
+            mostrarbtn:false
 
         }
         this.handleChangeDireccion=this.handleChangeDireccion.bind(this);
@@ -92,9 +93,12 @@ export class Direcciones extends React.Component{
                                     <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
                                 </div> 
                             </ul>
+                           {this.state.mostrarbtn==true?
                             <Link to={"/resumen"}>
                             <button class="btnregistro">Continuar</button>
                             </Link>
+                            : null
+                            }
                             <Link to={'/contenidocarrito'}>
                                             <a href="#" className="regresar"  class="regresar">Regresar</a>
                                             </Link>
@@ -104,7 +108,7 @@ export class Direcciones extends React.Component{
                             }                
                         </CardContent>
                     </Card>
-                    <Footer></Footer>
+                    {/* <Footer></Footer> */}
                  </div>
                     :
                     <div className='primer-panel'>
@@ -166,9 +170,11 @@ export class Direcciones extends React.Component{
             this.ProcesoInicial(token);
         }
     }
+    
     GetIdDireccion(id){
         this.setState({
-            direccion_id:id
+            direccion_id:id,
+            mostrarbtn:true
         },()=>{
             localStorage.removeItem("direccion_id");
             localStorage.setItem("direccion_id",this.state.direccion_id);

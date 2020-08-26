@@ -79,7 +79,7 @@ export class ResumenCompra extends React.Component{
                           <button class="btnfin-resumen" onClick={()=>this.FinalizarPedido()}>Finalizar</button>
                       </CardContent>
                   </Card>
-                  <Footer></Footer>              
+                  {/* <Footer></Footer>               */}
               </div>
                     </>
                     :
@@ -94,7 +94,7 @@ export class ResumenCompra extends React.Component{
                         </div>
                         </CardContent>
                     </Card>
-                    <Footer></Footer>
+                    {/* <Footer></Footer> */}
                 </div>  
                 }   
             </Route>
