@@ -3,7 +3,10 @@ import { Card, CardContent, Typography, Box, colors } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 export class FormularioRegistro extends React.Component{
     constructor(props){
         super(props);
@@ -194,7 +197,7 @@ export class FormularioRegistro extends React.Component{
             "Password":this.state.contrasena,
             "Nombre": this.state.nombre+" "+this.state.apellido
         }
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Usuario/registrar";
+        const posturl=url_general+"api/Usuario/registrar";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'POST',

@@ -4,7 +4,10 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import {Footer} from './componentes/Footer';
-
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 export class Historico extends React.Component{
     constructor(props){
         super(props);
@@ -51,7 +54,7 @@ export class Historico extends React.Component{
                                                 <Link to={'/detalleproducto/'+item2.ArtSku}>
                                                 <button class="btnfin-h">Comprar</button>
                                                 </Link>
-                                                <div class="imagen-resumen-h"><img  width={48} src={"https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
+                                                <div class="imagen-resumen-h"><img  width={48} src={url_general+"Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
                                             </li>
                                         </ul>
                                         </>    

@@ -4,6 +4,10 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import Carousel,{ consts } from 'react-elastic-carousel';
 import { Footer } from './Footer';
 
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
 export class CarritoResponsivo extends React.Component{
     constructor(props){
@@ -89,7 +93,7 @@ export class CarritoResponsivo extends React.Component{
                                     <h3 class="m_1">{item.ArtDes}</h3>
                                     <p class="m_2">{item.ArtDesTv}</p>
                                     <div class="grid_img">
-                                        <div class="css3"><img class="imagen1" src={"https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
+                                        <div class="css3"><img class="imagen1" src={url_general+"Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
                                      
                                     </div>
                                  
@@ -137,7 +141,7 @@ export class CarritoResponsivo extends React.Component{
 
     CargarProductosSugeridos(){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Articulo/sugeridos";
+        const posturl=url_general+"api/Articulo/sugeridos";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',

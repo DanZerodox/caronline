@@ -4,6 +4,10 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import {Footer} from './componentes/Footer';
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 export class Direcciones extends React.Component{
     constructor(props){
         super(props);
@@ -224,7 +228,7 @@ export class Direcciones extends React.Component{
             "Referencia":this.state.referencia.toString()
         };
         console.log("mi array",data);
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Usuario/direccion/agregar";
+        const posturl=url_general+"api/Usuario/direccion/agregar";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'POST',
@@ -248,7 +252,7 @@ export class Direcciones extends React.Component{
     }
     CargarDirecciones(token){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Usuario/direccion";
+        const posturl=url_general+"api/Usuario/direccion";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',

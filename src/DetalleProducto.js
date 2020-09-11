@@ -8,6 +8,10 @@ import { Footer } from './componentes/Footer';
 import { BrowserRouter, Route, Link,Redirect } from "react-router-dom";
 import Carousel,{ consts } from 'react-elastic-carousel';
 // import { threadId } from 'worker_threads';
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
 export class DetalleProducto extends React.Component{
     constructor(props){
@@ -67,7 +71,7 @@ export class DetalleProducto extends React.Component{
                             <ul id="etalage">
                                 <li>
                                     <a href="#">
-                                        <img class="etalage_thumb_image" src={"https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+this.state.id+".png"} />
+                                        <img class="etalage_thumb_image" src={url_general+"Content/Assets/Images/"+this.state.id+".png"} />
                                     </a>
                                 </li>
                             </ul>
@@ -137,7 +141,7 @@ export class DetalleProducto extends React.Component{
                                     <h3 class="m_1">{item.ArtDes}</h3>
                                     <p class="m_2">{item.ArtDesTv}</p>
                                     <div class="grid_img">
-                                        <div class="css3"><img class="imagen1" src={"https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
+                                        <div class="css3"><img class="imagen1" src={url_general+"Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
                                      
                                     </div>
                                  
@@ -272,7 +276,7 @@ export class DetalleProducto extends React.Component{
     }
     CargarProductosSugeridos(){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Articulo/sugeridos";
+        const posturl=url_general+"api/Articulo/sugeridos";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',
@@ -363,7 +367,7 @@ export class DetalleProducto extends React.Component{
     AgregarCarrito(sku,descripcion,precio){
         var array=this.state.productosencarrito;
         var index=array.findIndex(x=>x.Sku === sku);
-        var url="https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+sku+".png";
+        var url=url_general+"Content/Assets/Images/"+sku+".png";
         if(index !== -1){
             let items=[...this.state.productosencarrito];
             let item={...items[index]};
@@ -415,7 +419,7 @@ export class DetalleProducto extends React.Component{
 
     CargarDetalleProducto(){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Articulo/"+this.state.id;
+        const posturl=url_general+"api/Articulo/"+this.state.id;
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',

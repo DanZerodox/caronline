@@ -5,7 +5,10 @@ import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import { Footer } from './componentes/Footer';
 import * as Yup from 'yup';
-
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 export class FormularioCompra extends React.Component{
     constructor(props){
         super(props);
@@ -117,7 +120,7 @@ export class FormularioCompra extends React.Component{
             "Usuario":this.state.correo,
             "Password":this.state.contrasena
         }
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Usuario/validar";
+        const posturl=url_general+"api/Usuario/validar";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'POST',

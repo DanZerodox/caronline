@@ -4,6 +4,10 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import {Footer} from './componentes/Footer';
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
 export class ResumenCompra extends React.Component{
     constructor(props){
@@ -44,7 +48,7 @@ export class ResumenCompra extends React.Component{
                                             </div>
                                     </div>
         
-                                    <div class="imagen-resumen"><img  width={48} src={"https://192.168.224.168:44387/qa_tiendajumex/Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
+                                    <div class="imagen-resumen"><img  width={48} src={url_general+"Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
                                     <div class="cantidad-resumen"><h2>Cantidad: {item2.TickDetCant} cajas</h2></div>
                                     <div class="precio-resumen"><h1 class="h-precio-resumen">${item2.TickDetSubTotal}.00</h1></div>
                                 </li>  
@@ -128,7 +132,7 @@ export class ResumenCompra extends React.Component{
 
     ConsultarDireccion(token){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Usuario/direccion";
+        const posturl=url_general+"api/Usuario/direccion";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',
@@ -152,7 +156,7 @@ export class ResumenCompra extends React.Component{
 
     ConsultarCarrito(token){
         var pro=[];
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Carrito/consultar";
+        const posturl=url_general+"api/Carrito/consultar";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'GET',

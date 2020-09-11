@@ -5,6 +5,11 @@ import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import { Footer } from './componentes/Footer';
 
+//QA
+//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
+//PRODUCCION
+var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
 export class ContenidoCarrito extends React.Component{
     constructor(props){
         super(props);
@@ -249,7 +254,7 @@ export class ContenidoCarrito extends React.Component{
         });
         console.log("si se pdo",data);
     
-        const posturl="https://192.168.224.168:44387/qa_tiendajumex/api/Carrito/agregar";
+        const posturl=url_general+"api/Carrito/agregar";
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
                 method: 'POST',
