@@ -2644,13 +2644,25 @@ body{
 
 
 @media (max-width:1600px){
+	h3.m_1 {
+		color: #555;
+		font-size: 1.1em;
+		text-transform: uppercase;
+		font-weight: 500;
+	}
 	.bodi-sus{
 		transform: scale(1);
 		overflow-y: scroll;
 		overflow-x: hidden;
 		height: 680px;
 	}
-
+	.m_2-produ{
+		font-size: 24px;
+	    color: black;
+	}
+	.agregar_pro{
+		display: none;
+	}
 	.imagen_cabecera{
 	width: 1524px;	
 	}
