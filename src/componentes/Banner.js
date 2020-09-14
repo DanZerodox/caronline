@@ -11,7 +11,7 @@ export class Banner extends React.Component{
                       <picture>
                         <source media="(min-width: 660px)" srcset={require("../images/Jumex/nuestrasmarcas.png")}/>
                         <source media="(min-width: 0px)" srcset={require("../images/Jumex/nuestrasmarcas.png")}/>
-                        <img src={require("../images/Jumex/nuestrasmarcas.png")} alt="UBIFWD Sale Category banner"/>
+                        <img className='imagen_cabecera' src={require("../images/Jumex/nuestrasmarcas.png")} alt="UBIFWD Sale Category banner"/>
                       </picture>
                     </div>
             </div>

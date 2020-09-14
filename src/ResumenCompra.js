@@ -15,7 +15,8 @@ export class ResumenCompra extends React.Component{
         this.state={
             arreglo:[],
             direccion:[],
-            mostrar: false
+            mostrar: false,
+            tipo_entrega:0
         }
     }
     render(){
@@ -60,21 +61,37 @@ export class ResumenCompra extends React.Component{
                           
                        </div>
                        <div class="editar-direccion">
-                             {this.state.direccion.map(dir=>(
-                                   <ul class="panel-direccion">
-                                   <li class="li-direccion-final-resumen">
-                                    <div class="direccion-primer">Dirección de entrega</div>
-                                       <div class="direccion-segundo">
-                                        <span class="direccion-mun-col">{dir.Direccion+" - "+dir.Municipio+", "+dir.Estado}</span>
-                                       </div>
-                                       <div class="direccion-segundo">
-                                        <span class="direccion-mun-col">{dir.Colonia+", C.P. "+dir.CP+" - "+dir.Referencia}</span>
-                                       </div>
-                                     
-                                   </li>  
+                            {this.state.tipo_entrega==0?
+                             this.state.direccion.map(dir=>(
+                                <ul class="panel-direccion">
+                                <li class="li-direccion-final-resumen">
+                                 <div class="direccion-primer">Dirección de entrega</div>
+                                    <div class="direccion-segundo">
+                                     <span class="direccion-mun-col">{dir.Direccion+" - "+dir.Municipio+", "+dir.Estado}</span>
+                                    </div>
+                                    <div class="direccion-segundo">
+                                     <span class="direccion-mun-col">{dir.Colonia+", C.P. "+dir.CP+" - "+dir.Referencia}</span>
+                                    </div>
+                                  
+                                </li>  
 
-                               </ul>
-                             ))} 
+                            </ul>
+                            )) 
+                            :
+                            <ul class="panel-direccion">
+                            <li class="li-direccion-final-resumen">
+                             <div class="direccion-primer">Dirección de entrega</div>
+                                <div class="direccion-segundo">
+                                 <span class="direccion-mun-col">En oficina</span>
+                                </div>
+                                <div class="direccion-segundo">
+                                 <span class="direccion-mun-col">Xalostoc</span>
+                                </div>
+                              
+                            </li>  
+
+                        </ul>
+                            }
 
                        </div> 
                        <Link to={"/contenidocarrito"}> 
@@ -108,20 +125,32 @@ export class ResumenCompra extends React.Component{
     componentDidMount(){
         var token=localStorage.getItem("token");
         var direccion_id=localStorage.getItem("direccion_id");
-        this.ConsultarCarrito(token).then(item=>{
-            this.setState({
-                arreglo:item
-            },()=>{
-                this.ConsultarDireccion(token).then(result=>{
+        var tipo_entrega=localStorage.getItem("tipo_entrega");
+        this.setState({tipo_entrega:tipo_entrega});
+            this.ConsultarCarrito(token).then(item=>{
+                this.setState({
+                    arreglo:item
+                },()=>{
+                  if(tipo_entrega==0){
+                    // this.ConsultarDireccion(token,direccion_id).then(result=>{
+                    //     this.setState({
+                    //         direccion:result
+                    //     },()=>{console.log(this.state.direccion)})
+                    // })
+                    var e=localStorage.getItem("direccion_objeto");
                     this.setState({
-                        direccion:result
-                    },()=>{console.log(this.state.direccion)})
+                        direccion:JSON.parse(e)
+                    })    
+
+                  }
                 })
             })
-        })
+        
+    
     }
 
     FinalizarPedido(){
+        this.CerrarPedido(localStorage.getItem("token"),localStorage.getItem("direccion_id"));
         this.setState({
             mostrar:true
         });
@@ -130,12 +159,39 @@ export class ResumenCompra extends React.Component{
         localStorage.setItem("direccion",this.state.direccion);
     }
 
-    ConsultarDireccion(token){
-        var pro=[];
-        const posturl=url_general+"api/Usuario/direccion";
+    CerrarPedido(token,direccion_id){
+        console.log(token);
+        var posturl="";
+        if(localStorage.getItem("tipo_entrega")==0){
+            posturl=url_general+"api/Carrito/confirmar/0/"+direccion_id;
+        }
+        else{
+            posturl=url_general+"api/Carrito/confirmar/1";
+        }
         var result= new Promise(function(resolve,reject){
             fetch(posturl,{
-                method: 'GET',
+                method: 'POST',
+                headers:{ 
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer '+token
+                }
+            }).then(
+                (res)=>res.json()
+
+            )
+            .catch(error=>console.log('Error',error));
+        });
+
+        return result;    
+    }
+
+    ConsultarDireccion(token,direccion_id){
+        console.log(token);
+        var pro=[];
+        const posturl=url_general+"api/Usuario/direccion/"+direccion_id;
+        var result= new Promise(function(resolve,reject){
+            fetch(posturl,{
+                method: 'POST',
                 headers:{ 
                     'Content-Type':'application/json',
                     'Authorization':'Bearer '+token

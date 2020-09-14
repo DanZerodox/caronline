@@ -25,7 +25,9 @@ export class FormularioCompra extends React.Component{
             productocanasta:[],
             cantidad:0,
             mostrarcompra:false,
-            redirect:false
+            redirect:false,
+            sitio:'',
+            tipo_sitio:0
         }
 
         
@@ -104,8 +106,14 @@ export class FormularioCompra extends React.Component{
     IniciarSesion(){
          this.ValidarDatos().then(item=>{
              this.setState({
-                 token:item[0]
+                 token:item[0],
+                 sitio:item[0].Sitio,
+                 tipo_sitio:item[0].TipoEntrega[0].TipoEntrega
+
              },()=>{
+                 localStorage.setItem("tipo_sitio",this.state.tipo_sitio);
+                 console.log(this.state.sitio);
+                 console.log(this.state.tipo_sitio);
                 if(this.state.token.Estatus=="OK"){
                 localStorage.setItem("token",this.state.token.AccessToken);  
                 window.location.reload(); 

@@ -25,7 +25,10 @@ export class Direcciones extends React.Component{
             nombre:'',
             redirect: false,
             direccion_id:'',
-            mostrarbtn:false
+            mostrarbtn:false,
+            tipo_entrega: 0,
+            mostrarError:false,
+            tipo_sitio:0
 
         }
         this.handleChangeDireccion=this.handleChangeDireccion.bind(this);
@@ -59,7 +62,10 @@ export class Direcciones extends React.Component{
             <Route>
                  
                 <>
-                {this.state.mostrar==false?
+
+                {
+                this.state.mostrarError==false?
+                this.state.mostrar==false?
                  <div className='direcciones-panel'>
                     <Card>
                         <CardContent>
@@ -78,13 +84,31 @@ export class Direcciones extends React.Component{
                                     <div class="direccion-segundo">
                                         <span class="direccion-mun-col">{this.state.nombre}</span>
                                     </div>
-                                    <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId)} type="radio"></input></div>
+                                    <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
                                 </li>  
                                 <div class="editar-direccion">
                                     <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
                                 </div> 
                             </ul>
                             ))}
+                           {this.state.tipo_sitio==0?
+                            <>
+                            <br></br>
+                            <ul class="panel-direccion">
+                                <li class="li-direccion">
+                                    <div class="direccion-primer">En oficina</div>
+                                    <div class="direccion-segundo">
+                                        <span class="direccion-mun-col">Xalostoc</span>
+                                    </div>
+                                  
+                                    <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion("",1)}  type="radio"></input></div>
+                                </li>  
+                    
+                            </ul>
+                            </>
+                            :
+                            null
+                            }
                             <br></br>
                             <h4>En otra ubicación</h4>
                             <ul class="panel-direccion">
@@ -160,8 +184,22 @@ export class Direcciones extends React.Component{
                         </CardContent>
                     </Card>  
                   </div> 
-                 
+                 :
+                 <div className='primer-panel'>
+                    <Card>
+                        <CardContent>
+                        <div class="mensajefinal">
+                        <img class="circlegreen" src={require('./images/Jumex/tache.png')}></img>
+                        <p>Ha ocurrido un error</p>
+                        <p>{this.state.mensaje.Mensaje}</p>
+                        <Link to={'/formulariocompra'}><p>Regresar</p></Link>
+                        <img class="circlegreen" src={require('./images/Jumex/tucan.png')}></img>
+                        </div>
+                        </CardContent>
+                    </Card>
+                </div> 
                  }
+                 
                                   
                 </>
             </Route>           
@@ -170,18 +208,32 @@ export class Direcciones extends React.Component{
 
     componentDidMount(){
         var token=localStorage.getItem("token");
+        var tipo_sitio=localStorage.getItem("tipo_sitio");
+        console.log(token);
         if(token != null){
+            this.setState({tipo_sitio:tipo_sitio});
             this.ProcesoInicial(token);
         }
     }
     
-    GetIdDireccion(id){
+    GetIdDireccion(id,tipo){
         this.setState({
             direccion_id:id,
-            mostrarbtn:true
+            mostrarbtn:true,
+            tipo_entrega:tipo
         },()=>{
-            localStorage.removeItem("direccion_id");
-            localStorage.setItem("direccion_id",this.state.direccion_id);
+            if(this.state.tipo_entrega==0){
+                this.state.direcciones.map(item=>{
+                    if(item.DirId==id){
+                        localStorage.removeItem("direccion_id");
+                        localStorage.setItem("direccion_id",this.state.direccion_id);
+                        localStorage.removeItem("direccion_objeto");
+                        localStorage.setItem("direccion_objeto",JSON.stringify(this.state.direcciones));
+                    }
+                })
+            }
+            localStorage.removeItem("tipo_entrega");
+            localStorage.setItem("tipo_entrega",this.state.tipo_entrega);
         })
     }
 
@@ -191,7 +243,7 @@ export class Direcciones extends React.Component{
                 direcciones:item,
                 nombre:localStorage.getItem("nombre-usuario")
             },()=>{
-                console.log(this.state.direcciones.length);
+                console.log(this.state.direcciones);
                 if(this.state.direcciones.length==0){
                 this.setState({
                     mostrar:true
@@ -210,8 +262,14 @@ export class Direcciones extends React.Component{
                 if(this.state.mensaje.Estatus=="OK"){
                     this.ProcesoInicial(token);
                     this.setState({
-                        mostrar:false
+                        mostrar:false,
+                        mostrarError:false
                     })
+                }
+                else{
+                    this.setState({
+                        mostrarError:true
+                    })    
                 }
 
             })

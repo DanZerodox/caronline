@@ -58,7 +58,11 @@ export class HeadTop extends React.Component{
                 <div className="cssmenu">
                     <ul>
                     <li className="active"><a href="register.html">Registrate</a></li> 
-                    <li><a href="login.html">Mi Cuenta</a></li> 
+                    <li>
+                        <Link to={'/formulariocompra'}>
+                        Mi Cuenta
+                        </Link>                    
+                    </li> 
                     <li><a href="checkout.html">Mi Carrito</a></li> 
                     </ul>
                 </div>
