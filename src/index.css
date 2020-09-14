@@ -3040,6 +3040,9 @@ body{
 	}	
 }
 @media (max-width:800px){
+	.box1{
+		transform: none;
+	}
 	.btnfin-resumen{
 		margin-top: -66px;
 	}
@@ -3252,6 +3255,9 @@ body{
 	}
 }	
 @media (max-width:768px){
+	.box1{
+		transform: none;
+	}
 	.btnfin-resumen{
 		margin-top: -66px;
 	}
@@ -3472,6 +3478,9 @@ body{
 	}
 }
 @media (max-width:640px){
+	.box1{
+		transform: none;
+	}
 	.monorin {
 		height: 271px;
 		padding: 54px 0px;
@@ -3735,6 +3744,9 @@ body{
 	}
 }
 @media (max-width:480px){
+	.box1{
+		transform: none;
+	}
 	.monorin {
 		height: 271px;
 		padding: 54px 0px;
@@ -4478,6 +4490,9 @@ body{
 	}
 }
 @media (max-width:375px){
+	.box1{
+		transform: none;
+	}
 	.monorin {
 		height: 271px;
 		padding: 54px 0px;
@@ -5472,6 +5487,9 @@ body{
 	}
 }
 @media (max-width:360px){
+	.box1{
+		transform: none;
+	}
 	.monorin {
 		height: 271px;
 		padding: 54px 0px;
@@ -6451,6 +6469,9 @@ body{
 	}
 }
 @media (max-width:320px){
+	.box1{
+		transform: none;
+	}
 	.monorin {
 		height: 271px;
 		padding: 54px 0px;
