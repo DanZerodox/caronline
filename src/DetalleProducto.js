@@ -67,7 +67,7 @@ export class DetalleProducto extends React.Component{
                                 </li>
                             </ul>
                         </div>
-                        <div class="cont1 span_2_of_a1">
+                        <div class="cont1 span_2_of_a1" style={{height:450}}>
                             {this.state.productodetalle.map((item)=>(
                                 item.ArtSku==this.state.id?
                                <>
@@ -436,8 +436,12 @@ export class DetalleProducto extends React.Component{
             this.setState({height:1000, width:727})
         }
         else if(height < 1500){
-            this.setState({height:550, width:485, marginLeft:85})
-        }else{
+            this.setState({height:600, width:485, marginLeft:85})
+        }
+        else if(height < 600){
+            this.setState({height:600, width:485, marginLeft:85})
+        }
+        else{
             this.setState({height:750, width:582, marginLeft:148})
         }
        console.log(height);
