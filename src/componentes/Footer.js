@@ -1,18 +1,18 @@
-import { Component } from 'react';
 import React from 'react';
-import '../App.css';
+import Card from 'react-bootstrap/Card';
+
 
 export class Footer extends React.Component{
     render(){
         return(
             <>
+			  <Card style={{boxShadow:'none', padding:'10px 90px', border:'none', backgroundColor:'rgb(229, 232, 240)'}}>
+                <Card.Title>
+                <p class="leyendapie">Compra tus productos JUMEX favoritos en línea en la Tienda de Jumex oficial en México. Nuevos productos y promociones increíbles: ¡solo lo mejor de Jumex! Jumex cuenta con los mejores productos para ti: prueba los nuevos sabores entre diferentes productos de alta calidad.</p>
+                </Card.Title>
+              </Card>
             <div class="footer">
-                <div class="footer-top">
-                    <div class="wrap">
-                        <p class="leyendapie">Compra tus productos JUMEX favoritos en línea en la Tienda de Jumex oficial en México. Nuevos productos y promociones increíbles: ¡solo lo mejor de Jumex! Jumex cuenta con los mejores productos para ti: prueba los nuevos sabores entre diferentes productos de alta calidad.</p>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+            
                 <div class="footer-middle">
                 <div class="wrap">
                     <div>

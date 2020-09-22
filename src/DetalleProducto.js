@@ -7,6 +7,13 @@ import {Productos} from './componentes/Productos';
 import { Footer } from './componentes/Footer';
 import { BrowserRouter, Route, Link,Redirect } from "react-router-dom";
 import Carousel,{ consts } from 'react-elastic-carousel';
+import { BarraInicio } from './componentes/BarraInicio';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import { CardHeader } from '@material-ui/core';
 // import { threadId } from 'worker_threads';
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
@@ -23,7 +30,10 @@ export class DetalleProducto extends React.Component{
             productosencarrito:[],
             mostrar:false,
             productossugeridos:[],
-            mostrarresponsive: false
+            mostrarresponsive: false,
+            height: 0,
+            width: 0,
+            marginLeft: 0
         }
     }
     myArrow({ type, onClick, isEdge }) {
@@ -39,34 +49,15 @@ export class DetalleProducto extends React.Component{
         return (
             <Route>
         <> 
-        <div class="body-content">
-        <div className="cabecera">
-        <div className="container-breadcrumbs sidebar-padding show-for-medium cell">
-                <div className="breadcrumb breadcrumbs-outer"><div class="breadcrumb-refinement breadcrumb-controls" data-divider="y">
-                <ul>
-                <li className="flecha">
-                    <Link to={'/'}>
-                <a href="#" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
-                </Link>
-                </li>
-                <li>
-                <span className="svg-wrapper">
-                <svg className="icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
-                </span>
-                
-                <span className="segundo">Detalle del Producto</span>
-                </li>
-                
-                </ul>
-                </div></div>
-            </div>
-        </div>
+        <div class="bodi-sus" style={{overflowY:'hidden', height:this.state.height}}>
+        <BarraInicio></BarraInicio>
+
              {/* <div class="single">
               
              </div> */}
                <div class="">
                     
-                    <div class="cont span_2_of_3">
+                    <div class="cont span_2_of_3" style={{height:this.state.height, overflowX:'hidden'}}>
                         <div class="labout span_1_of_a1">
                             <ul id="etalage">
                                 <li>
@@ -89,7 +80,7 @@ export class DetalleProducto extends React.Component{
                                     <h4 class="marca">Vendido por <Link to="/">{item.ArtMar}</Link></h4>
                                     <div class="cantidadcarrito">
                                         <button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button>
-                                        <p>{this.state.cantidad}</p>
+                                        <p style={{marginTop:17}}>{this.state.cantidad}</p>
                                         <button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button>
                                        
                                     </div>
@@ -163,62 +154,61 @@ export class DetalleProducto extends React.Component{
                     </div>    
                     <Footer></Footer>  
                     </div>
-                    <div class="cont span_1_of_left">
+                    <div class="cont span_1_of_left" style={{width:this.state.width}}>
                         <section  class="sky-form">
                           <h4>Mi Carrito</h4>
                         </section>
-                        <section className="contenido-carrito">
-                           {this.state.mostrar==true?
-                         this.state.productosencarrito.map((produ)=>(
-                            <>
-                            {/* <div className="articulo">
-                                <p className="pro-titulo">{produ.Des}</p>
-                                <img className="miniimagen" src={produ.Url}/>
-                                <a href="#"><img className="basurero" src={require('./images/Jumex/basura.png')} onClick={()=>this.EliminarCarrito(produ.Sku)}></img></a>
-                                <div class="procantidadcarrito">
+                        <div style={{padding:20, overflowY:'scroll', height:350} }>
+                        {this.state.mostrar==true?
+                        this.state.productosencarrito.map((produ)=>(
+
+                            <Card style={{border:'1px solid #dedede', padding:10,  marginBottom:15}}>
+                             <CardMedia image={produ.Url} style={{float:'left', width:60, height:100}}>
+
+                             </CardMedia>   
+                             <CardContent>
+                             <div style={{
+                                        marginLeft: 8,
+                                        fontWeight: "bold",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        fontSize: 15,
+                                        textOverflow: "ellipsis",
+                                        padding:'0px 10px'
+                                }}>{produ.Des}
+                                </div>
+                                <div style={{
+                                      marginLeft: 8,
+                                      whiteSpace: "nowrap",
+                                      overflow: "hidden",
+                                      fontSize: 15,
+                                      textOverflow: "ellipsis",
+                                      padding:'0 10px'
+                                }}>
+                                    Sku: {produ.Sku}
+                                    <div style={{
+                                        float:'right',
+                                        fontSize:20,
+                                        fontWeight:600
+                                    }}>
+                                        ${produ.Precio}.00
+                                    </div>
+                                </div>
+                                <div style={{float:'left', width:125, padding:'0px 6px', border:'1px solid #cacaca', borderRadius:4, marginLeft:this.state.marginLeft}}>
                                     <button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button>
                                     <input className="inputcantidad" value={produ.Cantidad}/>
                                     <button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button>
                                    
                                 </div>
-
-                            </div> */}
-                             <ul class="panel-direccion-detalle">
-
-<li class="li-direccion-resumen">
-    <div class="direccion-primer-resumen">{produ.Des}</div>
-    <div class="direccion-segundo-resumen">
-        <span class="direccion-mun-col">SKU: {produ.Sku}</span>
-    </div>
-
-    <div class="direccion-tercero-detalle">
-    <div class="seccion-articulo-bajo-detalle">
-                <ul class="seccion-art-width">
-                    {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></li> */}
-                    
-                    <li class="li-articulo"><a class="parte-title-bajo" onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a></li>
-                </ul>
-            </div>
-    </div>
-
-    <div class="imagen-resumen"><img  width={48} src={produ.Url}></img></div>
-    <div class="cantidad-resumen-detalle">
-    <div class="procantidadcarrito">
-                                    <button class="btnagregarnum" onClick={()=>this.QuitarItemCarrito(produ.Sku)}>-</button>
-                                    <input className="inputcantidad" value={produ.Cantidad+"Caja"}/>
-                                    <button class="btnagregarnum" onClick={()=>this.AgregarItemCarrito(produ.Sku)}>+</button>
-                                   
-                                </div>
-    </div>
-    <div class="precio-resumen-detalle"><h1 class="h-precio-resumen-detalle">${produ.Precio}.00</h1></div>
-</li>  
-
-</ul>
-                            </>
-                        )):<p class="nohay">No tienes productos en tu carrito.</p>   
-                        }
-                        </section>
-                        <section className="pagar-carrito">
+                                <div style={{float:"right", marginTop:16}}>
+                                <a class="parte-title-bajo" onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                </div>    
+                             </CardContent>   
+                            </Card>   
+                        ))
+                        :<p class="nohay">No tienes productos en tu carrito.</p>}
+                        </div>
+                        <section className="pagar-carrito" style={{textAlign:'center'}}>
                            {this.state.mostrar==true?
                          <Link to={'/formulariocompra'}>
                          <button className="btnpagar">Finalizar Compra</button>
@@ -261,7 +251,8 @@ export class DetalleProducto extends React.Component{
                       },()=>{console.log("baby",this.state.productossugeridos)})
                   })  
             })
-        });     
+        });  
+        this.resize();   
     }
 
     AgregarCarritoResponsive(sku,descripcion,precio){
@@ -437,6 +428,19 @@ export class DetalleProducto extends React.Component{
         });
 
         return result;
+    }
+
+    resize() {
+        const height = window.innerWidth;
+        if(height >1900){
+            this.setState({height:1000, width:727})
+        }
+        else if(height < 1500){
+            this.setState({height:550, width:485, marginLeft:85})
+        }else{
+            this.setState({height:750, width:582, marginLeft:148})
+        }
+       console.log(height);
     }
 }
 

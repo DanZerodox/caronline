@@ -3,6 +3,15 @@ import {render} from 'react-dom';
 import { Component } from "react";
 // import '../App.css';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+
+
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
@@ -23,56 +32,31 @@ export class HeadTop extends React.Component{
             <BrowserRouter>
             <Route>
              <>
-             
-            {this.state.mostrar==true?
-            <div className="header-top">
-                <div className="wrap-head"> 
-                <div className="logo">
-              
-                    <img className="imagenlogo" onClick={()=>this.RegresarInicio()} src={require('../images/logo.png')} alt=""/>
-                    {this.state.redirect==true?
-                        <Redirect push to={'/'}></Redirect>
-                        :null
-                    }
-                </div>
-                <div className="cssmenu">
-                    <ul>
-                    <li><a href="#">Bienvenido</a></li>
-                    <li><a href="#">{this.state.perfil.UsrNombre}</a></li>
-                    </ul>
-                </div>
-                <div className="clear"></div>
-                </div>
-            </div>
-                :
-                <div className="header-top">
-                <div className="wrap-head"> 
-                <div className="logo">
-             
-                    <img className="imagenlogo" src={require('../images/logo.png')} alt=""/>
-                    {this.state.redirect==true?
-                        <Redirect push to={'/'}></Redirect>
-                        :null
-                    }
-                </div>
-                <div className="cssmenu">
-                    <ul>
-                    <li className="active"><a href="register.html">Registrate</a></li> 
-                    <li>
-                        <Link to={'/formulariocompra'}>
-                        Mi Cuenta
-                        </Link>                    
-                    </li> 
-                    <li><a href="checkout.html">Mi Carrito</a></li> 
-                    </ul>
-                </div>
-                <div className="menu-respon">
-                    <img className="cssimagen" src={require('../images/menu.png')}></img>
-                </div>
-                <div className="clear"></div>
-                </div>
-            </div>
-            }
+             <Navbar  expand="lg" style={{backgroundColor:'#10266b'}}>
+                <Navbar.Brand>
+                    <Link to={'/'}>
+                    <img src={require('../images/logo.png')} style={{width:100}}></img>    
+                    </Link> 
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                    <Nav.Link href="#home" style={{color:"white", marginLeft:'auto'}}>Iniciar Sesión</Nav.Link>
+                    {/* <Nav.Link href="#link" style={{color:"white"}}>Link</Nav.Link>
+                    <NavDropdown style={{borderRight:'none'}} title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown> */}
+                    </Nav>
+                    {/* <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                    </Form> */}
+                </Navbar.Collapse>
+                </Navbar>
              </>
              </Route>
             </BrowserRouter>
