@@ -71,8 +71,7 @@ export class ContenidoCarrito extends React.Component{
                                             </div>
                                             ${item.Precio}.00
                                            
-                                            </div>
-                                           
+                                            </div> 
                                     </div>
                                     <div class="">
                                                 <ul>
