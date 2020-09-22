@@ -2251,7 +2251,7 @@ body{
 	.direcciones-panel{
 		padding: 22px 240px;
 		overflow-y: scroll;
-		height: 470px;
+		height: 550px;
 	}
 	.icon-link__icon{
 		width: 18px;
@@ -3794,7 +3794,7 @@ body{
 }
 @media (max-width:480px){
 	.editar-direccion{
-		margin-bottom: 110px;
+		margin-bottom: 88px;
 	}
 	.box1{
 		transform: none;
@@ -3959,7 +3959,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -4726,7 +4726,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -5458,6 +5458,7 @@ body{
 		position: relative;
 		top: -139px;
 		left: 36px;
+		margin-bottom:23px ;
 	}
 	.precio-resumen{
 		position: relative;
@@ -5694,7 +5695,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -6693,7 +6694,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -7436,6 +7437,8 @@ body{
 		position: relative;
 		top: -139px;
 		left: 36px;
+		margin-bottom:23px ;
+
 	}
 	.precio-resumen{
 		position: relative;

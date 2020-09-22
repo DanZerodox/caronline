@@ -32,7 +32,7 @@ export class ResumenCompra extends React.Component{
                         {this.state.arreglo.map(item=>(
                             item.Articulos.map(item2=>(
                                <>
-                                <ul class="panel-direccion">
+                                <ul class="panel-direccion" style={{height:166}}>
 
                                 <li class="li-direccion-resumen">
                                     <div class="direccion-primer-resumen">{item2.ArtDesTv}</div>
@@ -51,6 +51,7 @@ export class ResumenCompra extends React.Component{
         
                                     <div class="imagen-resumen"><img  width={48} src={url_general+"Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
                                     <div class="cantidad-resumen"><h2>Cantidad: {item2.TickDetCant} cajas</h2></div>
+                                    <br></br>
                                     <div class="precio-resumen"><h1 class="h-precio-resumen">${item2.TickDetSubTotal}.00</h1></div>
                                 </li>  
                                 
