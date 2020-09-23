@@ -71,7 +71,7 @@ export class DetalleProducto extends React.Component{
                                 </Card>
                             </Row>
                                
-                            <Row style={{display:'flow-root', width:'100%', flexWrap:'inherit', marginLeft:8}}>
+                            <Row style={{display:'flow-root', width:'100%', flexWrap:'inherit', padding:'4% 6%'}}>
                                {this.state.productodetalle.map((item)=>(
                                    item.ArtSku==this.state.id?
                                     <Card style={{overflow:'unset', boxShadow:'none'}}>
@@ -80,12 +80,12 @@ export class DetalleProducto extends React.Component{
                                          <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>PRECIO POR CAJA</Typography>             
                                          <Typography variant="h4" component="h2">${item.ArtPVenta}.00</Typography>        
                                          <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>Vendido por <Link to="/">{item.ArtMar}</Link></Typography>      
-                                         <Row style={{width:'96%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0, flexWrap:'inherit'}}>
+                                         <Row style={{width:'100%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0, flexWrap:'inherit'}}>
                                             <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
                                             <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'3.5', fontSize:20}}>{this.state.cantidad} Cajas</label></Col>
                                             <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
                                          </Row>   
-                                         <Button style={{width:'96%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
+                                         <Button style={{width:'100%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
                                                 Agregar
                                         </Button>
                                     </Card> 
@@ -447,6 +447,7 @@ export class DetalleProducto extends React.Component{
         }
         else{
             document.body.style.overflow="scroll";
+            document.body.style.width="fit-content";
         }
     }
 }
