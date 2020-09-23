@@ -4,7 +4,6 @@ import React from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Footer } from '../componentes/Footer';
 import {Banner} from '../componentes/Banner';
-// import Card from 'react-bootstrap/Card';
 import * as Constantes from '../componentes/Constantes';
 import { BarraInicio } from '../componentes/BarraInicio';
 import IconButton from "@material-ui/core/IconButton";
@@ -18,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
+import Media from 'react-media';
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
@@ -73,7 +73,7 @@ export class Productos extends React.Component{
             <div class="bodi-sus" style={{backgroundColor:"#e5e8f0"}}>
             <div className="productoprincipal">
             <BarraInicio></BarraInicio>
-            <Banner></Banner>
+            {/* <Banner></Banner> */}
             <div class="cell large-3 hide-for-xlarge paging-information">
                     <div class="clp-all-title">
                     <span>Todo</span>
@@ -129,8 +129,19 @@ export class Productos extends React.Component{
                                         precision={0.5}
                                     
                                     />
-                                
-                                    <Button style={{marginLeft:48}}>Agregar</Button>
+                                    <Media queries={{small:{maxWidth:1300}}}>
+                                                {matches=>
+                                                    matches.small?(
+                                                        <Button style={{marginLeft:48}}>Agregar</Button>
+
+                                                    )
+                                                    :
+                                                    (
+                                                        <Button style={{marginLeft:118}}>Agregar</Button>
+
+                                                    )
+                                                }
+                                    </Media>
                                   
                                 </CardActions>
                             </CardActionArea>                               
@@ -204,7 +215,7 @@ export class Productos extends React.Component{
 
     resize() {
         const height = window.innerWidth;
-        
+        console.log(height);
         if(height<600){
             var leftimg
             this.setState({ padding:58, width:100, heightimg:180, leftimg:38, heightcard:360, marginright: 60 },()=>{console.log(this.state.height)});

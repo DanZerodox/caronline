@@ -32,7 +32,7 @@ img{max-width:100%;}
 body{
 	font-family: 'Open Sans', sans-serif;
 	background:#e5e8f0;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .nav-link{
@@ -6431,7 +6431,7 @@ body{
 	.seccion-articulo-bajo-resumen{
 		font-size: 14px;
 		position: relative;
-		top: -1rem;
+		top: 0rem;
 		left: 0.7rem;
 	}
 	.cantidad-resumen{

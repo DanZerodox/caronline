@@ -1,3 +1,4 @@
+import './pruebaestilo.css';
 import React from 'react';
 import {render} from 'react-dom';
 import {HeadTop} from './componentes/HeadTop';
@@ -14,11 +15,28 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { CardHeader } from '@material-ui/core';
-// import { threadId } from 'worker_threads';
-//QA
-//var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
-//PRODUCCION
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Typography from '@material-ui/core/Typography';
+import Button from "@material-ui/core/Button";
+import Media from 'react-media';
+
 var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
+const imagen_principal = {
+    height: 360,
+    width: 212,
+    float: 'right'
+};
+
+const lineHeight={
+    lineHeight:'1.8'
+}
+
+function refreshPage() {
+    window.location.reload();
+}
 
 export class DetalleProducto extends React.Component{
     constructor(props){
@@ -33,201 +51,154 @@ export class DetalleProducto extends React.Component{
             mostrarresponsive: false,
             height: 0,
             width: 0,
-            marginLeft: 0
+            marginLeft: 0,
+            redirigir: false
         }
     }
-    myArrow({ type, onClick, isEdge }) {
-        const pointer = type === consts.PREV ? '👈' : '👉'
-        return (
-          <button onClick={onClick} disabled={isEdge}>
-            {pointer}
-          </button>
-        )
-      }
+   
     render(){
         console.log(this.state.id);
         return (
             <Route>
-        <> 
-        <div class="bodi-sus" style={{overflowY:'hidden', height:this.state.height}}>
-        <BarraInicio></BarraInicio>
-
-             {/* <div class="single">
-              
-             </div> */}
-               <div class="">
-                    
-                    <div class="cont span_2_of_3" style={{height:this.state.height, overflowX:'hidden'}}>
-                        <div class="labout span_1_of_a1">
-                            <ul id="etalage">
-                                <li>
-                                    <a href="#">
-                                        <img class="etalage_thumb_image" src={url_general+"Content/Assets/Images/"+this.state.id+".png"} />
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="cont1 span_2_of_a1" style={{height:450}}>
-                            {this.state.productodetalle.map((item)=>(
-                                item.ArtSku==this.state.id?
-                               <>
-                                <h3 class="m_3">{item.ArtDesTv}</h3>
-                                <div class="price_single">							
-                                <span class="actual">SKU: {item.ArtSku}</span>							 
-							    </div>
-                                 <h4 class="m_9">Precio por Caja</h4>
-                                    <h4 class="precio">${item.ArtPVenta}.00</h4> 
-                                    <h4 class="marca">Vendido por <Link to="/">{item.ArtMar}</Link></h4>
-                                    <div class="cantidadcarrito">
-                                        <button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button>
-                                        <p style={{marginTop:17}}>{this.state.cantidad}</p>
-                                        <button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button>
-                                       
-                                    </div>
-                                    <span class="tipo">Cajas</span>
-                                    <button class="btnagrecarrito" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>Agregar</button>
-                                    <button class="btnagrecarritoresponsive" onClick={()=>this.AgregarCarritoResponsive(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>Agregar</button>
-                                    {this.state.mostrarresponsive==true?
-                                        <Redirect push to={'/carritoresponsive'}></Redirect>
-                                        :null
-                                    }
-                               </>
-                                :null
-                                                                    
-                            ))}
-                         
-                        </div>
-                        <div class="labout span_1_of_a1">
-                        {/* <div class="toogle">
-     	<h3 class="m_3">Detalle del Producto</h3>
-     	<p class="m_text">Esto se veria mas bonito si tuviera una descripción, pero no tiene asi que esto es una prureba nada mas</p>
-     </div>	 */}
-                        </div>
-                        <div class="descripcionseccion">
-                        <div class="descripcion">
-                            <p class="dato1">Descripción</p>
-                         
-                        </div>
-                    
-                    </div> 
-                    <div class="descipciontexto">
-                            {this.state.productodetalle.map(item=>(
-                               item.ArtSku==this.state.id?
-                               <p>{item.ArtDes}</p>
-                               :null
-                            ))}
-                    </div>  
-                    <div class="sugerencias">
-                    <Carousel itemsToScroll={8} itemsToShow={3}>
-                    {this.state.productossugeridos.map(item=>
-                    <div class="contorno">
-                     <div class="">
-                        <div class="clear"></div>	
-                      </div>
-                      <div class="">
-                       <div class="">
-                                <div class="">
-                                <div class="view view-fifth">
-                                <div class="top_box">
-                                    <h3 class="m_1">{item.ArtDes}</h3>
-                                    <p class="m_2">{item.ArtDesTv}</p>
-                                    <div class="grid_img">
-                                        <div class="css3"><img class="imagen1" src={url_general+"Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
-                                     
-                                    </div>
-                                 
-                                        <div class="price">SKU: {item.ArtSku}</div>
+               <div>
+                   <BarraInicio></BarraInicio>
+                    <Row>
+                        <Col sm={9} style={{overflowY:'auto',height:'calc(100vh - 24px - 52px - 40px)'}}>
+                            <Row>
+                                <Col sm={4}>
+                                    <Card style={{overflow:'unset'}}>
+                                        <CardMedia style={imagen_principal} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
+                                    </Card>
+                                </Col>
+                                <Col sm={7}>
+                                   {this.state.productodetalle.map((item)=>(
+                                       item.ArtSku==this.state.id?
+                                        <Card style={{overflow:'unset', boxShadow:'none'}}>
+                                             <Typography style={{lineHeight:'1.8'}} variant="h5" component="h2">{item.ArtDesTv}</Typography>       
+                                             <Typography style={{color: '#ffaf02', fontSize: '1.3em', lineHeight:'1.8'}}>SKU: {item.ArtSku}</Typography> 
+                                             <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>PRECIO POR CAJA</Typography>             
+                                             <Typography variant="h4" component="h2">${item.ArtPVenta}.00</Typography>        
+                                             <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>Vendido por <Link to="/">{item.ArtMar}</Link></Typography>      
+                                             <Row style={{width:'38%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
+                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
+                                                <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
+                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                             </Row>   
+                                             <Typography style={{
+                                                     background: '#90ee90',
+                                                     color: '#24905e',
+                                                     fontWeight: 700,
+                                                     bottom: '12rem',
+                                                     padding: '4px',
+                                                     borderRadius: '6px',
+                                                     width: '10%'
+                                             }}>Cajas</Typography>
+                                             <Row style={{justifyContent:'center'}}>
+                                                <Button style={{width:'40%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
+                                                    Agregar
+                                                </Button>
+                                             </Row>
+                                        </Card> 
+                                       :null
+                                   ))}
+                                </Col>
+                                <Col sm={1}>
+                                </Col>
+                            </Row>
+                            <Row style={{backgroundColor:'#f7f7f7', padding:'20px 40px'}}>
+                                <Typography style={{borderBottom:'4px solid blue'}}>Descripción</Typography>
+                            </Row>
+                           <Row style={{padding:30}}>
+                           <Carousel itemsToScroll={8} itemsToShow={3}>
+                                {this.state.productossugeridos.map((item)=>(
+                                    <Card style={{padding:15}}>
+                                        <Typography>{item.ArtDesTv}</Typography>
+                                        <CardActionArea>
+                                            <CardMedia style={{
+                                                height:115,
+                                                backgroundSize:'contain',
+                                                backgroundPositionX:'center',
+                                                backgroundRepeat:'no-repeat'
+                                            }} image={url_general+"Content/Assets/Images/"+item.ArtSku+".png"}></CardMedia>
+                                        </CardActionArea> 
+                                        <Typography style={{color: '#ffaf02'}}>SKU: {item.ArtSku}</Typography> 
+                                        <Typography variant="h6">${item.ArtPVenta}.00</Typography>   
                                         <Link to={'/detalleproducto/'+item.ArtSku}>
-                                        <button onClick={()=>this.Refrescar()} class="btnver">Ver</button>
-                                        </Link>
-                                </div>
-                             </div>
-                                </div>
-                          
-                       </div>
-                      </div>
-                    </div> 
-                    )}
-                    </Carousel>
-                     
-                   
-                    </div>    
-                    <Footer></Footer>  
-                    </div>
-                    <div class="cont span_1_of_left" style={{width:this.state.width}}>
-                        <section  class="sky-form">
-                          <h4>Mi Carrito</h4>
-                        </section>
-                        <div style={{padding:20, overflowY:'scroll', height:350} }>
-                        {this.state.mostrar==true?
-                        this.state.productosencarrito.map((produ)=>(
-
-                            <Card style={{border:'1px solid #dedede', padding:10,  marginBottom:15}}>
-                             <CardMedia image={produ.Url} style={{float:'left', width:60, height:100}}>
-
-                             </CardMedia>   
-                             <CardContent>
-                             <div style={{
-                                        marginLeft: 8,
-                                        fontWeight: "bold",
-                                        whiteSpace: "nowrap",
-                                        overflow: "hidden",
-                                        fontSize: 15,
-                                        textOverflow: "ellipsis",
-                                        padding:'0px 10px'
-                                }}>{produ.Des}
-                                </div>
-                                <div style={{
-                                      marginLeft: 8,
-                                      whiteSpace: "nowrap",
-                                      overflow: "hidden",
-                                      fontSize: 15,
-                                      textOverflow: "ellipsis",
-                                      padding:'0 10px'
-                                }}>
-                                    Sku: {produ.Sku}
-                                    <div style={{
-                                        float:'right',
-                                        fontSize:20,
-                                        fontWeight:600
-                                    }}>
-                                        ${produ.Precio}.00
-                                    </div>
-                                </div>
-                                <div style={{float:'left', width:125, padding:'0px 6px', border:'1px solid #cacaca', borderRadius:4, marginLeft:this.state.marginLeft}}>
-                                    <button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button>
-                                    <input className="inputcantidad" value={produ.Cantidad}/>
-                                    <button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button>
+                                            <Button  variant="outlined" color="primary" onClick={refreshPage}>
+                                                                Agregar
+                                            </Button> 
+                                        </Link>       
+                                                                     
+                                    </Card>
                                    
-                                </div>
-                                <div style={{float:"right", marginTop:16}}>
-                                <a class="parte-title-bajo" onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
-                                </div>    
-                             </CardContent>   
-                            </Card>   
-                        ))
-                        :<p class="nohay">No tienes productos en tu carrito.</p>}
-                        </div>
-                        <section className="pagar-carrito" style={{textAlign:'center'}}>
-                           {this.state.mostrar==true?
-                         <Link to={'/formulariocompra'}>
-                         <button className="btnpagar">Finalizar Compra</button>
-                         </Link>
-                        : null
-                        }
-                        </section>
-                    </div>
+                                        
+                                ))}
+                            </Carousel>
+                           </Row>
+                            <Footer></Footer>  
+                        </Col>
+                        <Col sm={3}>
+                            <Row style={{padding:15, justifyContent:'center', borderBottom:'1px solid #dedede'}}>
+                                <Typography>Mi Carrito</Typography>
+                            </Row>
+                            {this.state.mostrar==true?
+                            <>
+                            <Row>
+                                {this.state.productosencarrito.map((produ)=>(
+                                     <Card style={{width:'100%', padding:15, borderBottom:'1px solid #dedede', borderRadius:0, boxShadow:'none'}}>
+                                       <Row>
+                                        <Col sm={2}>
+                                            <CardMedia style={{height:88, width:46}} image={produ.Url}></CardMedia> 
+                                        </Col>    
+                                        <Col sm={7}>
+                                            <Media queries={{small:{maxWidth:1300}}}>
+                                                {matches=>
+                                                    matches.small?(
+                                                        <Typography style={{fontSize:'0.9rem'}}>{produ.Des}</Typography>
+                                                    )
+                                                    :
+                                                    (
+                                                        <Typography>{produ.Des}</Typography>
+                                                    )
+                                                }
+                                            </Media>
+                                            <Row style={{width:'100%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
+                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
+                                                <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
+                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                             </Row>   
+                                        </Col>
+                                        <Col sm={3} style={{padding:'21px 0px'}}>
+                                            <Typography> ${produ.Precio}.00</Typography>
+                                            <a onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                        </Col>
+                                       </Row>
+                                     </Card>  
+                                ))}            
+                            </Row>   
+                                              
+                            <Row style={{justifyContent:'center'}}>
+                                    <Button style={{backgroundColor:'#10266b', width:'85%', height:'40px', position:'absolute', bottom:0}} variant="contained" disableElevation>
+                                        <Link style={{color:'#ffffff'}} to={'/formulariocompra'}>
+                                            Finalizar Compra
+                                        </Link>    
+                                    </Button>
+                            </Row>                    
+                             </>
+                             :<p>No tienes productos en tu carrito.</p>   
+                             }
+                       </Col>
+                        
+                    </Row>
                   
-                </div>
-                </div>
-        </>
-
-        </Route>
+               </div>
+             
+            </Route>
         );
     };
 
     componentDidMount(){
-
+        console.log(window.innerHeight);
         if(localStorage.getItem("productosencarrito")!=null){
          
         var e=localStorage.getItem("productosencarrito");
@@ -263,7 +234,7 @@ export class DetalleProducto extends React.Component{
 
     }
     Refrescar(){
-        window.location.reload();
+        this.setState({redirigir:true})
     }
     CargarProductosSugeridos(){
         var pro=[];
@@ -398,10 +369,9 @@ export class DetalleProducto extends React.Component{
                      mostrar:false
                  });
                  localStorage.clear();
-                 localStorage.setItem("productosencarrito",JSON.stringify(this.state.productosencarrito))  
              }
              else{
-                localStorage.clear();
+                localStorage.removeItem("productosencarrito");
                 localStorage.setItem("productosencarrito",JSON.stringify(this.state.productosencarrito))  
              }        
             })
