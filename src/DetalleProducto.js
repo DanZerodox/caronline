@@ -83,9 +83,13 @@ export class DetalleProducto extends React.Component{
                                             <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'3.5', fontSize:20}}>{this.state.cantidad} Cajas</label></Col>
                                             <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
                                          </Row>   
-                                         <Button style={{width:'100%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
+                                         <Button style={{width:'100%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarritoResponsive(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
                                                 Agregar
                                         </Button>
+                                        {this.state.mostrarresponsive==true?
+                                        <Redirect push to={'/carritoresponsive'}></Redirect>
+                                        :null
+                                        }
                                     </Card> 
                                    :null
                                ))}
@@ -163,7 +167,6 @@ export class DetalleProducto extends React.Component{
                                                                         Agregar
                                                     </Button> 
                                                 </Link>       
-                                                                             
                                             </Card>
                                            
                                                 
