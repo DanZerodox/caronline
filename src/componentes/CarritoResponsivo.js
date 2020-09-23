@@ -1,237 +1,211 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import Carousel,{ consts } from 'react-elastic-carousel';
+import Carousel, { consts } from 'react-elastic-carousel';
 import { Footer } from './Footer';
-
+import Typography from '@material-ui/core/Typography';
+import Row from 'react-bootstrap/Row';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import { CardHeader } from '@material-ui/core';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Button from "@material-ui/core/Button";
+import Media from 'react-media';
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
-export class CarritoResponsivo extends React.Component{
-    constructor(props){
+export class CarritoResponsivo extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-            productosencarrito:[],
-            productossugeridos:[]
+        this.state = {
+            productosencarrito: [],
+            productossugeridos: []
         }
     }
-    render(){
-        return(
-           <Route>
-               <div class="seccion-responsive">
-                        <section  class="sky-form">
-                          <h4>Mi Carrito</h4>
-                        </section>
-                        <section className="contenido-carrito">
-                           {this.state.mostrar==true?
-                         this.state.productosencarrito.map((produ)=>(
-                            <>
-                        
-                             <ul class="panel-direccion-detalle">
-
-                            <li class="li-direccion-resumen">
-                                <div class="direccion-primer-resumen">{produ.Des}</div>
-                                <div class="direccion-segundo-resumen">
-                                    <span class="direccion-mun-col">SKU: {produ.Sku}</span>
-                                </div>
-
-                                <div class="direccion-tercero-detalle">
-                                <div class="seccion-articulo-bajo-detalle">
-                                            <ul class="seccion-art-width">
-                                                {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></li> */}
-                                                
-                                                <li class="li-articulo"><a class="parte-title-bajo" onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a></li>
-                                            </ul>
-                                        </div>
-                                </div>
-
-                                <div class="imagen-resumen"><img  width={48} src={produ.Url}></img></div>
-                                <div class="cantidad-resumen-detalle">
-                                <div class="procantidadcarritoresponsive">
-                                                                <button class="btnagregarnumresponsive" onClick={()=>this.QuitarItemCarrito(produ.Sku)}>-</button>
-                                                                <input className="inputcantidad" value={produ.Cantidad+"Caja"}/>
-                                                                <button class="btnagregarnumresponsive" onClick={()=>this.AgregarItemCarrito(produ.Sku)}>+</button>
-                                                            
-                                                            </div>
-                                </div>
-                                <div class="precio-resumen-detalle"><h1 class="h-precio-resumen-detalle">${produ.Precio}.00</h1></div>
-                            </li>  
-
-                            </ul>
-                            </>
-                        )):<p class="nohay">No tienes productos en tu carrito.</p>   
-                        }
-                        </section>
-                        <section className="pagar-carrito">
-                           {this.state.mostrar==true?
-                        <>
-                        <Link to={'/'}>
-                        <button class="btnagrecarritoresponsivev2">Continuar Comprando</button>
+    render() {
+        return (
+            <Route>
+                <div style={{ padding: 15, textAlign: 'center', borderBottom: '1px solid #dedede' }}>
+                    <Typography>
+                            Mi Carrito
+                    </Typography>
+                </div>
+                {this.state.mostrar==true?
+                <>
+                <Row style={{ width: '100%' }}>
+                    {this.state.productosencarrito.map((produ) => (
+                        <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                            <Row style={{ flexWrap: 'inherit' }}>
+                                <Col sm={2}>
+                                    <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
+                                </Col>
+                                <Col sm={7}>
+                                    <Typography>{produ.Des}</Typography>
+                                    <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                        <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
+                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
+                                    </Row>
+                                </Col>
+                                <Col sm={3} style={{ padding: '21px 0px' }}>
+                                    <Typography> ${produ.Precio}.00</Typography>
+                                    <a onClick={() => this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                </Col>
+                            </Row>
+                        </Card>
+                    ))}
+                </Row>
+                <Row style={{justifyContent:'center'}}>
+                    <Button style={{ width: '90%', height: 60, position:'absolute', bottom: 80 }} variant="outlined" color="primary">
+                            <Link to={'/'}>
+                                Continuar Comprando
+                            </Link>
+                    </Button>
+                </Row>
+                <Row style={{ justifyContent: 'center' }}>
+                    <Button style={{ backgroundColor: '#10266b', width: '90%', height: '55px', position: 'absolute', bottom: 10 }} variant="contained" disableElevation>
+                        <Link style={{ color: '#ffffff' }} to={'/formulariocompra'}>
+                            Finalizar Compra
                         </Link>
-                         <Link to={'/formulariocompra'}>
-                         <button className="btnpagar">Finalizar Compra</button>
-                         </Link>
-                        </>
-                        : null
-                        }
-                        </section>
-                        <div class="sugerencias">
-                            <h2 class="titulo-responsivo">Puede interesarte</h2>
-                    <Carousel itemsToScroll={8} itemsToShow={3}>
-                    {this.state.productossugeridos.map(item=>
-                    <div class="contorno">
-                     <div class="">
-                        <div class="clear"></div>	
-                      </div>
-                      <div class="">
-                       <div class="">
-                                <div class="">
-                                <div class="view view-fifth">
-                                <div class="top_box">
-                                    <h3 class="m_1">{item.ArtDes}</h3>
-                                    <p class="m_2">{item.ArtDesTv}</p>
-                                    <div class="grid_img">
-                                        <div class="css3"><img class="imagen1" src={url_general+"Content/Assets/Images/"+item.ArtSku+".png"} alt=""/></div>
-                                     
-                                    </div>
-                                 
-                                        <div class="price">SKU: {item.ArtSku}</div>
-                                        <button class="btnver">Ver</button>
-                                </div>
-                             </div>
-                                </div>
-                          
-                       </div>
-                      </div>
-                    </div> 
-                    )}
-                    </Carousel>
-                    
-
-                   
-                    </div> 
-                    <Footer></Footer>
-                    </div>
-
-           </Route>
+                    </Button>
+                </Row>
+                </>
+                :
+                <>
+                <p>No tienes productos en tu carrito.</p> 
+                <Row style={{ justifyContent: 'center' }}>
+                <Row style={{justifyContent:'center'}}>
+                    <Button style={{ width: '90%', height: 60, position:'absolute', bottom: 10 }} variant="outlined" color="primary">
+                            <Link to={'/'}>
+                                Continuar Comprando
+                            </Link>
+                    </Button>
+                </Row>
+                </Row>
+                </>
+                }
+            </Route>
         )
     }
-    componentDidMount(){
-        if(localStorage.getItem("productosencarrito")!=null){
-         
-            this.CargarProductosSugeridos().then(result=>{
+    componentDidMount() {
+        if (localStorage.getItem("productosencarrito") != null) {
+
+            this.CargarProductosSugeridos().then(result => {
                 this.setState({
-                    productossugeridos:result[0]
-                },()=>{console.log("baby",this.state.productossugeridos)})
-            })  
-            var e=localStorage.getItem("productosencarrito");
-            console.log("pddd",JSON.parse(e));
+                    productossugeridos: result[0]
+                }, () => { console.log("baby", this.state.productossugeridos) })
+            })
+            var e = localStorage.getItem("productosencarrito");
+            console.log("pddd", JSON.parse(e));
             this.setState({
-                productosencarrito:JSON.parse(e)
-            },()=>{
-    
-                if(this.state.productosencarrito!=null){
-                    this.setState({mostrar:true})
+                productosencarrito: JSON.parse(e)
+            }, () => {
+
+                if (this.state.productosencarrito != null) {
+                    this.setState({ mostrar: true })
                 }
             })
-            }
+        }
     }
 
-    CargarProductosSugeridos(){
-        var pro=[];
-        const posturl=url_general+"api/Articulo/sugeridos";
-        var result= new Promise(function(resolve,reject){
-            fetch(posturl,{
+    CargarProductosSugeridos() {
+        var pro = [];
+        const posturl = url_general + "api/Articulo/sugeridos";
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
                 method: 'GET',
-                headers:{
-                    'Content-Type':'application/json'
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             }).then(
-                (res)=>res.json()
+                (res) => res.json()
             )
-            .catch(error=>console.log('Error',error))
-            .then(resp=>{
-                pro.push(resp);
-                resolve(pro);
-            })
+                .catch(error => console.log('Error', error))
+                .then(resp => {
+                    pro.push(resp);
+                    resolve(pro);
+                })
         });
 
         return result;
     }
 
-    EliminarCarrito(sku){
-        var array=this.state.productosencarrito;
-        var index=array.findIndex(x=>x.Sku === sku);
-        if(index !== -1){
-            array.splice(index,1);
+    EliminarCarrito(sku) {
+        var array = this.state.productosencarrito;
+        var index = array.findIndex(x => x.Sku === sku);
+        if (index !== -1) {
+            array.splice(index, 1);
             this.setState({
-                productosencarrito:array
-            },()=>{
-               if(this.state.productosencarrito.length == 0){
-                   this.setState({
-                       mostrar:false
-                   });
-                   localStorage.clear();
-                   localStorage.setItem("productosencarrito",JSON.stringify(this.state.productosencarrito))  
-               }
-               else{
-                  localStorage.clear();
-                  localStorage.setItem("productosencarrito",JSON.stringify(this.state.productosencarrito))  
-               }        
-              })
+                productosencarrito: array
+            }, () => {
+                if (this.state.productosencarrito.length == 0) {
+                    this.setState({
+                        mostrar: false
+                    });
+                    localStorage.clear();
+                }
+                else {
+                    localStorage.removeItem("productosencarrito");
+                    localStorage.setItem("productosencarrito", JSON.stringify(this.state.productosencarrito))
+                }
+            })
         }
     }
 
-    AgregarItemCarrito(sku){
-     
+    AgregarItemCarrito(sku) {
+
         const { productos: productosencarrito } = this.state;
 
-        const productos= this.state.productosencarrito.map(item=>{
-            
-              if(item.Sku===sku){
-                  if(item.Cantidad===1){
-                      item.Cantidad += 1;
-                      item.Precio=(item.Cantidad*item.Precio)
-                  }
-                  else{
-                      var punit=(item.Precio/item.Cantidad);
-                      item.Cantidad += 1;
-                      item.Precio=(item.Cantidad*punit)
-                      console.log("entro",punit)
-                  }
-                
-                 return item;
-              }
-  
-              return item;
-          });
-          this.setState(productos);
-          localStorage.setItem("productosencarrito",JSON.stringify(productos))
+        const productos = this.state.productosencarrito.map(item => {
+
+            if (item.Sku === sku) {
+                if (item.Cantidad === 1) {
+                    item.Cantidad += 1;
+                    item.Precio = (item.Cantidad * item.Precio)
+                }
+                else {
+                    var punit = (item.Precio / item.Cantidad);
+                    item.Cantidad += 1;
+                    item.Precio = (item.Cantidad * punit)
+                    console.log("entro", punit)
+                }
+
+                return item;
+            }
+
+            return item;
+        });
+        this.setState(productos);
+        localStorage.setItem("productosencarrito", JSON.stringify(productos))
     }
-    QuitarItemCarrito(sku){
-        
+    QuitarItemCarrito(sku) {
+
         const { productos: productosencarrito } = this.state;
 
-        const productos= this.state.productosencarrito.map(item=>{
-              if(item.Sku===sku){
-                  if(item.Cantidad===1){
-                      item.Cantidad -= 1;
-                      item.Precio=(item.Cantidad*item.Precio)
-                  }
-                  else{
-                      var punit=(item.Precio/item.Cantidad);
-                      item.Cantidad -= 1;
-                      item.Precio=(item.Cantidad*punit)
-                      console.log("entro",punit)
-                  }
-                 return item;
-              }
-  
-              return item;
-          });
-          this.setState(productos);
-          localStorage.setItem("productosencarrito",JSON.stringify(productos))
+        const productos = this.state.productosencarrito.map(item => {
+            if (item.Sku === sku) {
+                if (item.Cantidad === 1) {
+                    item.Cantidad -= 1;
+                    item.Precio = (item.Cantidad * item.Precio)
+                }
+                else {
+                    var punit = (item.Precio / item.Cantidad);
+                    item.Cantidad -= 1;
+                    item.Precio = (item.Cantidad * punit)
+                    console.log("entro", punit)
+                }
+                return item;
+            }
+
+            return item;
+        });
+        this.setState(productos);
+        localStorage.setItem("productosencarrito", JSON.stringify(productos))
     }
 }
