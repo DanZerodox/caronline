@@ -1,4 +1,3 @@
-import './pruebaestilo.css';
 import React from 'react';
 import {render} from 'react-dom';
 import {HeadTop} from './componentes/HeadTop';
@@ -62,135 +61,176 @@ export class DetalleProducto extends React.Component{
             <Route>
                <div>
                    <BarraInicio></BarraInicio>
-                    <Row>
-                        <Col sm={9} style={{overflowY:'auto',height:'calc(100vh - 24px - 52px - 40px)'}}>
+                   <Media queries={{small:{maxWidth:480},medium:{maxWidth:900},large:{maxWidth:1200}}}>
+                    {matches=>
+                        matches.small?(
+                           <>
                             <Row>
-                                <Col sm={4}>
-                                    <Card style={{overflow:'unset'}}>
-                                        <CardMedia style={imagen_principal} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
-                                    </Card>
-                                </Col>
-                                <Col sm={7}>
-                                   {this.state.productodetalle.map((item)=>(
-                                       item.ArtSku==this.state.id?
-                                        <Card style={{overflow:'unset', boxShadow:'none'}}>
-                                             <Typography style={{lineHeight:'1.8'}} variant="h5" component="h2">{item.ArtDesTv}</Typography>       
-                                             <Typography style={{color: '#ffaf02', fontSize: '1.3em', lineHeight:'1.8'}}>SKU: {item.ArtSku}</Typography> 
-                                             <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>PRECIO POR CAJA</Typography>             
-                                             <Typography variant="h4" component="h2">${item.ArtPVenta}.00</Typography>        
-                                             <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>Vendido por <Link to="/">{item.ArtMar}</Link></Typography>      
-                                             <Row style={{width:'38%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
-                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
-                                                <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
-                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
-                                             </Row>   
-                                             <Typography style={{
-                                                     background: '#90ee90',
-                                                     color: '#24905e',
-                                                     fontWeight: 700,
-                                                     bottom: '12rem',
-                                                     padding: '4px',
-                                                     borderRadius: '6px',
-                                                     width: '10%'
-                                             }}>Cajas</Typography>
-                                             <Row style={{justifyContent:'center'}}>
-                                                <Button style={{width:'40%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
-                                                    Agregar
-                                                </Button>
-                                             </Row>
-                                        </Card> 
-                                       :null
-                                   ))}
-                                </Col>
-                                <Col sm={1}>
-                                </Col>
+                                 <Card style={{overflow:'unset'}}>
+                                    <CardMedia style={{height:360, width:418, backgroundPositionX:'center', backgroundRepeat:'no-repeat', backgroundSize:'contain'}} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
+                                </Card>
                             </Row>
-                            <Row style={{backgroundColor:'#f7f7f7', padding:'20px 40px'}}>
-                                <Typography style={{borderBottom:'4px solid blue'}}>Descripción</Typography>
+                               
+                            <Row style={{display:'flow-root', width:'100%', flexWrap:'inherit', marginLeft:8}}>
+                               {this.state.productodetalle.map((item)=>(
+                                   item.ArtSku==this.state.id?
+                                    <Card style={{overflow:'unset', boxShadow:'none'}}>
+                                         <Typography style={{lineHeight:'1.8'}} variant="h5" component="h2">{item.ArtDesTv}</Typography>       
+                                         <Typography style={{color: '#ffaf02', fontSize: '1.3em', lineHeight:'1.8'}}>SKU: {item.ArtSku}</Typography> 
+                                         <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>PRECIO POR CAJA</Typography>             
+                                         <Typography variant="h4" component="h2">${item.ArtPVenta}.00</Typography>        
+                                         <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>Vendido por <Link to="/">{item.ArtMar}</Link></Typography>      
+                                         <Row style={{width:'96%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0, flexWrap:'inherit'}}>
+                                            <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
+                                            <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'3.5', fontSize:20}}>{this.state.cantidad} Cajas</label></Col>
+                                            <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                         </Row>   
+                                         <Button style={{width:'96%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
+                                                Agregar
+                                        </Button>
+                                    </Card> 
+                                   :null
+                               ))}
                             </Row>
-                           <Row style={{padding:30}}>
-                           <Carousel itemsToScroll={8} itemsToShow={3}>
-                                {this.state.productossugeridos.map((item)=>(
-                                    <Card style={{padding:15}}>
-                                        <Typography>{item.ArtDesTv}</Typography>
-                                        <CardActionArea>
-                                            <CardMedia style={{
-                                                height:115,
-                                                backgroundSize:'contain',
-                                                backgroundPositionX:'center',
-                                                backgroundRepeat:'no-repeat'
-                                            }} image={url_general+"Content/Assets/Images/"+item.ArtSku+".png"}></CardMedia>
-                                        </CardActionArea> 
-                                        <Typography style={{color: '#ffaf02'}}>SKU: {item.ArtSku}</Typography> 
-                                        <Typography variant="h6">${item.ArtPVenta}.00</Typography>   
-                                        <Link to={'/detalleproducto/'+item.ArtSku}>
-                                            <Button  variant="outlined" color="primary" onClick={refreshPage}>
-                                                                Agregar
-                                            </Button> 
-                                        </Link>       
-                                                                     
-                                    </Card>
-                                   
-                                        
-                                ))}
-                            </Carousel>
-                           </Row>
                             <Footer></Footer>  
-                        </Col>
-                        <Col sm={3}>
-                            <Row style={{padding:15, justifyContent:'center', borderBottom:'1px solid #dedede'}}>
-                                <Typography>Mi Carrito</Typography>
-                            </Row>
-                            {this.state.mostrar==true?
-                            <>
-                            <Row>
-                                {this.state.productosencarrito.map((produ)=>(
-                                     <Card style={{width:'100%', padding:15, borderBottom:'1px solid #dedede', borderRadius:0, boxShadow:'none'}}>
-                                       <Row>
-                                        <Col sm={2}>
-                                            <CardMedia style={{height:88, width:46}} image={produ.Url}></CardMedia> 
-                                        </Col>    
+                           </>
+                        ):(
+                            matches.medium?(
+                            <p>soy mediano</p>
+                            ):
+                            (
+                                <Row>
+                                <Col sm={9} style={{overflowY:'auto',height:'calc(100vh - 24px - 52px - 40px)'}}>
+                                    <Row>
+                                        <Col sm={4}>
+                                            <Card style={{overflow:'unset'}}>
+                                                <CardMedia style={imagen_principal} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
+                                            </Card>
+                                        </Col>
                                         <Col sm={7}>
-                                            <Media queries={{small:{maxWidth:1300}}}>
-                                                {matches=>
-                                                    matches.small?(
-                                                        <Typography style={{fontSize:'0.9rem'}}>{produ.Des}</Typography>
-                                                    )
-                                                    :
-                                                    (
-                                                        <Typography>{produ.Des}</Typography>
-                                                    )
-                                                }
-                                            </Media>
-                                            <Row style={{width:'100%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
-                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
-                                                <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
-                                                <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
-                                             </Row>   
+                                           {this.state.productodetalle.map((item)=>(
+                                               item.ArtSku==this.state.id?
+                                                <Card style={{overflow:'unset', boxShadow:'none'}}>
+                                                     <Typography style={{lineHeight:'1.8'}} variant="h5" component="h2">{item.ArtDesTv}</Typography>       
+                                                     <Typography style={{color: '#ffaf02', fontSize: '1.3em', lineHeight:'1.8'}}>SKU: {item.ArtSku}</Typography> 
+                                                     <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>PRECIO POR CAJA</Typography>             
+                                                     <Typography variant="h4" component="h2">${item.ArtPVenta}.00</Typography>        
+                                                     <Typography style={{color: '#555', fontSize: '.85em', lineHeight:'1.8'}}>Vendido por <Link to="/">{item.ArtMar}</Link></Typography>      
+                                                     <Row style={{width:'38%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                                     </Row>   
+                                                     <Typography style={{
+                                                             background: '#90ee90',
+                                                             color: '#24905e',
+                                                             fontWeight: 700,
+                                                             bottom: '12rem',
+                                                             padding: '4px',
+                                                             borderRadius: '6px',
+                                                             width: '10%'
+                                                     }}>Cajas</Typography>
+                                                     <Row style={{justifyContent:'center'}}>
+                                                        <Button style={{width:'40%', height:60}} variant="outlined" color="primary" onClick={()=>this.AgregarCarrito(item.ArtSku,item.ArtDesTv,item.ArtPVenta)}>
+                                                            Agregar
+                                                        </Button>
+                                                     </Row>
+                                                </Card> 
+                                               :null
+                                           ))}
                                         </Col>
-                                        <Col sm={3} style={{padding:'21px 0px'}}>
-                                            <Typography> ${produ.Precio}.00</Typography>
-                                            <a onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                        <Col sm={1}>
                                         </Col>
-                                       </Row>
-                                     </Card>  
-                                ))}            
-                            </Row>   
-                                              
-                            <Row style={{justifyContent:'center'}}>
-                                    <Button style={{backgroundColor:'#10266b', width:'85%', height:'40px', position:'absolute', bottom:0}} variant="contained" disableElevation>
-                                        <Link style={{color:'#ffffff'}} to={'/formulariocompra'}>
-                                            Finalizar Compra
-                                        </Link>    
-                                    </Button>
-                            </Row>                    
-                             </>
-                             :<p>No tienes productos en tu carrito.</p>   
-                             }
-                       </Col>
-                        
-                    </Row>
-                  
+                                    </Row>
+                                    <Row style={{backgroundColor:'#f7f7f7', padding:'20px 40px'}}>
+                                        <Typography style={{borderBottom:'4px solid blue'}}>Descripción</Typography>
+                                    </Row>
+                                   <Row style={{padding:30}}>
+                                   <Carousel itemsToScroll={8} itemsToShow={3}>
+                                        {this.state.productossugeridos.map((item)=>(
+                                            <Card style={{padding:15}}>
+                                                <Typography>{item.ArtDesTv}</Typography>
+                                                <CardActionArea>
+                                                    <CardMedia style={{
+                                                        height:115,
+                                                        backgroundSize:'contain',
+                                                        backgroundPositionX:'center',
+                                                        backgroundRepeat:'no-repeat'
+                                                    }} image={url_general+"Content/Assets/Images/"+item.ArtSku+".png"}></CardMedia>
+                                                </CardActionArea> 
+                                                <Typography style={{color: '#ffaf02'}}>SKU: {item.ArtSku}</Typography> 
+                                                <Typography variant="h6">${item.ArtPVenta}.00</Typography>   
+                                                <Link to={'/detalleproducto/'+item.ArtSku}>
+                                                    <Button  variant="outlined" color="primary" onClick={refreshPage}>
+                                                                        Agregar
+                                                    </Button> 
+                                                </Link>       
+                                                                             
+                                            </Card>
+                                           
+                                                
+                                        ))}
+                                    </Carousel>
+                                   </Row>
+                                    <Footer></Footer>  
+                                </Col>
+                                <Col sm={3}>
+                                    <Row style={{padding:15, justifyContent:'center', borderBottom:'1px solid #dedede'}}>
+                                        <Typography>Mi Carrito</Typography>
+                                    </Row>
+                                    {this.state.mostrar==true?
+                                    <>
+                                    <Row>
+                                        {this.state.productosencarrito.map((produ)=>(
+                                             <Card style={{width:'100%', padding:15, borderBottom:'1px solid #dedede', borderRadius:0, boxShadow:'none'}}>
+                                               <Row>
+                                                <Col sm={2}>
+                                                    <CardMedia style={{height:88, width:46}} image={produ.Url}></CardMedia> 
+                                                </Col>    
+                                                <Col sm={7}>
+                                                    <Media queries={{small:{maxWidth:1300}}}>
+                                                        {matches=>
+                                                            matches.small?(
+                                                                <Typography style={{fontSize:'0.9rem'}}>{produ.Des}</Typography>
+                                                            )
+                                                            :
+                                                            (
+                                                                <Typography>{produ.Des}</Typography>
+                                                            )
+                                                        }
+                                                    </Media>
+                                                    <Row style={{width:'100%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                                     </Row>   
+                                                </Col>
+                                                <Col sm={3} style={{padding:'21px 0px'}}>
+                                                    <Typography> ${produ.Precio}.00</Typography>
+                                                    <a onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                                </Col>
+                                               </Row>
+                                             </Card>  
+                                        ))}            
+                                    </Row>   
+                                                      
+                                    <Row style={{justifyContent:'center'}}>
+                                            <Button style={{backgroundColor:'#10266b', width:'85%', height:'40px', position:'absolute', bottom:0}} variant="contained" disableElevation>
+                                                <Link style={{color:'#ffffff'}} to={'/formulariocompra'}>
+                                                    Finalizar Compra
+                                                </Link>    
+                                            </Button>
+                                    </Row>                    
+                                     </>
+                                     :<p>No tienes productos en tu carrito.</p>   
+                                     }
+                               </Col>
+                                
+                            </Row>
+                            )
+                        )
+                    }
+                   </Media>
                </div>
              
             </Route>
@@ -402,19 +442,12 @@ export class DetalleProducto extends React.Component{
 
     resize() {
         const height = window.innerWidth;
-        if(height >1900){
-            this.setState({height:1000, width:727})
-        }
-        else if(height < 1500){
-            this.setState({height:600, width:485, marginLeft:85})
-        }
-        else if(height < 600){
-            this.setState({height:600, width:485, marginLeft:85})
+        if(height>800){
+            document.body.style.overflow="hidden";
         }
         else{
-            this.setState({height:750, width:582, marginLeft:148})
+            document.body.style.overflow="scroll";
         }
-       console.log(height);
     }
 }
 
