@@ -65,13 +65,11 @@ export class DetalleProducto extends React.Component{
                     {matches=>
                         matches.small?(
                            <>
-                            <Row>
-                                 <Card style={{overflow:'unset'}}>
-                                    <CardMedia style={{height:360, width:418, backgroundPositionX:'center', backgroundRepeat:'no-repeat', backgroundSize:'contain'}} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
-                                </Card>
-                            </Row>
+                            <Card style={{overflow:'unset'}}>
+                                <CardMedia style={{height:360, width:359, backgroundPositionX:'center', backgroundRepeat:'no-repeat', backgroundSize:'contain'}} image={url_general+"Content/Assets/Images/"+this.state.id+".png"}></CardMedia>
+                            </Card>
                                
-                            <Row style={{display:'flow-root', width:'100%', flexWrap:'inherit', padding:'4% 6%'}}>
+                            <div style={{display:'flow-root', width:'100%', flexWrap:'inherit', padding:'4% 6%'}}>
                                {this.state.productodetalle.map((item)=>(
                                    item.ArtSku==this.state.id?
                                     <Card style={{overflow:'unset', boxShadow:'none'}}>
@@ -91,7 +89,7 @@ export class DetalleProducto extends React.Component{
                                     </Card> 
                                    :null
                                ))}
-                            </Row>
+                            </div>
                             <Footer></Footer>  
                            </>
                         ):(
@@ -447,7 +445,6 @@ export class DetalleProducto extends React.Component{
         }
         else{
             document.body.style.overflow="scroll";
-            document.body.style.width="fit-content";
         }
     }
 }
