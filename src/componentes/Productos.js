@@ -138,7 +138,6 @@ export class Productos extends React.Component{
                                                     :
                                                     (
                                                         <Button style={{marginLeft:118}}>Agregar</Button>
-
                                                     )
                                                 }
                                     </Media>
