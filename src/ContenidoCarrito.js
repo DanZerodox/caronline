@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box } from '@material-ui/core';
+import { Card, CardContent, Typography, Box, CardMedia } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
@@ -26,68 +26,68 @@ export class ContenidoCarrito extends React.Component{
     render(){
         return(
             <Route>
-            <div className='carrito-panel'>
+            <div className='carrito-panel'> 
                     <Card>
                         <CardContent>
                             {this.state.mostrar==false?
-                           <>
-                            <div class="titulo-carrito"><h1 class="label-carrito">Carrito ({this.state.cantidadtitulo})</h1></div>
+                                <>
+                                <div class="titulo-carrito"><h1 class="label-carrito">Carrito ({this.state.cantidadtitulo})</h1></div>
                                   
-                                        {this.state.productosencarrito.map((item)=>(
-                                        <article class="articulo-carrito">
-                                           
-                                            <figure class="img-responsive">
-                                                <img className="studio" width={48} height={80} src={item.Url}></img>
-                                            </figure>
-                                            <div>
-                                                <div>
-                                                    <h2>
-                                                        <a class="descarrito-articulo" href="#">{item.Des}</a>
-                                                    </h2>
-                                                </div>
-                                                <p class="sku-articulo">SKU:<span class="sku-articulosub">{item.Sku}</span></p>
-                                                <div class="procantidadcarrito-articulo">
-                                                        <button class="btnagregarnum" onClick={()=>this.QuitarItem(item.Sku)}>-</button>
-                                                        <input className="inputcantidad" value={item.Cantidad}/>
-                                                        <button class="btnagregarnum" onClick={()=>this.AgregarItem(item.Sku)}>+</button>
-                                                    
-                                                 </div>
-                                                <span class="unidad-articulo">${item.Precio}.00</span>
-                                                <span class="unidad-articulosub">Cajas</span>
+                                  {this.state.productosencarrito.map((item)=>(
+                                  <article class="articulo-carrito">
+                                     
+                                      <figure class="img-responsive">
+                                          <img className="studio" width={48} height={80} src={item.Url}></img>
+                                      </figure>
+                                      <div>
+                                          <div>
+                                              <h2>
+                                                  <a class="descarrito-articulo" href="#">{item.Des}</a>
+                                              </h2>
+                                          </div>
+                                          <p class="sku-articulo">SKU:<span class="sku-articulosub">{item.Sku}</span></p>
+                                          <div class="procantidadcarrito-articulo">
+                                                  <button class="btnagregarnum" onClick={()=>this.QuitarItem(item.Sku)}>-</button>
+                                                  <input className="inputcantidad" value={item.Cantidad}/>
+                                                  <button class="btnagregarnum" onClick={()=>this.AgregarItem(item.Sku)}>+</button>
                                               
-                                            </div>
-                                            <div class="seccion-articulo-bajo">
-                                                <ul>
-                                                <Link to={'/'}>
-                                                    <li class="li-articulo">
-                                                        
-                                                        <a class="parte-title-bajo" href="#">Mas productos de Jumex</a>
-                                                        </li>
-                                                        </Link>
-
-                                                    <li class="li-articulo"><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                    <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li>
-                                                    <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="seccion-articulo-bajo-responsive">
-                                                <ul>
-                                                    <li class="li-articulo"><Link to={'/'}><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></Link></li>
-
-                                                    <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
-
-                                                </ul>
-                                            </div>
+                                           </div>
+                                          <span class="unidad-articulo">${item.Precio}.00</span>
+                                          <span class="unidad-articulosub">Cajas</span>
                                         
-                                            </article>
-                                        
-                                        ))} 
-                                        <article class="total"><p class="total-letra">Total: ${this.state.total}.00</p></article>     
-                                        <button class="btnregistro" onClick={()=>this.RegistrarArticulos()}>Continuar Compra</button>
-        
-                                         
-                           </> :
+                                      </div>
+                                      <div class="seccion-articulo-bajo">
+                                          <ul>
+                                          <Link to={'/'}>
+                                              <li class="li-articulo">
+                                                  
+                                                  <a class="parte-title-bajo" href="#">Mas productos de Jumex</a>
+                                                  </li>
+                                                  </Link>
+  
+                                              <li class="li-articulo"><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                              <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li>
+                                              <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
+  
+                                          </ul>
+                                      </div>
+                                      <div class="seccion-articulo-bajo-responsive">
+                                          <ul>
+                                              <li class="li-articulo"><Link to={'/'}><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></Link></li>
+  
+                                              <li class="li-articulo"><a onClick={()=>this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
+  
+                                          </ul>
+                                      </div>
+                                  
+                                      </article>
+                                  
+                                  )) }
+                                <article class="total"><p class="total-letra">Total: ${this.state.total}.00</p></article>     
+                                <button class="btnregistro" onClick={()=>this.RegistrarArticulos()}>Continuar Compra</button>
+                                  
+                            </>
+                           :
                             <div class="titulo-carrito-sinpro">
                                 <img width={100} src={require('./images/Jumex/triste.png')}></img>
                                 <br></br>

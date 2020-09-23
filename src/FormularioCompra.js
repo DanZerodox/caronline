@@ -27,7 +27,8 @@ export class FormularioCompra extends React.Component{
             mostrarcompra:false,
             redirect:false,
             sitio:'',
-            tipo_sitio:0
+            tipo_sitio:0,
+            height: 0
         }
 
         
@@ -62,9 +63,9 @@ export class FormularioCompra extends React.Component{
                                }}
                                validationSchema={validaciones}
                              >
-                                 <Form class="monorin">
+                                 <Form class="monorin" style={{height:this.state.height}}>
                                     <h1 class="txt">Iniciar Sesión</h1>
-                                     <div class="seccion-p1">
+                                     <div class="seccion-p1" style={{padding:'20px'}}>
                                         <Field id="txtp1" name="email" type="email" onChange={this.handleChangeCorreo} value={this.state.correo} component={TextField} label="Correo Electronico"></Field>
                                          &nbsp;
                                          &nbsp;
@@ -77,7 +78,7 @@ export class FormularioCompra extends React.Component{
                                      </div>
                                         <label className="error_mensaje">{this.state.token.Mensaje}</label>
 
-                                     <Link to={"/registrocuenta"}> <p class="registrarse">¿No tienes cuenta? Registrate Aquí</p></Link>
+                                     <Link to={"/registrocuenta"}> <p style={{marginLeft:18}} class="registrarse">¿No tienes cuenta? Registrate Aquí</p></Link>
                                      {/* <div class="omitir"><a href="#" onClick={()=>this.MostrarDireccion()}>Omitir</a></div> */}
                                  </Form>
                              </Formik>
@@ -96,6 +97,7 @@ export class FormularioCompra extends React.Component{
     }
 
     componentDidMount(){
+        this.resize();
         if(localStorage.getItem("token")!=null){
             this.setState({
                 redirect:true
@@ -148,5 +150,18 @@ export class FormularioCompra extends React.Component{
         });
 
         return result;              
+    }
+
+    resize() {
+        const height = window.innerWidth;
+        if(height >1900){
+            this.setState({height:1000, width:727})
+        }
+        else if(height < 1500){
+            this.setState({height:168, width:485, marginLeft:85})
+        }else{
+            this.setState({height:168, width:582, marginLeft:148})
+        }
+       console.log(height);
     }
 }

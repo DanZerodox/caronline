@@ -8,11 +8,11 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   
-  <React.StrictMode>
-
+  <React.StrictMode>    
     <>
     <HeadTop/>
     {/* <HeadBanner></HeadBanner> */}
+
     <App />
     </>
     

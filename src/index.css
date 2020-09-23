@@ -31,8 +31,12 @@ img{max-width:100%;}
 /*end reset*/
 body{
 	font-family: 'Open Sans', sans-serif;
-	background:#e5e8f0;
-	overflow: hidden;
+	background:#ffffff;
+	/* overflow: hidden; */
+}
+
+.nav-link{
+	color: white;
 }
 .jBnCOy{
 	display: none;
@@ -464,7 +468,7 @@ body{
 	.bodi-sus{
 		overflow-y: scroll;	
 		overflow-x: hidden;
-		height: 512px;
+		height: 600px;
 	}
 	.grid_img{
 		text-align:center;
@@ -2162,7 +2166,7 @@ body{
 	.seccion-articulo-bajo-resumen{
 		font-size: 14px;
 		position: relative;	
-		top: -2rem;
+		top: -1rem;
 		left: 1.7rem;
 	}
 	.imagen-resumen{
@@ -2242,11 +2246,12 @@ body{
 		align-items: center;
 		padding-left: 12px;
 		border-top: .0625em solid #e6e6e6;
+
 	}
 	.direcciones-panel{
 		padding: 22px 240px;
 		overflow-y: scroll;
-		height: 470px;
+		height: 550px;
 	}
 	.icon-link__icon{
 		width: 18px;
@@ -2416,7 +2421,7 @@ body{
 	}
 	.sugerencias{
 		background-color: #fff;
-		width: 88%;
+		/* width: 88%; */
 		margin: 0px 7px 8px 6px;
 		padding: 40px 31px;
 	}
@@ -2894,6 +2899,9 @@ body{
 	}
 	.span_1_of_c1 p {
 		margin-top: 15px;
+	}
+	.carrito-panel{
+		height: 550px;
 	}
 	.col_1_of_middle {
 		margin: 1% 0 1% 2.6%;
@@ -3785,6 +3793,9 @@ body{
 	}
 }
 @media (max-width:480px){
+	.editar-direccion{
+		margin-bottom: 88px;
+	}
 	.box1{
 		transform: none;
 	}
@@ -3948,7 +3959,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -3979,7 +3990,7 @@ body{
 	}
 	.procantidadcarrito-articulo{
 		top: -4.8rem;
-		left: -13.5rem;
+		left: -7rem;
 		position: relative;
 		border: 1px solid #cacaca;
 		border-radius: 4px;
@@ -4002,14 +4013,14 @@ body{
 		/* float: right; */
 		position: relative;
 		padding: 0px 61px;
-		left: 13rem;
+		left: 6rem;
 		font-size: 35px;
 	}
 	.unidad-articulo{
 		position: relative;
 		top: -6rem;
 		/* float: left; */
-		left: 19rem;
+		left: 15rem;
 		/* font-weight: bold; */
 		font-size: 31px;
 	}
@@ -4715,7 +4726,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -5080,7 +5091,7 @@ body{
 		width: 100%;
 		margin-left: 0;
 		padding: 30px;
-		height: 399px;
+		height: 420px;
 		background-color: #f7f7f7;
 	}
 	.view1 .mask1, .view1 .content {
@@ -5447,6 +5458,7 @@ body{
 		position: relative;
 		top: -139px;
 		left: 36px;
+		margin-bottom:23px ;
 	}
 	.precio-resumen{
 		position: relative;
@@ -5683,7 +5695,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -6419,7 +6431,7 @@ body{
 	.seccion-articulo-bajo-resumen{
 		font-size: 14px;
 		position: relative;
-		top: -1rem;
+		top: 0rem;
 		left: 0.7rem;
 	}
 	.cantidad-resumen{
@@ -6682,7 +6694,7 @@ body{
 	.direcciones-panel{
 		padding: 0px 0px;
 		overflow-y: scroll;
-		height: 830px;
+		height: 600px;
 	}
 	.li-direccion-h{
 		height: 154px;
@@ -7425,6 +7437,8 @@ body{
 		position: relative;
 		top: -139px;
 		left: 36px;
+		margin-bottom:23px ;
+
 	}
 	.precio-resumen{
 		position: relative;
