@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Productos} from './componentes/Productos';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, HashRouter } from "react-router-dom";
 import { DetalleProducto } from "./DetalleProducto";
 import { FormularioCompra } from './FormularioCompra';
 import { FormularioRegistro } from './FormularioRegistro';
@@ -15,7 +15,7 @@ class App extends React.Component{
   render(){
     return (
       <>          
-       <BrowserRouter>
+       <HashRouter>
        <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route>
        <Route path="/formulariocompra"  component={FormularioCompra}></Route>
        <Route path="/registrocuenta" exact={true} component={FormularioRegistro}></Route>
@@ -25,7 +25,7 @@ class App extends React.Component{
        <Route path="/historico" exact={true} component={Historico}></Route>
        <Route path="/carritoresponsive" exact={true} component={CarritoResponsivo}></Route>
        <Route path="/" exact={true} component={Productos}></Route>
-       </BrowserRouter>  
+       </HashRouter>  
             
        </>
     );

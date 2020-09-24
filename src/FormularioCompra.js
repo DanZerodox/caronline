@@ -30,7 +30,8 @@ export class FormularioCompra extends React.Component {
             redirect: false,
             sitio: '',
             tipo_sitio: 0,
-            height: 0
+            height: 0,
+            carritoBD:[]
         }
 
 
@@ -121,10 +122,36 @@ export class FormularioCompra extends React.Component {
                 console.log(this.state.tipo_sitio);
                 if (this.state.token.Estatus == "OK") {
                     localStorage.setItem("token", this.state.token.AccessToken);
+                   
                     window.location.reload();
                 }
             })
         })
+    }
+
+    ConsultarCarritoBD(token){
+        var pro = [];
+        const posturl = url_general + "api/Carrito/consultar";
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            }).then(
+                (res) => res.json()
+
+            )
+                .catch(error => console.log('Error', error))
+                .then(resp => {
+                    pro.push(resp);
+                    console.log('ya quedo'+pro)
+                    resolve(pro);
+                });
+        });
+
+        return result;
     }
 
     ValidarDatos() {

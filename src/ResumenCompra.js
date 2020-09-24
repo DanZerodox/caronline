@@ -295,9 +295,16 @@ export class ResumenCompra extends React.Component {
         this.setState({ tipo_entrega: tipo_entrega });
         this.ConsultarCarrito(token).then(item => {
             var e = localStorage.getItem("productosencarrito");
-            this.setState({
-                arreglo: JSON.parse(e),
-            }, () => {
+           const datos=[];
+           this.setState({arreglo:item},()=>{
+               console.log(this.state.arreglo);
+               this.state.arreglo.map(a=>{
+                a.Articulos.map(item2=>{         
+                    var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
+                    datos.push(item);
+                })
+               });
+               this.setState({arreglo:datos},()=>{
                 if (tipo_entrega == 0) {
                     // this.ConsultarDireccion(token,direccion_id).then(result=>{
                     //     this.setState({
@@ -310,7 +317,9 @@ export class ResumenCompra extends React.Component {
                     })
 
                 }
-            })
+           })
+           });
+          
         })
 
 
@@ -324,20 +333,21 @@ export class ResumenCompra extends React.Component {
         localStorage.removeItem("productosencarrito");
         localStorage.setItem("compras", JSON.stringify(this.state.arreglo));
         localStorage.setItem("direccion", this.state.direccion);
+        localStorage.setItem("productosencarrito",null)
     }
 
     CerrarPedido(token, direccion_id) {
         console.log(token);
         var posturl = "";
         if (localStorage.getItem("tipo_entrega") == 0) {
-            posturl = url_general + "api/Carrito/confirmar/0/" + direccion_id;
+            posturl = url_general + "api/Carrito/confirmar/0/"+direccion_id;
         }
         else {
             posturl = url_general + "api/Carrito/confirmar/1";
         }
         var result = new Promise(function (resolve, reject) {
             fetch(posturl, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token

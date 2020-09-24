@@ -25,7 +25,9 @@ export class ContenidoCarrito extends React.Component {
             token: '',
             mensaje: [],
             redirect: false,
-            total: ''
+            total: '',
+            carritoDB:[],
+            productosBD:[]
         }
     }
     render() {
@@ -196,35 +198,170 @@ export class ContenidoCarrito extends React.Component {
 
     componentDidMount() {
         console.log(window.innerHeight);
+        console.log(localStorage.getItem("token"));
+        console.log(localStorage.getItem("carritoDB"));
+        this.resize();
         if (localStorage.getItem("token") != null) {
+           
             this.setState({ token: localStorage.getItem("token") })
             if (localStorage.getItem("productosencarrito") != null) {
 
                 var e = localStorage.getItem("productosencarrito");
-
+                
                 console.log("pddd", JSON.parse(e));
                 this.setState({
                     productosencarrito: JSON.parse(e),
                 }, () => {
-                    var total = 0;
-                    for (var i = 0; i < this.state.productosencarrito.length; i++) {
-                        total = (total + this.state.productosencarrito[i].Precio)
-                    }
-                    console.log("mi precio", total);
-                    this.setState({
-                        cantidadtitulo: this.state.productosencarrito.length,
-                        total: total
-                    })
+                    console.log('primera parte',this.state.productosencarrito);
+                    this.ConsultarCarrito(localStorage.getItem("token")).then(item=>{
+                        console.log("luna",item);
+                        this.setState({
+                            carritoDB:item
+                        },()=>{
+                            console.log("CARRITO",item[0]);
+                            var oye=item[0];
+                            if(typeof item[0] =="undefined"){
+                                this.UnirCarritos(1)
+                            }else{
+                                this.UnirCarritos(0)
+                            }
+
+                        })
+                    });
+                   
+                })
+            }else{
+                this.ConsultarCarrito(localStorage.getItem("token")).then(item=>{
+                    console.log(item);
+                    const datos=[];
+                    this.setState({productosBD:item},()=>{
+                        this.state.productosBD.map(a=>{
+                            a.Articulos.map(item2=>{
+                            
+                                    var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
+                                    datos.push(item);
+                            })
+                        })
+                    });
+
+                    this.setState({productosencarrito:datos})
                 })
             }
         }
+
+       
+    }
+    UnirCarritos(numero){
+        console.log("AQUIUNO",this.state.carritoDB);
+        console.log("AQUI",this.state.productosencarrito);
+        const datos=[];
+        if(numero == 0){
+            this.state.carritoDB.map(item=>{
+                item.Articulos.map(item2=>{
+                   var existe = this.state.productosencarrito.findIndex(x=> x.Sku == item2.ArtSku);
+                   if(existe!==-1){
+                    let items=[...this.state.productosencarrito];
+                    let item={...items[existe]};
+                    var rest=0;
+                    if(item.BD==0){
+                        item.carga=false;
+                        rest=0
+                    }
+                    else{
+                        item.carga=true;
+                        rest=item2.TickDetSubTotal
+                    }
+                    item.Cantidad=(item.Cantidad + Number(item2.TickDetCant)-item.BD);
+                    item.Precio=(item.Precio + Number(item2.TickDetSubTotal)-rest);
+                    item.BD=Number(item2.TickDetCant);
+                    items[existe]=item;
+                    datos.push(item);
+                    console.log(datos);
+                   }else{
+                       var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":0,"carga":false}
+                       datos.push(item);    
+                   }
+                   
+                })
+               
+           });
+           this.setState({
+            productosencarrito:datos
+        },()=>{
+            console.log("SALIO",this.state.productosencarrito);
+         var total = 0;
+         for (var i = 0; i < this.state.productosencarrito.length; i++) {
+             total = (total + this.state.productosencarrito[i].Precio)
+         }
+        
+         console.log("mi precio", total);
+         this.setState({
+             cantidadtitulo: this.state.productosencarrito.length,
+             total: total
+         });
+        //  localStorage.removeItem(); 
+        })
+        }else{
+            this.setState({
+                productosencarrito:this.state.productosencarrito
+            },()=>{
+                var total = 0;
+         for (var i = 0; i < this.state.productosencarrito.length; i++) {
+             total = (total + this.state.productosencarrito[i].Precio)
+         }
+         console.log("mi precio", total);
+         this.setState({
+             cantidadtitulo: this.state.productosencarrito.length,
+             total: total
+         });
+            })
+        }
+      
+    }
+    ConsultarCarrito(token) {
+        var pro = [];
+        const posturl = url_general + "api/Carrito/consultar";
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            }).then(
+                (res) => res.json()
+
+            )
+                .catch(error => console.log('Error', error))
+                .then(resp => {
+                    pro.push(resp);
+                    resolve(pro);
+                });
+        });
+
+        return result;
     }
 
     AgregarItem(sku) {
         const { productos: productosencarrito } = this.state;
         const productos = this.state.productosencarrito.map(item => {
 
-            if (item.Sku === sku) {
+            if (item.Sku === sku && item.carga===false) {
+                if (item.Cantidad === 1) {
+                    item.Cantidad += 1;
+                    item.Precio = (item.Cantidad * item.Precio)
+
+                }
+                else {
+                    var punit = (item.Precio / item.Cantidad);
+                    item.Cantidad += 1;
+                    item.Precio = (item.Cantidad * punit)
+                    console.log("entro", punit)
+                }
+
+                return item;
+            }
+            else if(item.Sku === sku && item.carga===true){
                 if (item.Cantidad === 1) {
                     item.Cantidad += 1;
                     item.Precio = (item.Cantidad * item.Precio)
@@ -270,7 +407,7 @@ export class ContenidoCarrito extends React.Component {
                     console.log("entro", punit)
                 }
                 return item;
-            }
+        }
 
             return item;
         });
@@ -321,6 +458,7 @@ export class ContenidoCarrito extends React.Component {
                         redirect: true
                     })
                 }
+                localStorage.removeItem("productosencarrito");
             })
         });
 
@@ -350,7 +488,7 @@ export class ContenidoCarrito extends React.Component {
             }).then(
                 (res) => res.json()
             )
-                .catch(error => console.log('Error', error))
+                .catch(error => console.log('Error Contenido Carrito', error))
                 .then(resp => {
 
                     resolve(resp);
@@ -358,6 +496,17 @@ export class ContenidoCarrito extends React.Component {
 
         });
         return result;
+    }
+
+    
+    resize() {
+        const height = window.innerWidth;
+        if(height>800){
+            document.body.style.overflow="scroll";
+        }
+        else{
+            document.body.style.overflow="scroll";
+        }
     }
 
 }

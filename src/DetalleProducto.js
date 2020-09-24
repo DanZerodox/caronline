@@ -201,9 +201,9 @@ export class DetalleProducto extends React.Component{
                                                         }
                                                     </Media>
                                                     <Row style={{width:'100%', border:'1px solid #cacaca',borderRadius: '4px', marginBottom:10, marginLeft:0}}>
-                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItem()}>-</button></Col>
-                                                        <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{this.state.cantidad}</label></Col>
-                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItem()}>+</button></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><label style={{lineHeight:'2.5'}}>{produ.Cantidad}</label></Col>
+                                                        <Col style={{textAlign:'center'}} sm={4}><button class="btnagregarnum" onClick={()=>this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
                                                      </Row>   
                                                 </Col>
                                                 <Col sm={3} style={{padding:'21px 0px'}}>
@@ -385,7 +385,7 @@ export class DetalleProducto extends React.Component{
             })
         }else{
             var precio=(this.state.cantidad * precio);
-            const producto=[{"Sku":sku,"Url":url,"Des":descripcion,"Cantidad":this.state.cantidad,"Precio":precio}];
+            const producto=[{"Sku":sku,"Url":url,"Des":descripcion,"Cantidad":this.state.cantidad,"Precio":precio, "BD":0,"carga":false}];
             this.setState({
                 productosencarrito:this.state.productosencarrito.concat(producto),
                 mostrar:true
