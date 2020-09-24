@@ -43,7 +43,7 @@ export class CarritoResponsivo extends React.Component {
                         <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                             <Row style={{ flexWrap: 'inherit' }}>
                                 <Col sm={2}>
-                                    <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
+                                    <CardMedia style={{ height: 88, width: 46, float:'right' }} image={produ.Url}></CardMedia>
                                 </Col>
                                 <Col sm={7}>
                                     <Typography>{produ.Des}</Typography>

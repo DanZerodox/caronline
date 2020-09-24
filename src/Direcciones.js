@@ -4,6 +4,8 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import {Footer} from './componentes/Footer';
+import Media from 'react-media';
+
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
@@ -66,8 +68,8 @@ export class Direcciones extends React.Component{
                 {
                 this.state.mostrarError==false?
                 this.state.mostrar==false?
-                 <div className='direcciones-panel'>
-                    <Card>
+                 <div style={{display:'flex', justifyContent:'center'}}>
+                    <Card style={{boxShadow:'0 0  black'}}>
                         <CardContent>
                          
                             <h2 class="direccion-title">Elige dónde recibir tus productos Jumex</h2>
@@ -75,21 +77,66 @@ export class Direcciones extends React.Component{
                             <h4>En una de mis direcciones</h4>
                             
                             {this.state.direcciones.map(item=>(
-                            <ul class="panel-direccion">
-                                <li class="li-direccion">
-                                    <div class="direccion-primer">CP {item.CP}</div>
-                                    <div class="direccion-segundo">
-                                        <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
-                                    </div>
-                                    <div class="direccion-segundo">
-                                        <span class="direccion-mun-col">{this.state.nombre}</span>
-                                    </div>
-                                    <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
-                                </li>  
-                                <div class="editar-direccion">
-                                    <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
-                                </div> 
-                            </ul>
+                                <Media queries={{small:{maxWidth:480},medium:{maxWidth:1300},large:{maxWidth:1600}}}>
+                                    {
+                                        matches=>
+                                            matches.small?(
+                                                <ul class="panel-direccion" style={{height:188}}>
+                                                    <li class="li-direccion">
+                                                        <div class="direccion-primer">CP {item.CP}</div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                        </div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                        </div>
+                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                    </li>  
+                                                    <div class="editar-direccion">
+                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
+                                                    </div> 
+                                                </ul> 
+                                            ):
+                                            (
+                                               matches.medium?(
+                                                <>
+                                                <ul class="panel-direccion">
+                                                    <li class="li-direccion">
+                                                        <div class="direccion-primer">CP {item.CP}</div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                        </div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                        </div>
+                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                    </li>  
+                                                    <div class="editar-direccion">
+                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
+                                                    </div> 
+                                                </ul>
+                                                </>
+                                               ) :
+                                               (
+                                                <ul class="panel-direccion">
+                                                    <li class="li-direccion">
+                                                        <div class="direccion-primer">CP {item.CP}</div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                        </div>
+                                                        <div class="direccion-segundo">
+                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                        </div>
+                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                    </li>  
+                                                    <div class="editar-direccion">
+                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
+                                                    </div> 
+                                                </ul>
+                                               )
+                                            )
+                                    }
+                                </Media>
                             ))}
                            {this.state.tipo_sitio==0?
                             <>
@@ -111,16 +158,49 @@ export class Direcciones extends React.Component{
                             }
                             <br></br>
                             <h4>En otra ubicación</h4>
-                            <ul class="panel-direccion">
-                                <div class="editar-direccion">
-                                <span class="icon-link__icon">
-                                    <svg class="button-icon" viewBox="0 0 16 16"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.8">
-                                        <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
-                                     </path></g></svg>
-                                </span>
-                                    <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
-                                </div> 
-                            </ul>
+                            <Media queries={{small:{maxWidth:480}, medium:{maxWidth:1300}, large:{maxWidth:1600}}}>
+                                {
+                                    matches=>
+                                        matches.small?(   
+                                        <ul class="panel-direccion" style={{height:70}}>
+                                            <div class="editar-direccion">
+                                            <span style={{width:25}} class="icon-link__icon">
+                                                <svg class="button-icon" style={{width:22, height:15}} viewBox="0 0 16 16"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.8">
+                                                    <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
+                                                </path></g></svg>
+                                            </span>
+                                                <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                            </div> 
+                                        </ul>
+                                        ):
+                                        (
+                                            matches.medium?(
+                                                <ul class="panel-direccion">
+                                                    <div class="editar-direccion">
+                                                    <span style={{width:25}} class="icon-link__icon">
+                                                        <svg class="button-icon" style={{width:22, height:15}} viewBox="0 0 16 16"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.8">
+                                                            <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
+                                                        </path></g></svg>
+                                                    </span>
+                                                        <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                                    </div> 
+                                                </ul>
+                                            ):
+                                            (
+                                                <ul class="panel-direccion">
+                                                    <div class="editar-direccion">
+                                                    <span style={{width:25}} class="icon-link__icon">
+                                                        <svg class="button-icon" style={{width:22, height:15}} viewBox="0 0 16 16"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.8">
+                                                            <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
+                                                        </path></g></svg>
+                                                    </span>
+                                                        <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                                    </div> 
+                                                </ul>
+                                            )
+                                        )
+                                }
+                            </Media>
                            {this.state.mostrarbtn==true?
                             <Link to={"/resumen"}>
                             <button class="btnregistro">Continuar</button>
@@ -200,7 +280,7 @@ export class Direcciones extends React.Component{
                 </div> 
                  }
                  
-                                  
+                <Footer></Footer>                  
                 </>
             </Route>           
             )

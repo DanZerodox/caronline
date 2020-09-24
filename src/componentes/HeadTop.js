@@ -24,7 +24,9 @@ export class HeadTop extends React.Component{
         this.state={
             mostrar:false,
             perfil:[],
-            redirect:false
+            redirect:false,
+            redirigir:false,
+            cerrar:false
         }
     }
     render(){
@@ -41,7 +43,18 @@ export class HeadTop extends React.Component{
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link href="#home" style={{color:"white", marginLeft:'auto'}}>Iniciar Sesión</Nav.Link>
+                        {this.state.perfil!=""?
+                        <>
+                         <Nav.Link style={{color:'#ffffff'}} href="#inic">{this.state.perfil.UsrNombre}</Nav.Link>
+                         <Nav.Link style={{color:'#ffffff'}} href="#" onClick={()=>this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
+                        </>
+                        :
+                       <>
+                        <Nav.Link href="#formulariocompra" style={{color:"white", marginLeft:'auto'}} onClick={()=>this.Redirigir()}>    
+                        Iniciar Sesión
+                        </Nav.Link>
+                       </>
+                     }
                     {/* <Nav.Link href="#link" style={{color:"white"}}>Link</Nav.Link>
                     <NavDropdown style={{borderRight:'none'}} title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -57,6 +70,14 @@ export class HeadTop extends React.Component{
                     </Form> */}
                 </Navbar.Collapse>
                 </Navbar>
+                {this.state.redirigir==true?
+                    <Redirect push to={'/formulariocompra'}></Redirect>
+                :null
+                 }
+                {this.state.cerrar==true?
+                    <Redirect to={'/'}></Redirect>
+                :null
+                 }
              </>
              </Route>
             </BrowserRouter>
@@ -77,6 +98,11 @@ export class HeadTop extends React.Component{
             })    
            
         }
+    }
+    Redirigir(){
+        this.setState({
+            redirigir:true
+        })
     }
     RegresarInicio(){
         this.setState({
@@ -108,5 +134,10 @@ export class HeadTop extends React.Component{
         });
 
         return result;      
+    }
+    CerrarSesion(){
+        console.log('entro');
+        localStorage.clear();
+        
     }
 }

@@ -17,7 +17,7 @@ class App extends React.Component{
       <>          
        <BrowserRouter>
        <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route>
-       <Route path="/formulariocompra" exact={true} component={FormularioCompra}></Route>
+       <Route path="/formulariocompra"  component={FormularioCompra}></Route>
        <Route path="/registrocuenta" exact={true} component={FormularioRegistro}></Route>
        <Route path="/contenidocarrito" component={ContenidoCarrito}></Route>
        <Route path="/direcciones" exact={true} component={Direcciones}></Route>

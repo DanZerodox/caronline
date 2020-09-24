@@ -216,7 +216,7 @@ export class DetalleProducto extends React.Component{
                                     </Row>   
                                                       
                                     <Row style={{justifyContent:'center'}}>
-                                            <Button style={{backgroundColor:'#10266b', width:'85%', height:'40px', position:'absolute', bottom:0}} variant="contained" disableElevation>
+                                            <Button style={{backgroundColor:'#10266b', width:'85%', height:'40px', position:'absolute', bottom:10}} variant="contained" disableElevation>
                                                 <Link style={{color:'#ffffff'}} to={'/formulariocompra'}>
                                                     Finalizar Compra
                                                 </Link>    

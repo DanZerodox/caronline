@@ -3,235 +3,404 @@ import { Card, CardContent, Typography, Box } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
-import {Footer} from './componentes/Footer';
+import { Footer } from './componentes/Footer';
+import Media from 'react-media';
+import CardMedia from "@material-ui/core/CardMedia";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from "@material-ui/core/Button";
+
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
-export class ResumenCompra extends React.Component{
-    constructor(props){
+export class ResumenCompra extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-            arreglo:[],
-            direccion:[],
+        this.state = {
+            arreglo: [],
+            direccion: [],
             mostrar: false,
-            tipo_entrega:0
+            tipo_entrega: 0
         }
     }
-    render(){
-        return(
+    render() {
+        return (
             <Route>
-                 {this.state.mostrar==false?
+                {this.state.mostrar == false ?
                     <>
-                                  <div className='direcciones-panel'>
-                  <Card>
-                      <CardContent>
-                        <h2 class="direccion-title">Resumen de tu pedido</h2>
-                        <div class="morty-resumen">
-                        {this.state.arreglo.map(item=>(
-                            item.Articulos.map(item2=>(
-                               <>
-                                <ul class="panel-direccion" style={{height:166}}>
+                        <Media queries={{ small: { maxWidth: 480 }, medium: { maxWidth: 1300 }, large: { maxWidth: 1600 } }}>
+                            {matches =>
+                                matches.small ? (
+                                    <div>
+                                        <Card style={{ width: '100%', boxShadow: '0 0 black' }}>
+                                            <CardContent>
+                                                <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                <div class="morty-resumen">
+                                                    {this.state.arreglo.map(item => (
+                                                        item.Articulos.map(item2 => (
+                                                            <>
+                                                                <Card>
+                                                                    <Row>
+                                                                        <Col xs={2}>
+                                                                            <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
+                                                                        </Col>
+                                                                        <Col xs={10} style={{ padding: 24 }}>
+                                                                            <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
+                                                                            <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
+                                                                            <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}>{item2.TickDetCant} Cajas</Typography>
+                                                                            <Typography style={{ fontSize: '1rem', width:'45%'}}>Total: ${item2.TickDetSubTotal}.00</Typography>
 
-                                <li class="li-direccion-resumen">
-                                    <div class="direccion-primer-resumen">{item2.ArtDesTv}</div>
-                                    <div class="direccion-segundo-resumen">
-                                        <span class="direccion-mun-col">SKU: {item2.ArtSku}</span>
+                                                                            <ul style={{ display: 'flex' }}>
+                                                                                <li><a href="#">Productos Jumex</a></li>
+                                                                                <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                            </ul>
+                                                                        </Col>
+                                                                        
+                                                                       
+                                                                    </Row>
+                                                                </Card>
+                                                            </>
+                                                        ))
+                                                    ))}
+
+                                                </div>
+                                                <div class="editar-direccion">
+                                                    {this.state.tipo_entrega == 0 ?
+                                                        this.state.direccion.map(dir => (
+                                                            <ul class="panel-direccion">
+                                                                <li style={{width:'100%'}} class="li-direccion-final-resumen">
+                                                                    <div class="direccion-primer">Dirección de entrega</div>
+                                                                    <div class="direccion-segundo">
+                                                                        <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
+                                                                    </div>
+                                                                    <div class="direccion-segundo">
+                                                                        <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
+                                                                    </div>
+
+                                                                </li>
+
+                                                            </ul>
+                                                        ))
+                                                        :
+                                                        <ul class="panel-direccion">
+                                                            <li class="li-direccion-final-resumen">
+                                                                <div class="direccion-primer">Dirección de entrega</div>
+                                                                <div class="direccion-segundo">
+                                                                    <span class="direccion-mun-col">En oficina</span>
+                                                                </div>
+                                                                <div class="direccion-segundo">
+                                                                    <span class="direccion-mun-col">Xalostoc</span>
+                                                                </div>
+
+                                                            </li>
+
+                                                        </ul>
+                                                    }
+
+                                                </div>
+                                                <Link to={"/contenidocarrito"}>
+                                                    <button class="btncancel-resumen">Cancelar</button>
+                                                </Link>
+                                                <button class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                            </CardContent>
+                                        </Card>
+
                                     </div>
-                                    <div class="direccion-tercero-resumen">
-                                    <div class="seccion-articulo-bajo-resumen">
-                                                <ul class="lista-bajo-resumen">
-                                                    <li class="li-articulo-resumen"><a class="parte-title-bajo" href="#">Mas productos de Jumex</a></li>
-                                                    <li class="li-articulo-resumen"><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                    {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                </ul>
+                                )
+                                    : (matches.medium ? (
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                                <CardContent>
+                                                    <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                    <div class="morty-resumen">
+                                                        {this.state.arreglo.map(item => (
+                                                            item.Articulos.map(item2 => (
+                                                                <>
+                                                                    <Card>
+                                                                        <Row>
+                                                                            <Col sm={2}>
+                                                                                <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
+                                                                            </Col>
+                                                                            <Col sm={5} style={{ padding: 18 }}>
+                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
+                                                                                <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
+                                                                                <ul style={{ display: 'flex' }}>
+                                                                                    <li><a href="#">Mas productos de Jumex</a></li>
+                                                                                    <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                    {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                                </ul>
+                                                                            </Col>
+                                                                            <Col sm={2} style={{ padding: '50px 15px' }}>
+                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
+                                                                            </Col>
+                                                                            <Col sm={3} style={{ padding: 48 }}>
+                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
+                                                                            </Col>
+                                                                        </Row>
+                                                                    </Card>
+                                                                </>
+                                                            ))
+                                                        ))}
+
+                                                    </div>
+                                                    <div class="editar-direccion">
+                                                        {this.state.tipo_entrega == 0 ?
+                                                            this.state.direccion.map(dir => (
+                                                                <ul class="panel-direccion">
+                                                                    <li class="li-direccion-final-resumen">
+                                                                        <div class="direccion-primer">Dirección de entrega</div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
+                                                                        </div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
+                                                                        </div>
+
+                                                                    </li>
+
+                                                                </ul>
+                                                            ))
+                                                            :
+                                                            <ul class="panel-direccion">
+                                                                <li class="li-direccion-final-resumen">
+                                                                    <div class="direccion-primer">Dirección de entrega</div>
+                                                                    <div class="direccion-segundo">
+                                                                        <span class="direccion-mun-col">En oficina</span>
+                                                                    </div>
+                                                                    <div class="direccion-segundo">
+                                                                        <span class="direccion-mun-col">Xalostoc</span>
+                                                                    </div>
+
+                                                                </li>
+
+                                                            </ul>
+                                                        }
+
+                                                    </div>
+                                                    <Link to={"/contenidocarrito"}>
+                                                        <button class="btncancel-resumen">Cancelar</button>
+                                                    </Link>
+                                                    <button class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                </CardContent>
+                                            </Card>
+
+                                        </div>
+                                    )
+                                        : (
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                                    <CardContent>
+                                                        <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                        <div class="morty-resumen">
+                                                            {this.state.arreglo.map(item => (
+                                                                item.Articulos.map(item2 => (
+                                                                    <>
+                                                                        <Card>
+                                                                            <Row>
+                                                                                <Col sm={2}>
+                                                                                    <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
+                                                                                </Col>
+                                                                                <Col sm={5} style={{ padding: 18 }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
+                                                                                    <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
+                                                                                    <ul style={{ display: 'flex' }}>
+                                                                                        <li><a href="#">Mas productos de Jumex</a></li>
+                                                                                        <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                        {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                                    </ul>
+                                                                                </Col>
+                                                                                <Col sm={2} style={{ padding: '50px 15px' }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
+                                                                                </Col>
+                                                                                <Col sm={3} style={{ padding: 48 }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </Card>
+                                                                    </>
+                                                                ))
+                                                            ))}
+
+                                                        </div>
+                                                        <div class="editar-direccion">
+                                                            {this.state.tipo_entrega == 0 ?
+                                                                this.state.direccion.map(dir => (
+                                                                    <ul class="panel-direccion">
+                                                                        <li class="li-direccion-final-resumen">
+                                                                            <div class="direccion-primer">Dirección de entrega</div>
+                                                                            <div class="direccion-segundo">
+                                                                                <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
+                                                                            </div>
+                                                                            <div class="direccion-segundo">
+                                                                                <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
+                                                                            </div>
+
+                                                                        </li>
+
+                                                                    </ul>
+                                                                ))
+                                                                :
+                                                                <ul class="panel-direccion" style={{ padding: 28 }}>
+                                                                    <li class="li-direccion-final-resumen">
+                                                                        <div class="direccion-primer">Dirección de entrega</div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">En oficina</span>
+                                                                        </div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">Xalostoc</span>
+                                                                        </div>
+
+                                                                    </li>
+
+                                                                </ul>
+                                                            }
+
+                                                        </div>
+                                                        <Link style={{ position: 'relative', top: '-95px' }} to={"/contenidocarrito"}>
+                                                            <button class="btncancel-resumen">Cancelar</button>
+                                                        </Link>
+                                                        <button style={{ position: 'relative', top: '-95px' }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                    </CardContent>
+                                                </Card>
+
                                             </div>
-                                    </div>
-        
-                                    <div class="imagen-resumen"><img  width={48} src={url_general+"Content/Assets/Images/"+item2.ArtSku+".png"}></img></div>
-                                    <div class="cantidad-resumen"><h2>Cantidad: {item2.TickDetCant} cajas</h2></div>
-                                    <br></br>
-                                    <div class="precio-resumen"><h1 class="h-precio-resumen">${item2.TickDetSubTotal}.00</h1></div>
-                                </li>  
-                                
-                                </ul>
-                                </>
-                            ))
-                        ))}
-                          
-                       </div>
-                       <div class="editar-direccion">
-                            {this.state.tipo_entrega==0?
-                             this.state.direccion.map(dir=>(
-                                <ul class="panel-direccion">
-                                <li class="li-direccion-final-resumen">
-                                 <div class="direccion-primer">Dirección de entrega</div>
-                                    <div class="direccion-segundo">
-                                     <span class="direccion-mun-col">{dir.Direccion+" - "+dir.Municipio+", "+dir.Estado}</span>
-                                    </div>
-                                    <div class="direccion-segundo">
-                                     <span class="direccion-mun-col">{dir.Colonia+", C.P. "+dir.CP+" - "+dir.Referencia}</span>
-                                    </div>
-                                  
-                                </li>  
-
-                            </ul>
-                            )) 
-                            :
-                            <ul class="panel-direccion">
-                            <li class="li-direccion-final-resumen">
-                             <div class="direccion-primer">Dirección de entrega</div>
-                                <div class="direccion-segundo">
-                                 <span class="direccion-mun-col">En oficina</span>
-                                </div>
-                                <div class="direccion-segundo">
-                                 <span class="direccion-mun-col">Xalostoc</span>
-                                </div>
-                              
-                            </li>  
-
-                        </ul>
+                                        )
+                                    )
                             }
-
-                       </div> 
-                       <Link to={"/contenidocarrito"}> 
-                          <button class="btncancel-resumen">Cancelar</button>   
-                          </Link>  
-                          <button class="btnfin-resumen" onClick={()=>this.FinalizarPedido()}>Finalizar</button>
-                      </CardContent>
-                  </Card>
-                  {/* <Footer></Footer>               */}
-              </div>
+                        </Media>
                     </>
                     :
                     <div className='primer-panel'>
-                    <Card>
-                        <CardContent>
-                        <div class="mensajefinal">
-                         <img class="circlegreen" src={require('./images/Jumex/ok.png')}></img>
-                         <p>Se ha confirmado tu compra, podrás dar seguimiento <Link to={'/historico'}>Aquí</Link> o desde el chat bot, Gracias por tu preferencia.</p>
-                         <Link to={'/'}><p>Ir a Inicio</p></Link>
-                         <img class="circlegreen" src={require('./images/Jumex/tucan.png')}></img>
-                        </div>
-                        </CardContent>
-                    </Card>
-                    {/* <Footer></Footer> */}
-                </div>  
-                }   
+                        <Card>
+                            <CardContent>
+                                <div class="mensajefinal">
+                                    <img class="circlegreen" src={require('./images/Jumex/ok.png')}></img>
+                                    <p>Se ha confirmado tu compra, podrás dar seguimiento <Link to={'/historico'}>Aquí</Link> o desde el chat bot, Gracias por tu preferencia.</p>
+                                    <Link to={'/'}><p>Ir a Inicio</p></Link>
+                                    <img class="circlegreen" src={require('./images/Jumex/tucan.png')}></img>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        {/* <Footer></Footer> */}
+                    </div>
+                }
+                <Footer></Footer>
             </Route>
         )
     }
 
-    componentDidMount(){
-        var token=localStorage.getItem("token");
-        var direccion_id=localStorage.getItem("direccion_id");
-        var tipo_entrega=localStorage.getItem("tipo_entrega");
-        this.setState({tipo_entrega:tipo_entrega});
-            this.ConsultarCarrito(token).then(item=>{
-                this.setState({
-                    arreglo:item
-                },()=>{
-                  if(tipo_entrega==0){
+    componentDidMount() {
+        var token = localStorage.getItem("token");
+        var direccion_id = localStorage.getItem("direccion_id");
+        var tipo_entrega = localStorage.getItem("tipo_entrega");
+        this.setState({ tipo_entrega: tipo_entrega });
+        this.ConsultarCarrito(token).then(item => {
+            this.setState({
+                arreglo: item
+            }, () => {
+                if (tipo_entrega == 0) {
                     // this.ConsultarDireccion(token,direccion_id).then(result=>{
                     //     this.setState({
                     //         direccion:result
                     //     },()=>{console.log(this.state.direccion)})
                     // })
-                    var e=localStorage.getItem("direccion_objeto");
+                    var e = localStorage.getItem("direccion_objeto");
                     this.setState({
-                        direccion:JSON.parse(e)
-                    })    
+                        direccion: JSON.parse(e)
+                    })
 
-                  }
-                })
+                }
             })
-        
-    
+        })
+
+
     }
 
-    FinalizarPedido(){
-        this.CerrarPedido(localStorage.getItem("token"),localStorage.getItem("direccion_id"));
+    FinalizarPedido() {
+        this.CerrarPedido(localStorage.getItem("token"), localStorage.getItem("direccion_id"));
         this.setState({
-            mostrar:true
+            mostrar: true
         });
         localStorage.removeItem("productosencarrito");
-        localStorage.setItem("compras",JSON.stringify(this.state.arreglo));
-        localStorage.setItem("direccion",this.state.direccion);
+        localStorage.setItem("compras", JSON.stringify(this.state.arreglo));
+        localStorage.setItem("direccion", this.state.direccion);
     }
 
-    CerrarPedido(token,direccion_id){
+    CerrarPedido(token, direccion_id) {
         console.log(token);
-        var posturl="";
-        if(localStorage.getItem("tipo_entrega")==0){
-            posturl=url_general+"api/Carrito/confirmar/0/"+direccion_id;
+        var posturl = "";
+        if (localStorage.getItem("tipo_entrega") == 0) {
+            posturl = url_general + "api/Carrito/confirmar/0/" + direccion_id;
         }
-        else{
-            posturl=url_general+"api/Carrito/confirmar/1";
+        else {
+            posturl = url_general + "api/Carrito/confirmar/1";
         }
-        var result= new Promise(function(resolve,reject){
-            fetch(posturl,{
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
                 method: 'POST',
-                headers:{ 
-                    'Content-Type':'application/json',
-                    'Authorization':'Bearer '+token
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
                 }
             }).then(
-                (res)=>res.json()
+                (res) => res.json()
 
             )
-            .catch(error=>console.log('Error',error));
+                .catch(error => console.log('Error', error));
         });
 
-        return result;    
+        return result;
     }
 
-    ConsultarDireccion(token,direccion_id){
+    ConsultarDireccion(token, direccion_id) {
         console.log(token);
-        var pro=[];
-        const posturl=url_general+"api/Usuario/direccion/"+direccion_id;
-        var result= new Promise(function(resolve,reject){
-            fetch(posturl,{
+        var pro = [];
+        const posturl = url_general + "api/Usuario/direccion/" + direccion_id;
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
                 method: 'POST',
-                headers:{ 
-                    'Content-Type':'application/json',
-                    'Authorization':'Bearer '+token
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
                 }
             }).then(
-                (res)=>res.json()
+                (res) => res.json()
 
             )
-            .catch(error=>console.log('Error',error))
-            .then(resp=>{
-                pro.push(resp);
-                resolve(resp);
-            });
+                .catch(error => console.log('Error', error))
+                .then(resp => {
+                    pro.push(resp);
+                    resolve(resp);
+                });
         });
 
-        return result;      
+        return result;
     }
 
-    ConsultarCarrito(token){
-        var pro=[];
-        const posturl=url_general+"api/Carrito/consultar";
-        var result= new Promise(function(resolve,reject){
-            fetch(posturl,{
+    ConsultarCarrito(token) {
+        var pro = [];
+        const posturl = url_general + "api/Carrito/consultar";
+        var result = new Promise(function (resolve, reject) {
+            fetch(posturl, {
                 method: 'GET',
-                headers:{ 
-                    'Content-Type':'application/json',
-                    'Authorization':'Bearer '+token
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
                 }
             }).then(
-                (res)=>res.json()
+                (res) => res.json()
 
             )
-            .catch(error=>console.log('Error',error))
-            .then(resp=>{
-                pro.push(resp);
-                resolve(pro);
-            });
+                .catch(error => console.log('Error', error))
+                .then(resp => {
+                    pro.push(resp);
+                    resolve(pro);
+                });
         });
 
-        return result;    
+        return result;
     }
 }
