@@ -208,7 +208,7 @@ export class DetalleProducto extends React.Component{
                                                 </Col>
                                                 <Col sm={3} style={{padding:'21px 0px'}}>
                                                     <Typography> ${produ.Precio}.00</Typography>
-                                                    <a onClick={()=>this.EliminarCarrito(produ.Sku)} href="#">Eliminar</a>
+                                                    <Button style={{width:'10%'}} onClick={()=>this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
                                                 </Col>
                                                </Row>
                                              </Card>  

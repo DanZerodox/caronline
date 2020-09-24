@@ -39,31 +39,29 @@ export class ResumenCompra extends React.Component {
                                                 <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                 <div class="morty-resumen">
                                                     {this.state.arreglo.map(item => (
-                                                        item.Articulos.map(item2 => (
-                                                            <>
-                                                                <Card>
-                                                                    <Row>
-                                                                        <Col xs={2}>
-                                                                            <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
-                                                                        </Col>
-                                                                        <Col xs={10} style={{ padding: 24 }}>
-                                                                            <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
-                                                                            <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
-                                                                            <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}>{item2.TickDetCant} Cajas</Typography>
-                                                                            <Typography style={{ fontSize: '1rem', width:'45%'}}>Total: ${item2.TickDetSubTotal}.00</Typography>
+                                                         <>
+                                                         <Card>
+                                                             <Row>
+                                                                 <Col xs={2}>
+                                                                     <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                 </Col>
+                                                                 <Col xs={10} style={{ padding: 24 }}>
+                                                                     <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item.ArtDesTv}</Typography>
+                                                                     <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.Sku}</Typography>
+                                                                     <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}> Cajas</Typography>
+                                                                     <Typography style={{ fontSize: '1rem', width:'45%'}}></Typography>
 
-                                                                            <ul style={{ display: 'flex' }}>
-                                                                                <li><a href="#">Productos Jumex</a></li>
-                                                                                <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                                {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                            </ul>
-                                                                        </Col>
-                                                                        
-                                                                       
-                                                                    </Row>
-                                                                </Card>
-                                                            </>
-                                                        ))
+                                                                     <ul style={{ display: 'flex' }}>
+                                                                         <li><a href="#">Productos Jumex</a></li>
+                                                                         <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                         {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                     </ul>
+                                                                 </Col>
+                                                                 
+                                                                
+                                                             </Row>
+                                                         </Card>
+                                                     </>
                                                     ))}
 
                                                 </div>
@@ -196,32 +194,30 @@ export class ResumenCompra extends React.Component {
                                                         <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                         <div class="morty-resumen">
                                                             {this.state.arreglo.map(item => (
-                                                                item.Articulos.map(item2 => (
-                                                                    <>
-                                                                        <Card>
-                                                                            <Row>
-                                                                                <Col sm={2}>
-                                                                                    <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
-                                                                                </Col>
-                                                                                <Col sm={5} style={{ padding: 18 }}>
-                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
-                                                                                    <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
-                                                                                    <ul style={{ display: 'flex' }}>
-                                                                                        <li><a href="#">Mas productos de Jumex</a></li>
-                                                                                        <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                                        {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                                    </ul>
-                                                                                </Col>
-                                                                                <Col sm={2} style={{ padding: '50px 15px' }}>
-                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
-                                                                                </Col>
-                                                                                <Col sm={3} style={{ padding: 48 }}>
-                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
-                                                                                </Col>
-                                                                            </Row>
-                                                                        </Card>
-                                                                    </>
-                                                                ))
+                                                                 <>
+                                                                 <Card>
+                                                                     <Row>
+                                                                         <Col sm={2}>
+                                                                             <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item.Sku + ".png"}></CardMedia>
+                                                                         </Col>
+                                                                         <Col sm={5} style={{ padding: 18 }}>
+                                                                             <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item.Des}</Typography>
+                                                                             <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.Sku}</Typography>
+                                                                             <ul style={{ display: 'flex' }}>
+                                                                                 <li><a href="#">Mas productos de Jumex</a></li>
+                                                                                 <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                 {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                             </ul>
+                                                                         </Col>
+                                                                         <Col sm={2} style={{ padding: '50px 15px' }}>
+                                                                             <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item.Cantidad} Cajas</Typography>
+                                                                         </Col>
+                                                                         <Col sm={3} style={{ padding:'48px 10px' }}>
+                                                                             <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item.Precio}.00</Typography>
+                                                                         </Col>
+                                                                     </Row>
+                                                                 </Card>
+                                                             </>
                                                             ))}
 
                                                         </div>
@@ -298,8 +294,9 @@ export class ResumenCompra extends React.Component {
         var tipo_entrega = localStorage.getItem("tipo_entrega");
         this.setState({ tipo_entrega: tipo_entrega });
         this.ConsultarCarrito(token).then(item => {
+            var e = localStorage.getItem("productosencarrito");
             this.setState({
-                arreglo: item
+                arreglo: JSON.parse(e),
             }, () => {
                 if (tipo_entrega == 0) {
                     // this.ConsultarDireccion(token,direccion_id).then(result=>{
