@@ -27,174 +27,199 @@ export class ContenidoCarrito extends React.Component {
             redirect: false,
             total: '',
             carritoDB:[],
-            productosBD:[]
+            productosBD:[],
+            mostrarvacio:false
         }
     }
     render() {
         return (
             <Route>
-                <Media queries={{ small: { maxWidth: 480 }, medium: { maxWidth: 1300 }, large: { maxWidth: 1600 } }}>
-                    {matches =>
-                        matches.small ? (
-                            <>
-                            <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
-                                <Typography>
-                                <Link to={'/'}>Inicio</Link>
-                                <span className="svg-wrapper">
-                                        <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
-                                </span> Mi Carrito ({this.state.cantidadtitulo})
-                                </Typography>
-                            </div>
-                            <Row style={{width:'100%'}}>
-                                {this.state.productosencarrito.map((produ)=>(
-                                    <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
-                                    <Row style={{ flexWrap: 'inherit' }}>
-                                        <Col sm={2}>
-                                            <CardMedia style={{ height: 88, width: 46, float:'right' }} image={produ.Url}></CardMedia>
-                                        </Col>
-                                        <Col sm={7}>
-                                            <Typography>{produ.Des}</Typography>
-                                            <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
-                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(produ.Sku)}>-</button></Col>
-                                                <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
-                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(produ.Sku)}>+</button></Col>
-                                            </Row>
-                                        </Col>
-                                        <Col sm={3} style={{ padding: '21px 0px' }}>
-                                            <Typography> ${produ.Precio}.00</Typography>
-                                            <Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(produ.Sku)}>Eliminar</Button>
-                                        </Col>
-                                    </Row>
-                                </Card>
-                                ))}
-                            </Row>
-                           
-                            <div style={{textAlign:'center'}}>
-                            <Typography style={{ padding: 30, fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
-                                <Button style={{backgroundColor: '#10266b', width: '70%', height: 60}} variant="outlined" onClick={()=>this.RegistrarArticulos()}>
-                                    <label style={{color:'#ffffff'}}>Continuar Comprando</label>                                        
-                                </Button>
-                            </div>
-                            </>
-                        )
-                            :
-                            (
-                                matches.medium ? (
-                                    <>
-                                        <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
-                                            <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
-                                            {this.state.productosencarrito.map((item) => (
-                                                <CardContent style={{ borderBottom: '1px solid #dedede' }}>
-                                                    <Row>
-                                                        <Col sm={2}>
-                                                            <CardMedia style={{
-                                                                height: 170,
-                                                                backgroundSize: 'contain',
-                                                                backgroundPositionX: 'center',
-                                                                backgroundRepeat: 'no-repeat'
-                                                            }} image={item.Url}></CardMedia>
-                                                        </Col>
-                                                        <Col sm={4} style={{ padding: 15 }}>
-                                                            <Typography style={{ fontSize: '1.4rem', textAlign: 'left' }}>{item.Des}</Typography>
-                                                            <Typography style={{ fontSize: '1.3rem', color: "#1a9349", fontWeight: "bold", textAlign: 'left' }}>Sku: {item.Sku}</Typography>
-                                                            <br></br>
-                                                            <br></br>
-                                                            <ul style={{ display: 'flex', justifyContent: 'space-around', float: 'left', width: '101%' }}>
-                                                                <Link to={'/'}>
-                                                                    <li>
-                                                                        <a href="#">Mas productos de Jumex</a>
-                                                                    </li>
-                                                                </Link>
+                {this.state.mostrarvacio==false?
+                 <Media queries={{ small: { maxWidth: 480 }, medium: { maxWidth: 1300 }, large: { maxWidth: 1600 } }}>
+                 {matches =>
+                     matches.small ? (
+                         <>
+                         <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
+                             <Typography>
+                             <Link to={'/'}>Inicio</Link>
+                             <span className="svg-wrapper">
+                                     <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
+                             </span> Mi Carrito ({this.state.cantidadtitulo})
+                             </Typography>
+                         </div>
+                         <Row style={{width:'100%'}}>
+                             {this.state.productosencarrito.map((produ)=>(
+                                 <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                                 <Row style={{ flexWrap: 'inherit' }}>
+                                     <Col sm={2}>
+                                         <CardMedia style={{ height: 88, width: 46, float:'right' }} image={produ.Url}></CardMedia>
+                                     </Col>
+                                     <Col sm={7}>
+                                         <Typography>{produ.Des}</Typography>
+                                         <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                             <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(produ.Sku)}>-</button></Col>
+                                             <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
+                                             <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(produ.Sku)}>+</button></Col>
+                                         </Row>
+                                     </Col>
+                                     <Col sm={3} style={{ padding: '21px 0px' }}>
+                                         <Typography> ${produ.Precio}.00</Typography>
+                                         <Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(produ.Sku)}>Eliminar</Button>
+                                     </Col>
+                                 </Row>
+                             </Card>
+                             ))}
+                         </Row>
+                        
+                         <div style={{textAlign:'center'}}>
+                         <Typography style={{ padding: 30, fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
+                             <Button style={{backgroundColor: '#10266b', width: '70%', height: 60}} variant="outlined" onClick={()=>this.RegistrarArticulos()}>
+                                 <label style={{color:'#ffffff'}}>Pasar a Pago</label>                                        
+                             </Button>
+                         </div>
+                         </>
+                     )
+                         :
+                         (
+                             matches.medium ? (
+                                 <>
+                                     <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
+                                         <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
+                                         {this.state.productosencarrito.map((item) => (
+                                             <CardContent style={{ borderBottom: '1px solid #dedede' }}>
+                                                 <Row>
+                                                     <Col sm={2}>
+                                                         <CardMedia style={{
+                                                             height: 170,
+                                                             backgroundSize: 'contain',
+                                                             backgroundPositionX: 'center',
+                                                             backgroundRepeat: 'no-repeat'
+                                                         }} image={item.Url}></CardMedia>
+                                                     </Col>
+                                                     <Col sm={4} style={{ padding: 15 }}>
+                                                         <Typography style={{ fontSize: '1.4rem', textAlign: 'left' }}>{item.Des}</Typography>
+                                                         <Typography style={{ fontSize: '1.3rem', color: "#1a9349", fontWeight: "bold", textAlign: 'left' }}>Sku: {item.Sku}</Typography>
+                                                         <br></br>
+                                                         <br></br>
+                                                         <ul style={{ display: 'flex', justifyContent: 'space-around', float: 'left', width: '101%' }}>
+                                                             <Link to={'/'}>
+                                                                 <li>
+                                                                     <a href="#">Mas productos de Jumex</a>
+                                                                 </li>
+                                                             </Link>
 
-                                                                <li class="parte-title-bajo"><a href="#">Detalle</a></li>
-                                                                <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
+                                                             <li class="parte-title-bajo"><a href="#">Detalle</a></li>
+                                                             <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
 
-                                                            </ul>
-                                                        </Col>
-                                                        <Col sm={4}>
-                                                            <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0, flexWrap: 'inherit', marginTop: 50 }}>
-                                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(item.Sku)}>-</button></Col>
-                                                                <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3.5', fontSize: 20 }}>{item.Cantidad} Cajas</label></Col>
-                                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(item.Sku)}>+</button></Col>
-                                                            </Row>
-                                                        </Col>
-                                                        <Col sm={2}>
-                                                            <Typography style={{ fontSize: '3rem' }}>${item.Precio}.00</Typography>
-                                                        </Col>
-                                                    </Row>
-                                                </CardContent>
-                                            ))}
-                                        </Card>
-                                        <Card style={{ boxShadow: '0 0 black' }}>
-                                            <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
-                                        </Card>
-                                        <Card>
-                                            <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} onClick={()=>this.RegistrarArticulos()} variant="contained" color="primary" disableElevation>Continuar Compra</Button>
-                                        </Card>
-                                    </>
-                                ) : (
-                                        <>
-                                            <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
-                                                <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
-                                                {this.state.productosencarrito.map((item) => (
-                                                    <CardContent style={{ borderBottom: '1px solid #dedede' }}>
-                                                        <Row>
-                                                            <Col sm={3}>
-                                                                <CardMedia style={{
-                                                                    height: 170,
-                                                                    backgroundSize: 'contain',
-                                                                    backgroundPositionX: 'center',
-                                                                    backgroundRepeat: 'no-repeat'
-                                                                }} image={item.Url}></CardMedia>
-                                                            </Col>
-                                                            <Col sm={4} style={{ padding: 20 }}>
-                                                                <Typography style={{ fontSize: '1.4rem', textAlign: 'left' }}>{item.Des}</Typography>
-                                                                <Typography style={{ fontSize: '1.3rem', color: "#1a9349", fontWeight: "bold", textAlign: 'left' }}>Sku: {item.Sku}</Typography>
-                                                                <br></br>
-                                                                <br></br>
-                                                                <ul style={{ display: 'flex', justifyContent: 'space-around', float: 'left' }}>
-                                                                    <Link to={'/'}>
-                                                                        <li>
-                                                                            <a href="#">Mas productos de Jumex</a>
-                                                                        </li>
-                                                                    </Link>
+                                                         </ul>
+                                                     </Col>
+                                                     <Col sm={4}>
+                                                         <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0, flexWrap: 'inherit', marginTop: 50 }}>
+                                                             <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(item.Sku)}>-</button></Col>
+                                                             <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3.5', fontSize: 20 }}>{item.Cantidad} Cajas</label></Col>
+                                                             <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(item.Sku)}>+</button></Col>
+                                                         </Row>
+                                                     </Col>
+                                                     <Col sm={2}>
+                                                         <Typography style={{ fontSize: '3rem' }}>${item.Precio}.00</Typography>
+                                                     </Col>
+                                                 </Row>
+                                             </CardContent>
+                                         ))}
+                                     </Card>
+                                     <Card style={{ boxShadow: '0 0 black' }}>
+                                         <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
+                                     </Card>
+                                     <Card>
+                                         <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} onClick={()=>this.RegistrarArticulos()} variant="contained" color="primary" disableElevation>Pasar a Pago</Button>
+                                     </Card>
+                                 </>
+                             ) : (
+                                     <>
+                                         <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
+                                             <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
+                                             {this.state.productosencarrito.map((item) => (
+                                                 <CardContent style={{ borderBottom: '1px solid #dedede' }}>
+                                                     <Row>
+                                                         <Col sm={3}>
+                                                             <CardMedia style={{
+                                                                 height: 170,
+                                                                 backgroundSize: 'contain',
+                                                                 backgroundPositionX: 'center',
+                                                                 backgroundRepeat: 'no-repeat'
+                                                             }} image={item.Url}></CardMedia>
+                                                         </Col>
+                                                         <Col sm={4} style={{ padding: 20 }}>
+                                                             <Typography style={{ fontSize: '1.4rem', textAlign: 'left' }}>{item.Des}</Typography>
+                                                             <Typography style={{ fontSize: '1.3rem', color: "#1a9349", fontWeight: "bold", textAlign: 'left' }}>Sku: {item.Sku}</Typography>
+                                                             <br></br>
+                                                             <br></br>
+                                                             <ul style={{ display: 'flex', justifyContent: 'space-around', float: 'left' }}>
+                                                                 <Link to={'/'}>
+                                                                     <li>
+                                                                         <a href="#">Mas productos de Jumex</a>
+                                                                     </li>
+                                                                 </Link>
 
-                                                                    <li class="parte-title-bajo"><a href="#">Detalle</a></li>
-                                                                    <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
+                                                                 <li class="parte-title-bajo"><a href="#">Detalle</a></li>
+                                                                 <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
 
-                                                                </ul>
-                                                            </Col>
-                                                            <Col sm={3}>
-                                                                <Row style={{ width: '80%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0, flexWrap: 'inherit', marginTop: 50 }}>
-                                                                    <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(item.Sku)}>-</button></Col>
-                                                                    <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3.5', fontSize: 20 }}>{item.Cantidad} Cajas</label></Col>
-                                                                    <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(item.Sku)}>+</button></Col>
-                                                                </Row>
-                                                            </Col>
-                                                            <Col sm={2}>
-                                                                <Typography style={{ fontSize: '3rem' }}>${item.Precio}.00</Typography>
-                                                            </Col>
-                                                        </Row>
-                                                    </CardContent>
-                                                ))}
-                                            </Card>
-                                            <Card style={{ boxShadow: '0 0 black' }}>
-                                                <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
-                                            </Card>
-                                            <Card>
-                                                <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} variant="contained" onClick={()=>this.RegistrarArticulos()} color="primary" disableElevation>Continuar Compra</Button>
-                                            </Card>
-                                        </>
-                                    )
-                            )
-                    }
-                </Media>
+                                                             </ul>
+                                                         </Col>
+                                                         <Col sm={3}>
+                                                             <Row style={{ width: '80%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0, flexWrap: 'inherit', marginTop: 50 }}>
+                                                                 <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItem(item.Sku)}>-</button></Col>
+                                                                 <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3.5', fontSize: 20 }}>{item.Cantidad} Cajas</label></Col>
+                                                                 <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItem(item.Sku)}>+</button></Col>
+                                                             </Row>
+                                                         </Col>
+                                                         <Col sm={2}>
+                                                             <Typography style={{ fontSize: '3rem' }}>${item.Precio}.00</Typography>
+                                                         </Col>
+                                                     </Row>
+                                                 </CardContent>
+                                             ))}
+                                         </Card>
+                                         <Card style={{ boxShadow: '0 0 black' }}>
+                                             <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
+                                         </Card>
+                                         <Card>
+                                             <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} variant="contained" onClick={()=>this.RegistrarArticulos()} color="primary" disableElevation>Pasar a Pago</Button>
+                                         </Card>
+                                     </>
+                                 )
+                         )
+                 }
+             </Media>
 
-                <Footer></Footer>
-                {this.state.redirect==true?
+                :
+                <>
+                 <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
+                            <Typography>
+                            <Link to={'/'}>Inicio</Link>
+                            <span className="svg-wrapper">
+                                    <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
+                            </span> Mi Carrito
+                            </Typography>
+                </div>
+                <div style={{padding:"177px 24px"}}>
+                 <label style={{marginBottom:20}}> No cuentas con ningun articulo en tu carrito.</label>
+                    <Button style={{backgroundColor:'#10266b', width:'100%', height:'40px'}} variant="contained" disableElevation>
+                            <Link style={{color:'#ffffff'}} to={'/'}>
+                                 Ver Productos
+                             </Link>    
+                    </Button>
+                </div>
+                </>
+                }
+               
+               {this.state.redirect==true?
                     <Redirect push to={'/direcciones'}></Redirect>
                     :null
                 }
+             
+              
+                <Footer></Footer>
             </Route>
         )
     }
@@ -233,8 +258,13 @@ export class ContenidoCarrito extends React.Component {
                     });
                    
                 })
-            }else{
+            }
+            else{
                 this.ConsultarCarrito(localStorage.getItem("token")).then(item=>{
+                    console.log("AQUI ESTA",item);
+                    if(typeof item[0] ==  "undefined"){
+                       this.setState({mostrarvacio:true})
+                    }else{
                     console.log(item);
                     const datos=[];
                     this.setState({productosBD:item},()=>{
@@ -248,8 +278,10 @@ export class ContenidoCarrito extends React.Component {
                     });
 
                     this.setState({productosencarrito:datos})
+                    }  
                 })
             }
+
         }
 
        

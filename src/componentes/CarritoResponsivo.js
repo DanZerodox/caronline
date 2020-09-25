@@ -42,7 +42,7 @@ export class CarritoResponsivo extends React.Component {
                 </div>
                 {this.state.mostrar==true?
                 <>
-                <Row style={{ width: '100%', overflowY:'scroll', height:300 }}>
+                <Row style={{ width: '100%', overflowY:'scroll', height:360 }}>
                     {this.state.productosencarrito.map((produ) => (
                         <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                             <Row style={{ flexWrap: 'inherit' }}>
