@@ -102,7 +102,7 @@ export class DetalleProducto extends React.Component{
                             ):
                             (
                                 <Row>
-                                <Col sm={9} style={{overflowY:'auto',height:'calc(100vh - 24px - 52px - 40px)'}}>
+                                <Col sm={8} style={{overflowY:'auto',height:'calc(100vh - 24px - 52px - 40px)'}}>
                                     <Row>
                                         <Col sm={4}>
                                             <Card style={{overflow:'unset'}}>
@@ -175,13 +175,13 @@ export class DetalleProducto extends React.Component{
                                    </Row>
                                     <Footer></Footer>  
                                 </Col>
-                                <Col sm={3}>
+                                <Col sm={4}>
                                     <Row style={{padding:15, justifyContent:'center', borderBottom:'1px solid #dedede'}}>
                                         <Typography>Mi Carrito</Typography>
                                     </Row>
                                     {this.state.mostrar==true?
                                     <>
-                                    <Row>
+                                    <Row style={{overflowY:'scroll', height:360}}>
                                         {this.state.productosencarrito.map((produ)=>(
                                              <Card style={{width:'100%', padding:15, borderBottom:'1px solid #dedede', borderRadius:0, boxShadow:'none'}}>
                                                <Row>
@@ -355,7 +355,10 @@ export class DetalleProducto extends React.Component{
                   else{
                       var punit=(item.Precio/item.Cantidad);
                       item.Cantidad -= 1;
-                      item.Precio=(item.Cantidad*punit)
+                      item.Precio=(item.Cantidad*punit);
+                      if(item.Cantidad < 1){
+                        this.EliminarCarrito(item.Sku);
+                    }
                       console.log("entro",punit)
                   }
                  return item;

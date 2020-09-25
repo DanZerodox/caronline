@@ -31,14 +31,18 @@ export class CarritoResponsivo extends React.Component {
     render() {
         return (
             <Route>
-                <div style={{ padding: 15, textAlign: 'center', borderBottom: '1px solid #dedede' }}>
+                <div>
+                <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
                     <Typography>
-                            Mi Carrito
+                        <Link to={'/'}>Inicio</Link>
+                        <span className="svg-wrapper">
+                                <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
+                        </span> Mi Carrito
                     </Typography>
                 </div>
                 {this.state.mostrar==true?
                 <>
-                <Row style={{ width: '100%' }}>
+                <Row style={{ width: '100%', overflowY:'scroll', height:300 }}>
                     {this.state.productosencarrito.map((produ) => (
                         <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                             <Row style={{ flexWrap: 'inherit' }}>
@@ -91,6 +95,7 @@ export class CarritoResponsivo extends React.Component {
                 </Row>
                 </>
                 }
+                </div>
             </Route>
         )
     }
@@ -198,8 +203,11 @@ export class CarritoResponsivo extends React.Component {
                 else {
                     var punit = (item.Precio / item.Cantidad);
                     item.Cantidad -= 1;
-                    item.Precio = (item.Cantidad * punit)
-                    console.log("entro", punit)
+                    item.Precio = (item.Cantidad * punit);
+                    if(item.Cantidad < 1){
+                        this.EliminarCarrito(item.Sku);
+                    }
+                    console.log("entro", punit);
                 }
                 return item;
             }

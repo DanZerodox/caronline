@@ -132,12 +132,15 @@ export class Productos extends React.Component{
                                     <Media queries={{small:{maxWidth:1300}}}>
                                                 {matches=>
                                                     matches.small?(
+                                                        <Link to={'/detalleproducto/'+item.ArtSku}>
                                                         <Button style={{marginLeft:48}}>Agregar</Button>
-
+                                                        </Link>
                                                     )
                                                     :
-                                                    (
+                                                    ( 
+                                                        <Link to={'/detalleproducto/'+item.ArtSku}>
                                                         <Button style={{marginLeft:118}}>Agregar</Button>
+                                                        </Link>
                                                     )
                                                 }
                                     </Media>

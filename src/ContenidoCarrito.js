@@ -59,7 +59,7 @@ export class ContenidoCarrito extends React.Component {
                                         </Col>
                                         <Col sm={3} style={{ padding: '21px 0px' }}>
                                             <Typography> ${produ.Precio}.00</Typography>
-                                            <a onClick={() => this.EliminarArticulo(produ.Sku)} href="#">Eliminar</a>
+                                            <Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(produ.Sku)}>Eliminar</Button>
                                         </Col>
                                     </Row>
                                 </Card>
@@ -408,6 +408,9 @@ export class ContenidoCarrito extends React.Component {
                     var punit = (item.Precio / item.Cantidad);
                     item.Cantidad -= 1;
                     item.Precio = (item.Cantidad * punit)
+                    if(item.Cantidad < 1){
+                        this.EliminarArticulo(item.Sku);
+                    }
                     console.log("entro", punit)
                 }
                 return item;
