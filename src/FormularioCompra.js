@@ -31,7 +31,10 @@ export class FormularioCompra extends React.Component {
             sitio: '',
             tipo_sitio: 0,
             height: 0,
-            carritoBD:[]
+            carritoBD:[],
+            mostrarerror:false,
+            mensajeerror:''
+
         }
 
 
@@ -50,21 +53,7 @@ export class FormularioCompra extends React.Component {
     render() {
 
         return (
-            //   <Route>
-            //          <div className="primer-panel">
-            //            <Card>
-            //                  <CardContent>
-            //                    <Typography>Iniciar Sesión</Typography>
-
-            //                  </CardContent>
-            //              </Card>
-            //            </div>
-            //            <Footer></Footer>
-            //            {this.state.redirect==true?
-            //             <Redirect push to={'/contenidocarrito'}></Redirect>
-            //             :null
-            //             }
-            //   </Route>
+        
             <>
                 <div style={{ padding: '60px 0' }} className="Login">
                     <form style={{ margin: '0 auto', maxWidth: 320 }}>
@@ -85,9 +74,14 @@ export class FormularioCompra extends React.Component {
                                 value={this.state.contrasena}
                             />
                         </FormGroup>
+                        {this.state.mostrarerror==true?
+                        <label style={{color:'red'}}>{this.state.mensajeerror}</label>
+                        :    
+                            null
+                        }
                         <Button block bsSize="large" onClick={() => this.IniciarSesion()}>
                             Iniciar Sesión
-          </Button>
+                        </Button>
                         <br></br>
                         <Link to={"/registrocuenta"}> <p>¿No tienes cuenta? Registrate Aquí</p></Link>
                     </form>
@@ -122,8 +116,15 @@ export class FormularioCompra extends React.Component {
                 console.log(this.state.tipo_sitio);
                 if (this.state.token.Estatus == "OK") {
                     localStorage.setItem("token", this.state.token.AccessToken);
-                   
+                    
                     window.location.reload();
+                
+                }
+                else{
+                       this.setState({
+                           mostrarerror:true,
+                           mensajeerror:item[0].Mensaje
+                       }) 
                 }
             })
         })
