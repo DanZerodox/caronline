@@ -107,7 +107,7 @@ export class ContenidoCarrito extends React.Component {
                                                                 </Link>
 
                                                                 <li class="parte-title-bajo"><a href="#">Detalle</a></li>
-                                                                <li> <Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
+                                                                <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
 
                                                             </ul>
                                                         </Col>
@@ -259,13 +259,14 @@ export class ContenidoCarrito extends React.Component {
         console.log("AQUI",this.state.productosencarrito);
         const datos=[];
         if(numero == 0){
-            for(var i=0; i < this.state.productosencarrito.length; i++){
-                datos.push(this.state.productosencarrito[i]);
-            }
+            // for(var i=0; i < this.state.productosencarrito.length; i++){
+            //     datos.push(this.state.productosencarrito[i]);
+            // }
             console.log("global",datos);
             this.state.carritoDB.map(item=>{
                 item.Articulos.map(item2=>{
                    var existe = this.state.productosencarrito.findIndex(x=> x.Sku == item2.ArtSku);
+                  
                    if(existe!==-1){
                     let items=[...this.state.productosencarrito];
                     let item={...items[existe]};
@@ -283,7 +284,7 @@ export class ContenidoCarrito extends React.Component {
                     item.BD=Number(item2.TickDetCant);
                     items[existe]=item;
                     datos.push(item);
-                    console.log(datos);
+                    console.log("mis data",datos);
                    }else{
                        var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":0,"carga":false}
                        datos.push(item);    
@@ -292,6 +293,18 @@ export class ContenidoCarrito extends React.Component {
                 })
                
            });
+
+            this.state.productosencarrito.map(ite=>{
+                console.log("aqui llevo esto", this.state.productosencarrito);
+                var existe = datos.findIndex(x=> x.Sku == ite.Sku);
+                if(existe !== -1){
+                    console.log("nada");
+                }else{
+                    var item={"Sku":ite.Sku, "Url": ite.Url,"Des":ite.Des, "Cantidad":ite.Cantidad, "Precio":ite.Precio, "BD":ite.BD,"carga":ite.carga}
+                    datos.push(item); 
+                }
+             })
+
            this.setState({
             productosencarrito:datos
         },()=>{
