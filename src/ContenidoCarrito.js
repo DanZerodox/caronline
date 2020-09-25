@@ -37,9 +37,12 @@ export class ContenidoCarrito extends React.Component {
                     {matches =>
                         matches.small ? (
                             <>
-                            <div style={{ padding: 15, textAlign: 'center', borderBottom: '1px solid #dedede' }}>
+                            <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
                                 <Typography>
-                                        Mi Carrito ({this.state.cantidadtitulo})
+                                <Link to={'/'}>Inicio</Link>
+                                <span className="svg-wrapper">
+                                        <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
+                                </span> Mi Carrito ({this.state.cantidadtitulo})
                                 </Typography>
                             </div>
                             <Row style={{width:'100%'}}>
@@ -104,7 +107,7 @@ export class ContenidoCarrito extends React.Component {
                                                                 </Link>
 
                                                                 <li class="parte-title-bajo"><a href="#">Detalle</a></li>
-                                                                <li><a onClick={() => this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
+                                                                <li> <Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
 
                                                             </ul>
                                                         </Col>
@@ -157,7 +160,7 @@ export class ContenidoCarrito extends React.Component {
                                                                     </Link>
 
                                                                     <li class="parte-title-bajo"><a href="#">Detalle</a></li>
-                                                                    <li><a onClick={() => this.EliminarArticulo(item.Sku)} class="parte-title-bajo" href="#">Eliminar</a></li>
+                                                                    <li><Button style={{width:'10%'}} onClick={() => this.EliminarArticulo(item.Sku)}>Eliminar</Button></li>
 
                                                                 </ul>
                                                             </Col>
@@ -436,11 +439,14 @@ export class ContenidoCarrito extends React.Component {
         var index = array.findIndex(x => x.Sku === sku);
         if (index !== -1) {
             var total = (this.state.total - array[index].Precio);
-
+           
             array.splice(index, 1);
+            var cantidadc = this.state.cantidadtitulo - 1;
+
             this.setState({
                 productosencarrito: array,
-                total: total
+                total: total,
+                cantidadtitulo:cantidadc
             }, () => {
                 if (this.state.productosencarrito.length == 0) {
                     this.setState({
