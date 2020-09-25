@@ -169,7 +169,7 @@ export class Direcciones extends React.Component{
                                                     <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
                                                 </path></g></svg>
                                             </span>
-                                                <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                            <label onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></label>
                                             </div> 
                                         </ul>
                                         ):
@@ -182,7 +182,7 @@ export class Direcciones extends React.Component{
                                                             <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
                                                         </path></g></svg>
                                                     </span>
-                                                        <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                                        <label onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></label>
                                                     </div> 
                                                 </ul>
                                             ):
@@ -194,7 +194,7 @@ export class Direcciones extends React.Component{
                                                             <path class="button-icon__path" d="M8.599,2.00067031 L8.599,7.40067031 L13.999,7.40067031 L13.999,8.60067031 L8.599,8.60067031 L8.599,14.0006703 L7.399,14.0006703 L7.399,8.60067031 L1.999,8.60067031 L1.999,7.40067031 L7.399,7.40067031 L7.399,2.00067031 L8.599,2.00067031 Z" fill="#000000" fill-rule="nonzero">
                                                         </path></g></svg>
                                                     </span>
-                                                        <a href="#" onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></a>
+                                                        <label onClick={()=>this.MostrarVentanaAgregar()}><span class="direccion-edicion">Agregar una nueva dirección completa</span></label>
                                                     </div> 
                                                 </ul>
                                             )
@@ -219,51 +219,104 @@ export class Direcciones extends React.Component{
                     {/* <Footer></Footer> */}
                  </div>
                     :
-                    <div className='primer-panel'>
-                    <Card>
-                        <CardContent>
-                            <Formik>
-                                <Form>
-                                    <h1>Registra tu <b>Dirección de  entrega</b></h1>
-                                    <div class="datosgeneralesregistro">
-                                          <Box>
-                                          <Field name="direccion" onChange={this.handleChangeDireccion} value={this.state.direccion} component={TextField} label="Calle"></Field>
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          <Field name="municipio" onChange={this.handleChangeMunicipio} value={this.state.municipio}  component={TextField} label="Municipio"></Field> 
-                                          </Box>
-                                        
-                                          <Box>
-                                          <Field name="cp" onChange={this.handleChangeCP} value={this.state.cp} component={TextField} label="C.P."></Field> 
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          <Field name="estado" onChange={this.handleChangeEstado} value={this.state.estado}  component={TextField} label="Estado"></Field>    
-                                      
-                                          </Box>  
-                                          <Box>
-                                          <Field name="colonia" onChange={this.handleChangeColonia} value={this.state.colonia} component={TextField} label="Colonia"></Field> 
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          &nbsp;
-                                          <Field name="referencia" onChange={this.handleChangeReferencia} value={this.state.referencia}  component={TextField} label="Referencia"></Field> 
-                                          </Box>
-                                    </div>
-                                                
+                   <Media queries={{small:{maxWidth:480}}}>
+                       {matches=>
+                            matches.small?(
+                                <div className='primer-panel'>
+                                <Card>
+                                    <CardContent>
+                                        <Formik>
+                                            <Form>
+                                                <h1 style={{fontSize:'1.3rem'}}>Registra tu <b>Dirección de  entrega</b></h1>
+                                                <div style={{padding:'15px 22px'}} class="datosgeneralesregistro">
+                                                      <Box>
+                                                      <Field name="direccion" onChange={this.handleChangeDireccion} value={this.state.direccion} component={TextField} label="Calle"></Field>
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="municipio" onChange={this.handleChangeMunicipio} value={this.state.municipio}  component={TextField} label="Municipio"></Field> 
+                                                      </Box>
+                                                    
+                                                      <Box>
+                                                      <Field name="cp" onChange={this.handleChangeCP} value={this.state.cp} component={TextField} label="C.P."></Field> 
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="estado" onChange={this.handleChangeEstado} value={this.state.estado}  component={TextField} label="Estado"></Field>    
+                                                  
+                                                      </Box>  
+                                                      <Box>
+                                                      <Field name="colonia" onChange={this.handleChangeColonia} value={this.state.colonia} component={TextField} label="Colonia"></Field> 
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="referencia" onChange={this.handleChangeReferencia} value={this.state.referencia}  component={TextField} label="Referencia"></Field> 
+                                                      </Box>
+                                                </div>
+                                                            
+            
+                                            </Form>
+                                        </Formik>
+                                        <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
+                                                        <Link to={'/contenidocarrito'}>
+                                                        <a href="#" className="regresar"  class="regresar">Regresar</a>
+                                                        </Link>
+                                    </CardContent>
+                                </Card>  
+                              </div> 
+                            ):(
 
-                                </Form>
-                            </Formik>
-                            <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
-                                            <Link to={'/contenidocarrito'}>
-                                            <a href="#" className="regresar"  class="regresar">Regresar</a>
-                                            </Link>
-                        </CardContent>
-                    </Card>  
-                  </div> 
+                                <div className='primer-panel'>
+                                <Card>
+                                    <CardContent>
+                                        <Formik>
+                                            <Form>
+                                                <h1>Registra tu <b>Dirección de  entrega</b></h1>
+                                                <div class="datosgeneralesregistro">
+                                                      <Box>
+                                                      <Field name="direccion" onChange={this.handleChangeDireccion} value={this.state.direccion} component={TextField} label="Calle"></Field>
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="municipio" onChange={this.handleChangeMunicipio} value={this.state.municipio}  component={TextField} label="Municipio"></Field> 
+                                                      </Box>
+                                                    
+                                                      <Box>
+                                                      <Field name="cp" onChange={this.handleChangeCP} value={this.state.cp} component={TextField} label="C.P."></Field> 
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="estado" onChange={this.handleChangeEstado} value={this.state.estado}  component={TextField} label="Estado"></Field>    
+                                                  
+                                                      </Box>  
+                                                      <Box>
+                                                      <Field name="colonia" onChange={this.handleChangeColonia} value={this.state.colonia} component={TextField} label="Colonia"></Field> 
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      &nbsp;
+                                                      <Field name="referencia" onChange={this.handleChangeReferencia} value={this.state.referencia}  component={TextField} label="Referencia"></Field> 
+                                                      </Box>
+                                                </div>
+                                                            
+            
+                                            </Form>
+                                        </Formik>
+                                        <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
+                                                        <Link to={'/contenidocarrito'}>
+                                                        <a href="#" className="regresar"  class="regresar">Regresar</a>
+                                                        </Link>
+                                    </CardContent>
+                                </Card>  
+                              </div> 
+                            )
+                       }
+                   </Media>
                  :
                  <div className='primer-panel'>
                     <Card>
