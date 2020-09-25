@@ -256,6 +256,10 @@ export class ContenidoCarrito extends React.Component {
         console.log("AQUI",this.state.productosencarrito);
         const datos=[];
         if(numero == 0){
+            for(var i=0; i < this.state.productosencarrito.length; i++){
+                datos.push(this.state.productosencarrito[i]);
+            }
+            console.log("global",datos);
             this.state.carritoDB.map(item=>{
                 item.Articulos.map(item2=>{
                    var existe = this.state.productosencarrito.findIndex(x=> x.Sku == item2.ArtSku);

@@ -1,7 +1,6 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "home": "/qao_tienda_jumex/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -24,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build":"set \"CI=false\" && react-scripts build",
+    "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

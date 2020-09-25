@@ -369,6 +369,7 @@ export class DetalleProducto extends React.Component{
 
     AgregarCarrito(sku,descripcion,precio){
         var array=this.state.productosencarrito;
+        console.log('222',array);
         var index=array.findIndex(x=>x.Sku === sku);
         var url=url_general+"Content/Assets/Images/"+sku+".png";
         if(index !== -1){

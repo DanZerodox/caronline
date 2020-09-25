@@ -38,31 +38,33 @@ export class ResumenCompra extends React.Component {
                                             <CardContent>
                                                 <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                 <div class="morty-resumen">
-                                                    {this.state.arreglo.map(item => (
-                                                         <>
-                                                         <Card>
-                                                             <Row>
-                                                                 <Col xs={2}>
-                                                                     <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
-                                                                 </Col>
-                                                                 <Col xs={10} style={{ padding: 24 }}>
-                                                                     <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item.ArtDesTv}</Typography>
-                                                                     <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.Sku}</Typography>
-                                                                     <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}> Cajas</Typography>
-                                                                     <Typography style={{ fontSize: '1rem', width:'45%'}}></Typography>
-
-                                                                     <ul style={{ display: 'flex' }}>
-                                                                         <li><a href="#">Productos Jumex</a></li>
-                                                                         <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                         {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                     </ul>
-                                                                 </Col>
-                                                                 
-                                                                
-                                                             </Row>
-                                                         </Card>
-                                                     </>
-                                                    ))}
+                                                    {this.state.arreglo.map(item2 => (
+                                                         item2.Articulos.map(item =>(
+                                                            <>
+                                                            <Card>
+                                                                <Row>
+                                                                    <Col xs={2}>
+                                                                        <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                    </Col>
+                                                                    <Col xs={10} style={{ padding: 24 }}>
+                                                                        <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item.ArtDesTv}</Typography>
+                                                                        <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.ArtSku}</Typography>
+                                                                        <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}>{item.TickDetCant} Cajas</Typography>
+                                                         <Typography style={{ fontSize: '1rem', width:'45%'}}>Total: ${item.TickDetSubTotal}.00</Typography>
+   
+                                                                        <ul style={{ display: 'flex' }}>
+                                                                            <li><a href="#">Productos Jumex</a></li>
+                                                                            <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                            {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                        </ul>
+                                                                    </Col>
+                                                                    
+                                                                   
+                                                                </Row>
+                                                            </Card>
+                                                        </>
+                                                         )
+                                                    )))}
 
                                                 </div>
                                                 <div class="editar-direccion">
@@ -300,24 +302,25 @@ export class ResumenCompra extends React.Component {
                console.log(this.state.arreglo);
                this.state.arreglo.map(a=>{
                 a.Articulos.map(item2=>{         
-                    var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
-                    datos.push(item);
+                    var item={"Sku":item2.ArtSku, "Url": url_general+'Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
+                    datos.push(item2);
                 })
                });
-               this.setState({arreglo:datos},()=>{
-                if (tipo_entrega == 0) {
-                    // this.ConsultarDireccion(token,direccion_id).then(result=>{
-                    //     this.setState({
-                    //         direccion:result
-                    //     },()=>{console.log(this.state.direccion)})
-                    // })
-                    var e = localStorage.getItem("direccion_objeto");
-                    this.setState({
-                        direccion: JSON.parse(e)
-                    })
+        //        this.setState({arreglo:datos[0]},()=>{
+        //            console.log(this.state.arreglo);
+        //         if (tipo_entrega == 0) {
+        //             // this.ConsultarDireccion(token,direccion_id).then(result=>{
+        //             //     this.setState({
+        //             //         direccion:result
+        //             //     },()=>{console.log(this.state.direccion)})
+        //             // })
+        //             var e = localStorage.getItem("direccion_objeto");
+        //             this.setState({
+        //                 direccion: JSON.parse(e)
+        //             })
 
-                }
-           })
+        //         }
+        //    })
            });
           
         })
@@ -333,7 +336,6 @@ export class ResumenCompra extends React.Component {
         localStorage.removeItem("productosencarrito");
         localStorage.setItem("compras", JSON.stringify(this.state.arreglo));
         localStorage.setItem("direccion", this.state.direccion);
-        localStorage.setItem("productosencarrito",null)
     }
 
     CerrarPedido(token, direccion_id) {
