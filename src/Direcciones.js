@@ -7,7 +7,6 @@ import {Footer} from './componentes/Footer';
 import Media from 'react-media';
 import Map from './componentes/Map';
 import MapEditar from './componentes/MapEditar';
-
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION

@@ -321,7 +321,9 @@ const AsyncMap = withScriptjs(
         marginBottom: '100px'
        }}
        onPlaceSelected={ this.onPlaceSelected }
-       types={['(regions)']}
+       types={['geocode']}
+       componentRestrictions={{country: "mx"}}
+
       />
 {/*Marker*/}
       <Marker google={this.props.google}
