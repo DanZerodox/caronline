@@ -5,6 +5,8 @@ import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import {Footer} from './componentes/Footer';
 import Media from 'react-media';
+import Map from './componentes/Map';
+import MapEditar from './componentes/MapEditar';
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
@@ -30,7 +32,11 @@ export class Direcciones extends React.Component{
             mostrarbtn:false,
             tipo_entrega: 0,
             mostrarError:false,
-            tipo_sitio:0
+            tipo_sitio:0,
+            mostrarEdicion:false,
+            latitud_gine: 0,
+            longitud_gine: 0,
+            ediccion:false
 
         }
         this.handleChangeDireccion=this.handleChangeDireccion.bind(this);
@@ -77,63 +83,84 @@ export class Direcciones extends React.Component{
                             <h4>En una de mis direcciones</h4>
                             
                             {this.state.direcciones.map(item=>(
-                                <Media queries={{small:{maxWidth:480},medium:{maxWidth:1300},large:{maxWidth:1600}}}>
+                                <Media queries={{iphone:{maxWidth:400},small:{maxWidth:480},medium:{maxWidth:1300},large:{maxWidth:1600}}}>
                                     {
                                         matches=>
-                                            matches.small?(
-                                                <ul class="panel-direccion" style={{height:188}}>
-                                                    <li class="li-direccion">
-                                                        <div class="direccion-primer">CP {item.CP}</div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
-                                                        </div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
-                                                        </div>
-                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
-                                                    </li>  
-                                                    <div class="editar-direccion">
-                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
-                                                    </div> 
-                                                </ul> 
-                                            ):
+                                            matches.iphone?
                                             (
-                                               matches.medium?(
-                                                <>
-                                                <ul class="panel-direccion">
-                                                    <li class="li-direccion">
-                                                        <div class="direccion-primer">CP {item.CP}</div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
-                                                        </div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
-                                                        </div>
-                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
-                                                    </li>  
-                                                    <div class="editar-direccion">
-                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
-                                                    </div> 
-                                                </ul>
-                                                </>
-                                               ) :
-                                               (
-                                                <ul class="panel-direccion">
-                                                    <li class="li-direccion">
-                                                        <div class="direccion-primer">CP {item.CP}</div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
-                                                        </div>
-                                                        <div class="direccion-segundo">
-                                                            <span class="direccion-mun-col">{this.state.nombre}</span>
-                                                        </div>
-                                                        <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
-                                                    </li>  
-                                                    <div class="editar-direccion">
-                                                        <a href="#"><span class="direccion-edicion">Editar dirección</span></a>
-                                                    </div> 
-                                                </ul>
-                                               )
+                                                <ul class="panel-direccion" style={{height:260}}>
+                                                <li class="li-direccion">
+                                                    <div class="direccion-primer">CP {item.CP}</div>
+                                                    <div class="direccion-segundo">
+                                                        <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                    </div>
+                                                    <div class="direccion-segundo">
+                                                        <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                    </div>
+                                                    <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                </li>  
+                                                <div class="editar-direccion">
+                                                    <label onClick={()=>this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
+                                                </div> 
+                                            </ul> 
+                                            )
+                                            :
+                                            (
+                                                matches.small?(
+                                                    <ul class="panel-direccion" style={{height:188}}>
+                                                        <li class="li-direccion">
+                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                            </div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                            </div>
+                                                            <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                        </li>  
+                                                        <div class="editar-direccion">
+                                                            <label onClick={()=>this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
+                                                        </div> 
+                                                    </ul> 
+                                                ):
+                                                (
+                                                   matches.medium?(
+                                                    <>
+                                                    <ul class="panel-direccion">
+                                                        <li class="li-direccion">
+                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                            </div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                            </div>
+                                                            <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                        </li>  
+                                                        <div class="editar-direccion">
+                                                            <label onClick={()=>this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
+                                                        </div> 
+                                                    </ul>
+                                                    </>
+                                                   ) :
+                                                   (
+                                                    <ul class="panel-direccion">
+                                                        <li class="li-direccion">
+                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{item.Direccion+" - "+item.Colonia+", "+item.Municipio}</span>
+                                                            </div>
+                                                            <div class="direccion-segundo">
+                                                                <span class="direccion-mun-col">{this.state.nombre}</span>
+                                                            </div>
+                                                            <div><input class="radio-direccion" onClick={()=>this.GetIdDireccion(item.DirId,0)} type="radio"></input></div>
+                                                        </li>  
+                                                        <div class="editar-direccion">
+                                                            <label onClick={()=>this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
+                                                        </div> 
+                                                    </ul>
+                                                   )
+                                                )
                                             )
                                     }
                                 </Media>
@@ -219,104 +246,77 @@ export class Direcciones extends React.Component{
                     {/* <Footer></Footer> */}
                  </div>
                     :
-                   <Media queries={{small:{maxWidth:480}}}>
-                       {matches=>
+                  this.state.mostrarEdicion==false?
+                    <Media queries={{small:{maxWidth:480}}}>
+                        {matches=>
                             matches.small?(
-                                <div className='primer-panel'>
-                                <Card>
-                                    <CardContent>
-                                        <Formik>
-                                            <Form>
-                                                <h1 style={{fontSize:'1.3rem'}}>Registra tu <b>Dirección de  entrega</b></h1>
-                                                <div style={{padding:'15px 22px'}} class="datosgeneralesregistro">
-                                                      <Box>
-                                                      <Field name="direccion" onChange={this.handleChangeDireccion} value={this.state.direccion} component={TextField} label="Calle"></Field>
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="municipio" onChange={this.handleChangeMunicipio} value={this.state.municipio}  component={TextField} label="Municipio"></Field> 
-                                                      </Box>
-                                                    
-                                                      <Box>
-                                                      <Field name="cp" onChange={this.handleChangeCP} value={this.state.cp} component={TextField} label="C.P."></Field> 
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="estado" onChange={this.handleChangeEstado} value={this.state.estado}  component={TextField} label="Estado"></Field>    
-                                                  
-                                                      </Box>  
-                                                      <Box>
-                                                      <Field name="colonia" onChange={this.handleChangeColonia} value={this.state.colonia} component={TextField} label="Colonia"></Field> 
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="referencia" onChange={this.handleChangeReferencia} value={this.state.referencia}  component={TextField} label="Referencia"></Field> 
-                                                      </Box>
-                                                </div>
-                                                            
-            
-                                            </Form>
-                                        </Formik>
-                                        <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
+                                <div className='primer-panel' style={{margin:15, marginBottom:125}}>
+                                <Map
+                                    google={this.props.google}
+                                    center={{lat: 19.561498, lng: -99.048539}}
+                                    height='300px'
+                                    zoom={15}
+                                ></Map>
+                                 <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
                                                         <Link to={'/contenidocarrito'}>
                                                         <a href="#" className="regresar"  class="regresar">Regresar</a>
                                                         </Link>
-                                    </CardContent>
-                                </Card>  
-                              </div> 
+                                </div> 
                             ):(
 
-                                <div className='primer-panel'>
-                                <Card>
-                                    <CardContent>
-                                        <Formik>
-                                            <Form>
-                                                <h1>Registra tu <b>Dirección de  entrega</b></h1>
-                                                <div class="datosgeneralesregistro">
-                                                      <Box>
-                                                      <Field name="direccion" onChange={this.handleChangeDireccion} value={this.state.direccion} component={TextField} label="Calle"></Field>
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="municipio" onChange={this.handleChangeMunicipio} value={this.state.municipio}  component={TextField} label="Municipio"></Field> 
-                                                      </Box>
-                                                    
-                                                      <Box>
-                                                      <Field name="cp" onChange={this.handleChangeCP} value={this.state.cp} component={TextField} label="C.P."></Field> 
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="estado" onChange={this.handleChangeEstado} value={this.state.estado}  component={TextField} label="Estado"></Field>    
-                                                  
-                                                      </Box>  
-                                                      <Box>
-                                                      <Field name="colonia" onChange={this.handleChangeColonia} value={this.state.colonia} component={TextField} label="Colonia"></Field> 
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      <Field name="referencia" onChange={this.handleChangeReferencia} value={this.state.referencia}  component={TextField} label="Referencia"></Field> 
-                                                      </Box>
-                                                </div>
-                                                            
-            
-                                            </Form>
-                                        </Formik>
-                                        <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
+                            <div className='primer-panel' style={{marginBottom:70, margin:60}}>
+                                <Map
+                                google={this.props.google}
+                                center={{lat: 19.561498, lng: -99.048539}}
+                                height='300px'
+                                zoom={15}
+                                ></Map>
+                                <button class="btnregistro" onClick={()=>this.ValidarDireccion()}>Registrar</button>
                                                         <Link to={'/contenidocarrito'}>
                                                         <a href="#" className="regresar"  class="regresar">Regresar</a>
                                                         </Link>
-                                    </CardContent>
-                                </Card>  
-                              </div> 
+                            </div> 
                             )
-                       }
-                   </Media>
+                        }
+                    </Media>
+                  :
+                    this.state.direcciones.map(item=>(
+                        <Media queries={{small:{maxWidth:480}}}>
+                        {matches=>
+                            matches.small?(
+                                <div className='primer-panel' style={{margin:15, marginBottom:125}}>
+                                <MapEditar
+                                    google={this.props.google}
+                                    center={{lat: Number(item.Longitud), lng: Number(item.Latitud)}}
+                                    height='300px'
+                                    zoom={15}
+                                ></MapEditar>
+                                 <button class="btnregistro" onClick={()=>this.CorrerProcesoEditar()}>Editar</button>
+                                                    <Link to={'/contenidocarrito'}>
+                                                    <a href="#" className="regresar"  class="regresar">Regresar</a>
+                                                    </Link>
+                                </div> 
+                            ):(
+    
+                            <div className='primer-panel' style={{marginBottom:70, margin:60}}>
+                        
+                            <MapEditar
+                            google={this.props.google}
+                            center={{lat: Number(item.Longitud), lng: Number(item.Latitud)}}
+                            height='300px'
+                            zoom={15}
+                            ></MapEditar>
+                            <button class="btnregistro" onClick={()=>this.CorrerProcesoEditar()}>Editar</button>
+                                                    <Link to={'/contenidocarrito'}>
+                                                    <a href="#" className="regresar"  class="regresar">Regresar</a>
+                                                    </Link>
+                        </div> 
+                            
+                         
+                            )
+                        }
+                        </Media>
+                    ))
                  :
                  <div className='primer-panel'>
                     <Card>
@@ -346,7 +346,18 @@ export class Direcciones extends React.Component{
         if(token != null){
             this.setState({tipo_sitio:tipo_sitio});
             this.ProcesoInicial(token);
+           
         }
+
+    }
+
+    habilitargooglemaps(){
+      if(this.state.ediccion==true){
+        this.setState({ediccion:false})
+      }
+      else{
+        this.setState({ediccion:true})
+      }
     }
     
     GetIdDireccion(id,tipo){
@@ -376,7 +387,7 @@ export class Direcciones extends React.Component{
                 direcciones:item,
                 nombre:localStorage.getItem("nombre-usuario")
             },()=>{
-                console.log(this.state.direcciones);
+                console.log('estas son las direcciones',this.state.direcciones);
                 if(this.state.direcciones.length==0){
                 this.setState({
                     mostrar:true
@@ -385,6 +396,8 @@ export class Direcciones extends React.Component{
         })    
         })   
     }
+
+
 
     ValidarDireccion(){
         var token=localStorage.getItem("token");
@@ -410,14 +423,15 @@ export class Direcciones extends React.Component{
     }
     RegistrarDireccion(token){
         var pro;
-        const data={
-            "Direccion":this.state.direccion.toString(),
-            "Municipio":this.state.municipio.toString(),
-            "CP":this.state.cp.toString(),
-            "Estado":this.state.estado.toString(),
-            "Colonia":this.state.colonia.toString(),
-            "Referencia":this.state.referencia.toString()
-        };
+        // const data={
+        //     "Direccion":this.state.direccion.toString(),
+        //     "Municipio":this.state.municipio.toString(),
+        //     "CP":this.state.cp.toString(),
+        //     "Estado":this.state.estado.toString(),
+        //     "Colonia":this.state.colonia.toString(),
+        //     "Referencia":this.state.referencia.toString()
+        // };
+        var data=JSON.parse(localStorage.getItem("insertar_direccion"));
         console.log("mi array",data);
         const posturl=url_general+"api/Usuario/direccion/agregar";
         var result= new Promise(function(resolve,reject){
@@ -467,7 +481,65 @@ export class Direcciones extends React.Component{
 
     MostrarVentanaAgregar(){
         this.setState({
-            mostrar:true
+            mostrar:true,
+            mostrarEdicion:false
         })
+    }
+
+    EditarDireccion(){
+      this.setState({mostrar:true,mostrarEdicion:true})
+    }
+
+    CorrerProcesoEditar(){
+        var token=localStorage.getItem("token");
+
+        this.EdicionG(token).then(item=>{
+            this.setState({
+                mensaje:item
+            },()=>{
+                if(this.state.mensaje.Estatus=="OK"){
+                    this.ProcesoInicial(token);
+                    this.setState({
+                        mostrar:false,
+                        mostrarError:false
+                    })
+                }
+                else{
+                    this.setState({
+                        mostrarError:true
+                    })    
+                }
+
+            })
+        })
+    }
+
+    EdicionG(token){
+        var pro;
+        var id_direccion=this.state.direcciones[0].DirId;
+        console.log("ID",id_direccion);
+        var data=JSON.parse(localStorage.getItem("editar_direccion"));
+        console.log("mi array",data);
+        const posturl=url_general+"api/Usuario/direccion/"+id_direccion;
+        var result= new Promise(function(resolve,reject){
+            fetch(posturl,{
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer '+token
+                }
+            }).then(
+                (res)=>res.json()
+            )
+            .catch(error=>console.log('Error',error))
+            .then(resp=>{
+              
+                resolve(resp);
+            });
+           
+        });
+
+        return result;
     }
 }
