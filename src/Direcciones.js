@@ -35,9 +35,13 @@ export class Direcciones extends React.Component{
             mostrarEdicion:false,
             latitud_gine: 0,
             longitud_gine: 0,
-            ediccion:false
+            ediccion:false,
+            latitude:null,
+            longitude:null
 
         }
+        this.getLocation = this.getLocation.bind(this); 
+        this.getCoordinates = this.getCoordinates.bind(this); 
         this.handleChangeDireccion=this.handleChangeDireccion.bind(this);
         this.handleChangeMunicipio=this.handleChangeMunicipio.bind(this);
         this.handleChangeCP=this.handleChangeCP.bind(this);
@@ -46,6 +50,23 @@ export class Direcciones extends React.Component{
         this.handleChangeReferencia=this.handleChangeReferencia.bind(this);
 
     }
+
+    getLocation(){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates);
+        }
+        else{
+    
+        }
+    }
+
+    getCoordinates(position){
+        this.setState({
+            latitude:position.coords.latitude,
+            longitude:position.coords.longitude
+        })
+    }
+
     handleChangeDireccion(event){
         this.setState({direccion:event.target.value},()=>console.log(this.state.direccion))
     }
@@ -64,23 +85,21 @@ export class Direcciones extends React.Component{
     handleChangeReferencia(event){
         this.setState({referencia:event.target.value},()=>console.log(this.state.referencia))
     }
+
+  
     render(){
         return(
-            <Route>
-                 
+            <Route>                 
                 <>
-
                 {
                 this.state.mostrarError==false?
                 this.state.mostrar==false?
                  <div style={{display:'flex', justifyContent:'center'}}>
                     <Card style={{boxShadow:'0 0  black'}}>
                         <CardContent>
-                         
                             <h2 class="direccion-title">Elige dónde recibir tus productos Jumex</h2>
                             <br></br>
                             <h4>En una de mis direcciones</h4>
-                            
                             {this.state.direcciones.map(item=>(
                                 <Media queries={{iphone:{maxWidth:400},small:{maxWidth:480},medium:{maxWidth:1300},large:{maxWidth:1600}}}>
                                     {
@@ -252,7 +271,7 @@ export class Direcciones extends React.Component{
                                 <div className='primer-panel' style={{margin:15, marginBottom:125}}>
                                 <Map
                                     google={this.props.google}
-                                    center={{lat: 19.561498, lng: -99.048539}}
+                                    center={{lat: this.state.latitude, lng: this.state.longitude}}
                                     height='300px'
                                     zoom={15}
                                 ></Map>
@@ -266,7 +285,7 @@ export class Direcciones extends React.Component{
                             <div className='primer-panel' style={{marginBottom:70, margin:60}}>
                                 <Map
                                 google={this.props.google}
-                                center={{lat: 19.561498, lng: -99.048539}}
+                                center={{lat: this.state.latitude, lng: this.state.longitude}}
                                 height='300px'
                                 zoom={15}
                                 ></Map>
@@ -345,9 +364,13 @@ export class Direcciones extends React.Component{
         if(token != null){
             this.setState({tipo_sitio:tipo_sitio});
             this.ProcesoInicial(token);
-           
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(this.getCoordinates);
+            }
+            else{
+        
+            }
         }
-
     }
 
     habilitargooglemaps(){
