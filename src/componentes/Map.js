@@ -32,8 +32,9 @@ constructor( props ){
     lng: this.props.center.lng
 }
   }
- 
 }
+
+
 
 /**
   * Get the current address from the default map position and set those values in the state
