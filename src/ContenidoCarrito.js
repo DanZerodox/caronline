@@ -44,7 +44,7 @@ export class ContenidoCarrito extends React.Component {
                              <Link to={'/'}>Inicio</Link>
                              <span className="svg-wrapper">
                                      <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
-                             </span> Mi Carrito ({this.state.cantidadtitulo})
+                             </span> Mi Carrito ({this.state.productosencarrito.length})
                              </Typography>
                          </div>
                          <Row style={{width:'100%'}}>
@@ -84,7 +84,7 @@ export class ContenidoCarrito extends React.Component {
                              matches.medium ? (
                                  <>
                                      <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
-                                         <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
+                                         <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.productosencarrito.length})</Typography>
                                          {this.state.productosencarrito.map((item) => (
                                              <CardContent style={{ borderBottom: '1px solid #dedede' }}>
                                                  <Row>
@@ -137,7 +137,7 @@ export class ContenidoCarrito extends React.Component {
                              ) : (
                                      <>
                                          <Card style={{ boxShadow: '0 0 black', textAlign: 'center' }}>
-                                             <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.cantidadtitulo})</Typography>
+                                             <Typography style={{ fontSize: '1.5rem', borderBottom: '1px solid #dedede', boxShadow: '0 0 8px rgba(0,0,0,.12)', padding: 10 }}>Mi Carrito({this.state.productosencarrito.length})</Typography>
                                              {this.state.productosencarrito.map((item) => (
                                                  <CardContent style={{ borderBottom: '1px solid #dedede' }}>
                                                      <Row>
@@ -260,6 +260,7 @@ export class ContenidoCarrito extends React.Component {
                 })
             }
             else{
+                var total;
                 this.ConsultarCarrito(localStorage.getItem("token")).then(item=>{
                     console.log("AQUI ESTA",item);
                     if(typeof item[0] ==  "undefined"){
@@ -269,6 +270,7 @@ export class ContenidoCarrito extends React.Component {
                     const datos=[];
                     this.setState({productosBD:item},()=>{
                         this.state.productosBD.map(a=>{
+                            total= a.TickTotal;
                             a.Articulos.map(item2=>{
                             
                                     var item={"Sku":item2.ArtSku, "Url": url_general+'/Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
@@ -277,7 +279,7 @@ export class ContenidoCarrito extends React.Component {
                         })
                     });
 
-                    this.setState({productosencarrito:datos})
+                    this.setState({productosencarrito:datos, total:total})
                     }  
                 })
             }
@@ -327,7 +329,7 @@ export class ContenidoCarrito extends React.Component {
            });
 
             this.state.productosencarrito.map(ite=>{
-                console.log("aqui llevo esto", this.state.productosencarrito);
+                console.log("mI CANTIDAD", this.state.productosencarrito.length);
                 var existe = datos.findIndex(x=> x.Sku == ite.Sku);
                 if(existe !== -1){
                     console.log("nada");
@@ -336,7 +338,7 @@ export class ContenidoCarrito extends React.Component {
                     datos.push(item); 
                 }
              })
-
+        console.log("mi cantidad",datos.length)
            this.setState({
             productosencarrito:datos
         },()=>{
@@ -346,12 +348,12 @@ export class ContenidoCarrito extends React.Component {
              total = (total + this.state.productosencarrito[i].Precio)
          }
         
-         console.log("mi precio", total);
+         console.log("mi precio a segun esto", total);
          this.setState({
              cantidadtitulo: this.state.productosencarrito.length,
              total: total
-         });
-        //  localStorage.removeItem(); 
+         },()=>{console.log(this.state.total)});
+        //  localStorage.removeItem(); ,
         })
         }else{
             this.setState({

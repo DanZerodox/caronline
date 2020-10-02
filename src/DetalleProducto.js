@@ -5,7 +5,7 @@ import {HeadBanner} from './componentes/HeadBanner';
 import {Banner} from './componentes/Banner';
 import {Productos} from './componentes/Productos';
 import { Footer } from './componentes/Footer';
-import { BrowserRouter, Route, Link,Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Link,Redirect, HashRouter } from "react-router-dom";
 import Carousel,{ consts } from 'react-elastic-carousel';
 import { BarraInicio } from './componentes/BarraInicio';
 import Card from "@material-ui/core/Card";
@@ -34,7 +34,8 @@ const lineHeight={
 }
 
 function refreshPage() {
-    window.location.reload();
+    // window.location.reload();
+//   this.props.history.push('/detalleproducto/100914')
 }
 
 export class DetalleProducto extends React.Component{
@@ -58,6 +59,7 @@ export class DetalleProducto extends React.Component{
     render(){
         console.log(this.state.id);
         return (
+            <>
             <Route>
                <div>
                    <BarraInicio></BarraInicio>
@@ -162,11 +164,12 @@ export class DetalleProducto extends React.Component{
                                                 </CardActionArea> 
                                                 <Typography style={{color: '#ffaf02'}}>SKU: {item.ArtSku}</Typography> 
                                                 <Typography variant="h6">${item.ArtPVenta}.00</Typography>   
-                                                <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                    <Button  variant="outlined" color="primary" onClick={refreshPage}>
+                                                <Link to={window.location.pathname+"detalleproducto/"+item.ArtSku} hash="/#">
+                                                <Button  variant="outlined" color="primary">
                                                                         Agregar
-                                                    </Button> 
+                                                </Button> 
                                                 </Link>       
+                                                 
                                             </Card>
                                            
                                                 
@@ -234,7 +237,10 @@ export class DetalleProducto extends React.Component{
                    </Media>
                </div>
              
+               {/* <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route> */}
+
             </Route>
+            </>
         );
     };
 

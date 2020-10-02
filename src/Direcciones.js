@@ -64,6 +64,12 @@ export class Direcciones extends React.Component{
         this.setState({
             latitude:position.coords.latitude,
             longitude:position.coords.longitude
+        },()=>{
+            if (this.state.latitude === "") {
+                alert('falla');    
+            } else {
+                
+            }
         })
     }
 
@@ -360,17 +366,36 @@ export class Direcciones extends React.Component{
     componentDidMount(){
         var token=localStorage.getItem("token");
         var tipo_sitio=localStorage.getItem("tipo_sitio");
+        var errortxt;
         console.log(token);
         if(token != null){
             this.setState({tipo_sitio:tipo_sitio});
             this.ProcesoInicial(token);
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(this.getCoordinates);
+                
+                navigator.geolocation.watchPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(this.getCoordinates);                  
+                 }.bind(this),
+                  function(error) {
+                
+                  if (error.code == error.PERMISSION_DENIED)
+                      this.setState({
+                          latitude:19.524204,
+                          longitude: -99.081846
+                      })
+                  }.bind(this)
+                  
+                  );
+               console.log(errortxt);
             }
             else{
-        
+                 alert('No se pudo :(');   
             }
         }
+    }
+
+    llamaralert(){
+        alert('yaaaaa');
     }
 
     habilitargooglemaps(){
