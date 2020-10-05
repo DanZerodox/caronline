@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Component } from "react";
 // import '../App.css';
-import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Link, Redirect, HashRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -31,7 +31,7 @@ export class HeadTop extends React.Component {
     }
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <Route>
                     <>
                         <Navbar expand="lg" style={{ backgroundColor: '#10266b' }}>
@@ -51,9 +51,12 @@ export class HeadTop extends React.Component {
                                         </>
                                         :
                                         <>
-                                            <Nav.Link href="#formulariocompra" style={{ color: "white", marginLeft: 'auto' }} onClick={() => this.Redirigir()}>
-                                                Iniciar Sesión
-                        </Nav.Link>
+                                            <Nav.Link style={{ color: "white", marginLeft: 'auto' }}>
+                                                <Link push to={'/formulariocompra'} style={{color:'#ffffff'}}>
+                                                    Iniciar Sesión
+
+                                                </Link>
+                                            </Nav.Link>
                                         </>
                                     }
                                     {/* <Nav.Link href="#link" style={{color:"white"}}>Link</Nav.Link>
@@ -81,7 +84,7 @@ export class HeadTop extends React.Component {
                         }
                     </>
                 </Route>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
     componentDidMount() {
@@ -139,6 +142,7 @@ export class HeadTop extends React.Component {
     CerrarSesion() {
         console.log('entro');
         localStorage.clear();
+        this.setState({cerrar:true, perfil:""})
 
     }
 }

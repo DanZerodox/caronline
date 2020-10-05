@@ -299,7 +299,7 @@ export class ContenidoCarrito extends React.Component {
             console.log("global",datos);
             this.state.carritoDB.map(item=>{
                 item.Articulos.map(item2=>{
-                   var existe = this.state.productosencarrito.findIndex(x=> x.Sku == item2.ArtSku);
+                   var existe = this.state.productosencarrito.findIndex(x=> x.Sku == item2.ArtSku && x.BanderaIngreso==true);
                   
                    if(existe!==-1){
                     let items=[...this.state.productosencarrito];
@@ -313,8 +313,10 @@ export class ContenidoCarrito extends React.Component {
                         item.carga=true;
                         rest=item2.TickDetSubTotal
                     }
-                    item.Cantidad=(item.Cantidad + Number(item2.TickDetCant)-item.BD);
-                    item.Precio=(item.Precio + Number(item2.TickDetSubTotal)-rest);
+                    // item.Cantidad=(item.Cantidad + Number(item2.TickDetCant)-item.BD);
+                    // item.Precio=(item.Precio + Number(item2.TickDetSubTotal)-rest);
+                    item.Cantidad=item.Cantidad;
+                    item.Precio=item.Precio;
                     item.BD=Number(item2.TickDetCant);
                     items[existe]=item;
                     datos.push(item);
@@ -509,6 +511,7 @@ export class ContenidoCarrito extends React.Component {
         }
     }
     RegistrarArticulos() {
+        const { productos: productosencarrito } = this.state;
         this.InsertarProductos(this.state.token).then(item => {
             this.setState({
                 mensaje: item
@@ -518,9 +521,17 @@ export class ContenidoCarrito extends React.Component {
                         redirect: true
                     })
                 }
-                localStorage.removeItem("productosencarrito");
+             
             })
         });
+
+        const productos = this.state.productosencarrito.map(item => {
+            item.BanderaIngreso=false
+            return item;
+        });
+        this.setState(productos);
+        localStorage.removeItem("productosencarrito");
+        localStorage.setItem("productosencarrito",JSON.stringify(productos));
 
 
     }
