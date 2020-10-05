@@ -22,7 +22,8 @@ export class ResumenCompra extends React.Component {
             arreglo: [],
             direccion: [],
             mostrar: false,
-            tipo_entrega: 0
+            tipo_entrega: 0,
+            fecha_entrega: ''
         }
     }
     render() {
@@ -39,39 +40,39 @@ export class ResumenCompra extends React.Component {
                                                 <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                 <div class="morty-resumen">
                                                     {this.state.arreglo.map(item2 => (
-                                                         item2.Articulos.map(item =>(
+                                                        item2.Articulos.map(item => (
                                                             <>
-                                                            <Card>
-                                                                <Row>
-                                                                    <Col xs={2}>
-                                                                        <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
-                                                                    </Col>
-                                                                    <Col xs={10} style={{ padding: 24 }}>
-                                                                        <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item.ArtDesTv}</Typography>
-                                                                        <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.ArtSku}</Typography>
-                                                                        <Typography style={{ fontSize: '1rem', width:'40%', float:'right'}}>{item.TickDetCant} Cajas</Typography>
-                                                         <Typography style={{ fontSize: '1rem', width:'45%'}}>Total: ${item.TickDetSubTotal}.00</Typography>
-   
-                                                                        <ul style={{ display: 'flex' }}>
-                                                                            <li><a href="#">Productos Jumex</a></li>
-                                                                            <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                            {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                        </ul>
-                                                                    </Col>
-                                                                    
-                                                                   
-                                                                </Row>
-                                                            </Card>
-                                                        </>
-                                                         )
-                                                    )))}
+                                                                <Card>
+                                                                    <Row>
+                                                                        <Col xs={2}>
+                                                                            <CardMedia style={{ width: 75, height: 130 }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                        </Col>
+                                                                        <Col xs={10} style={{ padding: 24 }}>
+                                                                            <Typography style={{ fontSize: '1rem', fontWeight: 600 }}>{item.ArtDesTv}</Typography>
+                                                                            <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item.ArtSku}</Typography>
+                                                                            <Typography style={{ fontSize: '1rem', width: '40%', float: 'right' }}>{item.TickDetCant} Cajas</Typography>
+                                                                            <Typography style={{ fontSize: '1rem', width: '45%' }}>Total: ${item.TickDetSubTotal}.00</Typography>
+
+                                                                            <ul style={{ display: 'flex' }}>
+                                                                                <li><a href="#">Productos Jumex</a></li>
+                                                                                <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                            </ul>
+                                                                        </Col>
+
+
+                                                                    </Row>
+                                                                </Card>
+                                                            </>
+                                                        )
+                                                        )))}
 
                                                 </div>
                                                 <div class="editar-direccion">
                                                     {this.state.tipo_entrega == 0 ?
                                                         this.state.direccion.map(dir => (
                                                             <ul class="panel-direccion">
-                                                                <li style={{width:'100%'}} class="li-direccion-final-resumen">
+                                                                <li style={{ width: '100%' }} class="li-direccion-final-resumen">
                                                                     <div class="direccion-primer">Dirección de entrega</div>
                                                                     <div class="direccion-segundo">
                                                                         <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
@@ -111,120 +112,136 @@ export class ResumenCompra extends React.Component {
                                     </div>
                                 )
                                     : (matches.medium ? (
-                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
-                                                <CardContent>
-                                                    <h2 class="direccion-title">Resumen de tu pedido</h2>
-                                                    <div class="morty-resumen">
-                                                        {this.state.arreglo.map(item => (
-                                                            item.Articulos.map(item2 => (
-                                                                <>
-                                                                    <Card>
-                                                                        <Row>
-                                                                            <Col sm={2}>
-                                                                                <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
-                                                                            </Col>
-                                                                            <Col sm={5} style={{ padding: 18 }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
-                                                                                <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
-                                                                                <ul style={{ display: 'flex' }}>
-                                                                                    <li><a href="#">Mas productos de Jumex</a></li>
-                                                                                    <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                                    {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                                </ul>
-                                                                            </Col>
-                                                                            <Col sm={2} style={{ padding: '50px 15px' }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
-                                                                            </Col>
-                                                                            <Col sm={3} style={{ padding: 48 }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
-                                                                            </Col>
-                                                                        </Row>
-                                                                    </Card>
-                                                                </>
-                                                            ))
-                                                        ))}
+                                        <div>
+                                            <div class="row" style={{ justifyContent: 'center' }}>
+                                                <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                                    <CardContent>
+                                                        <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                        <h5>Fecha de entrega:</h5>
+                                                        <div class="morty-resumen" style={{height:300}}>
+                                                            {this.state.arreglo.map(item => (
+                                                                item.Articulos.map(item2 => (
+                                                                    <>
+                                                                        <Card>
+                                                                            <Row>
+                                                                                <Col sm={2}>
+                                                                                    <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
+                                                                                </Col>
+                                                                                <Col sm={5} style={{ padding: 18 }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
+                                                                                    <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
+                                                                                    <ul style={{ display: 'flex' }}>
+                                                                                        <li><a href="#">Mas productos de Jumex</a></li>
+                                                                                        <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                        {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                                    </ul>
+                                                                                </Col>
+                                                                                <Col sm={2} style={{ padding: '50px 15px' }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
+                                                                                </Col>
+                                                                                <Col sm={3} style={{ padding: 48 }}>
+                                                                                    <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </Card>
+                                                                    </>
+                                                                ))
+                                                            ))}
 
-                                                    </div>
-                                                    <div class="editar-direccion">
-                                                        {this.state.tipo_entrega == 0 ?
-                                                            this.state.direccion.map(dir => (
-                                                                <ul class="panel-direccion">
-                                                                    <li class="li-direccion-final-resumen">
-                                                                        <div class="direccion-primer">Dirección de entrega</div>
-                                                                        <div class="direccion-segundo">
-                                                                            <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
-                                                                        </div>
-                                                                        <div class="direccion-segundo">
-                                                                            <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
-                                                                        </div>
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
 
-                                                                    </li>
+                                            </div>
 
-                                                                </ul>
-                                                            ))
-                                                            :
+                                            <div class="row">
+                                                <div class="editar-direccion" style={{marginLeft:221, width:'40%'}}>
+                                                    {this.state.tipo_entrega == 0 ?
+                                                        this.state.direccion.map(dir => (
                                                             <ul class="panel-direccion">
                                                                 <li class="li-direccion-final-resumen">
                                                                     <div class="direccion-primer">Dirección de entrega</div>
                                                                     <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">En oficina</span>
+                                                                        <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
                                                                     </div>
                                                                     <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">Xalostoc</span>
+                                                                        <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
                                                                     </div>
 
                                                                 </li>
 
                                                             </ul>
-                                                        }
+                                                        ))
+                                                        :
+                                                        <ul class="panel-direccion">
+                                                            <li class="li-direccion-final-resumen">
+                                                                <div class="direccion-primer">Dirección de entrega</div>
+                                                                <div class="direccion-segundo">
+                                                                    <span class="direccion-mun-col">En oficina</span>
+                                                                </div>
+                                                                <div class="direccion-segundo">
+                                                                    <span class="direccion-mun-col">Xalostoc</span>
+                                                                </div>
 
-                                                    </div>
-                                                    <Link to={"/contenidocarrito"}>
-                                                        <button class="btncancel-resumen">Cancelar</button>
-                                                    </Link>
-                                                    <button class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
-                                                </CardContent>
-                                            </Card>
+                                                            </li>
+
+                                                        </ul>
+                                                    }
+
+                                                </div>
+                                                <Link to={"/contenidocarrito"} style={{position:'relative', top:162}}>
+                                                    <button style={{ height: 51 }} class="btncancel-resumen">Cancelar</button>
+                                                </Link>
+                                                <button style={{height:51, position:'relative', top:162}} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+
+                                            </div>
 
                                         </div>
                                     )
                                         : (
-                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
-                                                <CardContent>
-                                                    <h2 class="direccion-title">Resumen de tu pedido</h2>
-                                                    <div class="morty-resumen">
-                                                        {this.state.arreglo.map(item => (
-                                                            item.Articulos.map(item2 => (
-                                                                <>
-                                                                    <Card>
-                                                                        <Row>
-                                                                            <Col sm={2}>
-                                                                                <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
-                                                                            </Col>
-                                                                            <Col sm={5} style={{ padding: 18 }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
-                                                                                <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
-                                                                                <ul style={{ display: 'flex' }}>
-                                                                                    <li><a href="#">Mas productos de Jumex</a></li>
-                                                                                    <li><a class="parte-title-bajo" href="#">Detalle</a></li>
-                                                                                    {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
-                                                                                </ul>
-                                                                            </Col>
-                                                                            <Col sm={2} style={{ padding: '50px 15px' }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
-                                                                            </Col>
-                                                                            <Col sm={3} style={{ padding: 48 }}>
-                                                                                <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
-                                                                            </Col>
-                                                                        </Row>
-                                                                    </Card>
-                                                                </>
-                                                            ))
-                                                        ))}
+                                            <div>
+                                                <div class="row" style={{ justifyContent: 'center' }}>
+                                                    <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                                        <CardContent>
+                                                            <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                            <h5>Fecha de entrega:</h5>
+                                                            <div class="morty-resumen">
+                                                                {this.state.arreglo.map(item => (
+                                                                    item.Articulos.map(item2 => (
+                                                                        <>
+                                                                            <Card>
+                                                                                <Row>
+                                                                                    <Col sm={2}>
+                                                                                        <CardMedia style={{ width: 75, height: 130, float: 'right' }} image={url_general + "Content/Assets/Images/" + item2.ArtSku + ".png"}></CardMedia>
+                                                                                    </Col>
+                                                                                    <Col sm={5} style={{ padding: 18 }}>
+                                                                                        <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.ArtDesTv}</Typography>
+                                                                                        <Typography style={{ color: 'rgb(26, 147, 73)' }}>SKU: {item2.ArtSku}</Typography>
+                                                                                        <ul style={{ display: 'flex' }}>
+                                                                                            <li><a href="#">Mas productos de Jumex</a></li>
+                                                                                            <li><a class="parte-title-bajo" href="#">Detalle</a></li>
+                                                                                            {/* <li class="li-articulo"><a class="parte-title-bajo" href="#">Mis Favoritos</a></li> */}
+                                                                                        </ul>
+                                                                                    </Col>
+                                                                                    <Col sm={2} style={{ padding: '50px 15px' }}>
+                                                                                        <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>{item2.TickDetCant} Cajas</Typography>
+                                                                                    </Col>
+                                                                                    <Col sm={3} style={{ padding: 48 }}>
+                                                                                        <Typography style={{ fontSize: '1.5rem', fontWeight: 600 }}>Total: ${item2.TickDetSubTotal}.00</Typography>
+                                                                                    </Col>
+                                                                                </Row>
+                                                                            </Card>
+                                                                        </>
+                                                                    ))
+                                                                ))}
 
-                                                    </div>
+                                                            </div>
+                                                        </CardContent>
+                                                    </Card>
+
+                                                </div>
+
+                                                <div class="row" style={{ justifyContent: 'flex-end', width: '80%' }}>
                                                     <div class="editar-direccion">
                                                         {this.state.tipo_entrega == 0 ?
                                                             this.state.direccion.map(dir => (
@@ -260,13 +277,13 @@ export class ResumenCompra extends React.Component {
 
                                                     </div>
                                                     <Link to={"/contenidocarrito"}>
-                                                        <button class="btncancel-resumen">Cancelar</button>
+                                                        <button style={{ height: 68 }} class="btncancel-resumen">Cancelar</button>
                                                     </Link>
                                                     <button class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
-                                                </CardContent>
-                                            </Card>
 
-                                        </div>
+                                                </div>
+
+                                            </div>
                                         )
                                     )
                             }
@@ -297,34 +314,39 @@ export class ResumenCompra extends React.Component {
         var direccion_id = localStorage.getItem("direccion_id");
         var tipo_entrega = localStorage.getItem("tipo_entrega");
         this.setState({ tipo_entrega: tipo_entrega });
+
+        var e = localStorage.getItem("direccion_objeto");
+        this.setState({
+            direccion: JSON.parse(e),
+        });
         this.ConsultarCarrito(token).then(item => {
             var e = localStorage.getItem("productosencarrito");
-           const datos=[];
-           this.setState({arreglo:item},()=>{
-               console.log(this.state.arreglo);
-               this.state.arreglo.map(a=>{
-                a.Articulos.map(item2=>{         
-                    var item={"Sku":item2.ArtSku, "Url": url_general+'Content/Assets/Images/'+item2.ArtSku+'.png',"Des":item2.ArtDesTv, "Cantidad":item2.TickDetCant, "Precio":Number(item2.TickDetSubTotal), "BD":item2.TickDetCant,"carga":true}
-                    datos.push(item2);
-                })
-               });
-        //        this.setState({arreglo:datos[0]},()=>{
-        //            console.log(this.state.arreglo);
-        //         if (tipo_entrega == 0) {
-        //             // this.ConsultarDireccion(token,direccion_id).then(result=>{
-        //             //     this.setState({
-        //             //         direccion:result
-        //             //     },()=>{console.log(this.state.direccion)})
-        //             // })
-        //             var e = localStorage.getItem("direccion_objeto");
-        //             this.setState({
-        //                 direccion: JSON.parse(e)
-        //             })
+            const datos = [];
+            this.setState({ arreglo: item }, () => {
+                console.log(this.state.arreglo);
+                this.state.arreglo.map(a => {
+                    a.Articulos.map(item2 => {
+                        var item = { "Sku": item2.ArtSku, "Url": url_general + 'Content/Assets/Images/' + item2.ArtSku + '.png', "Des": item2.ArtDesTv, "Cantidad": item2.TickDetCant, "Precio": Number(item2.TickDetSubTotal), "BD": item2.TickDetCant, "carga": true }
+                        datos.push(item2);
+                    })
+                });
+                //        this.setState({arreglo:datos[0]},()=>{
+                //            console.log(this.state.arreglo);
+                //         if (tipo_entrega == 0) {
+                //             // this.ConsultarDireccion(token,direccion_id).then(result=>{
+                //             //     this.setState({
+                //             //         direccion:result
+                //             //     },()=>{console.log(this.state.direccion)})
+                //             // })
+                //             var e = localStorage.getItem("direccion_objeto");
+                //             this.setState({
+                //                 direccion: JSON.parse(e)
+                //             })
 
-        //         }
-        //    })
-           });
-          
+                //         }
+                //    })
+            });
+
         })
 
 
@@ -344,7 +366,7 @@ export class ResumenCompra extends React.Component {
         console.log(token);
         var posturl = "";
         if (localStorage.getItem("tipo_entrega") == 0) {
-            posturl = url_general + "api/Carrito/confirmar/0/"+direccion_id;
+            posturl = url_general + "api/Carrito/confirmar/0/" + direccion_id;
         }
         else {
             posturl = url_general + "api/Carrito/confirmar/1";

@@ -1,6 +1,6 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {Productos} from './componentes/Productos';
+import { render } from 'react-dom';
+import { Productos } from './componentes/Productos';
 import { BrowserRouter, Route, Link, HashRouter } from "react-router-dom";
 import { DetalleProducto } from "./DetalleProducto";
 import { FormularioCompra } from './FormularioCompra';
@@ -10,24 +10,26 @@ import { Direcciones } from './Direcciones';
 import { ResumenCompra } from './ResumenCompra';
 import { Historico } from './Historico';
 import { CarritoResponsivo } from './componentes/CarritoResponsivo';
+import { DetallePedido } from './componentes/DetallePedido';
 
-class App extends React.Component{
-  render(){
+class App extends React.Component {
+  render() {
     return (
-      <>          
-       <HashRouter>
-       <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route>
-       <Route path="/formulariocompra"  component={FormularioCompra}></Route>
-       <Route path="/registrocuenta" exact={true} component={FormularioRegistro}></Route>
-       <Route path="/contenidocarrito" component={ContenidoCarrito}></Route>
-       <Route path="/direcciones" exact={true} component={Direcciones}></Route>
-       <Route path="/resumen" exact={true} component={ResumenCompra}></Route>
-       <Route path="/historico" exact={true} component={Historico}></Route>
-       <Route path="/carritoresponsive" exact={true} component={CarritoResponsivo}></Route>
-       <Route path="/" exact={true} component={Productos}></Route>
-       </HashRouter>  
-            
-       </>
+      <>
+        <HashRouter>
+          <Route path="/detallepedido/:id" exact={true} component={DetallePedido}></Route>
+          <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route>
+          <Route path="/formulariocompra" component={FormularioCompra}></Route>
+          <Route path="/registrocuenta" exact={true} component={FormularioRegistro}></Route>
+          <Route path="/contenidocarrito" component={ContenidoCarrito}></Route>
+          <Route path="/direcciones" exact={true} component={Direcciones}></Route>
+          <Route path="/resumen" exact={true} component={ResumenCompra}></Route>
+          <Route path="/historico" exact={true} component={Historico}></Route>
+          <Route path="/carritoresponsive" exact={true} component={CarritoResponsivo}></Route>
+          <Route path="/" exact={true} component={Productos}></Route>
+        </HashRouter>
+
+      </>
     );
   };
 }
