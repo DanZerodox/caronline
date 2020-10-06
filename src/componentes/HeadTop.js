@@ -43,11 +43,11 @@ export class HeadTop extends React.Component {
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="mr-auto">
-                                    {this.state.perfil != "" ?
+                                    {this.state.pxerfil != "" ?
                                         <>
-                                            <Nav.Link to={'/'} style={{ color: '#ffffff' }} >{this.state.perfil.UsrNombre}</Nav.Link>
-                                            <Nav.Link to={'/historico'} style={{ color: '#ffffff' }}>Mis Pedidos</Nav.Link>
-                                            <Nav.Link style={{ color: '#ffffff' }} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
+                                            <Nav.Link to={'/'} style={{ color: '#ffffff', position:'absolute', right:222, top:21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
+                                            <Nav.Link to={'/historico'} style={{ color: '#ffffff', position:'absolute', right:119, top:21 }}>Mis Pedidos</Nav.Link>
+                                            <Nav.Link style={{ color: '#ffffff', position:'absolute', right:5, top:21 }} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
                                         </>
                                         :
                                         <>
