@@ -45,7 +45,7 @@ export class HeadTop extends React.Component {
                                 <Nav className="mr-auto">
                                     {this.state.perfil != "" ?
                                         <>
-                                            <Nav.Link style={{ color: '#ffffff' }} href="#inic">{this.state.perfil.UsrNombre}</Nav.Link>
+                                            <Nav.Link to={'/'} style={{ color: '#ffffff' }} >{this.state.perfil.UsrNombre}</Nav.Link>
                                             <Nav.Link to={'/historico'} style={{ color: '#ffffff' }}>Mis Pedidos</Nav.Link>
                                             <Nav.Link style={{ color: '#ffffff' }} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
                                         </>

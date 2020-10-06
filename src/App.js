@@ -11,6 +11,8 @@ import { ResumenCompra } from './ResumenCompra';
 import { Historico } from './Historico';
 import { CarritoResponsivo } from './componentes/CarritoResponsivo';
 import { DetallePedido } from './componentes/DetallePedido';
+import { DetallesSugeridos } from './componentes/DetallesSugeridos';
+
 
 class App extends React.Component {
   render() {
@@ -18,6 +20,7 @@ class App extends React.Component {
       <>
         <HashRouter>
           <Route path="/detallepedido/:id" exact={true} component={DetallePedido}></Route>
+          <Route path="/detallesugeridos/:id" exact={true} component={DetallesSugeridos}></Route>
           <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route>
           <Route path="/formulariocompra" component={FormularioCompra}></Route>
           <Route path="/registrocuenta" exact={true} component={FormularioRegistro}></Route>

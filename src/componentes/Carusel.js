@@ -14,9 +14,9 @@ var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
 
 export class Carusel extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             productossugeridos: [],
         }
     }
@@ -41,8 +41,8 @@ export class Carusel extends React.Component {
                                 {/* <Link  to={"/detalleproducto/" + item.ArtSku} onClick={()=>this.Refresh()}>
                                   
                                 </Link> */}
-  <Button variant="outlined" color="primary">
-                                        Agregar
+                                <Button variant="outlined" color="primary">
+                                    Agregar
                             </Button>
                             </Card>
 
@@ -54,17 +54,17 @@ export class Carusel extends React.Component {
         );
     }
 
-    componentDidMount(){
-        this.CargarProductosSugeridos().then(item=>{
-            this.setState({productossugeridos:item[0]})           
+    componentDidMount() {
+        this.CargarProductosSugeridos().then(item => {
+            this.setState({ productossugeridos: item[0] })
         })
     }
 
-    Refresh(){
+    Refresh() {
 
-        window.history.replaceState(null,"hola","http://localhost:3000/detalleproducto/100105")
+        window.history.replaceState(null, "hola", "http://localhost:3000/detalleproducto/100105")
     }
-    
+
     CargarProductosSugeridos() {
         var pro = [];
         const posturl = url_general + "api/Articulo/sugeridos";

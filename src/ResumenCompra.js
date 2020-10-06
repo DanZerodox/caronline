@@ -118,7 +118,7 @@ export class ResumenCompra extends React.Component {
                                                     <CardContent>
                                                         <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                         <h5>Fecha de entrega:</h5>
-                                                        <div class="morty-resumen" style={{height:300}}>
+                                                        <div class="morty-resumen" style={{ height: 300 }}>
                                                             {this.state.arreglo.map(item => (
                                                                 item.Articulos.map(item2 => (
                                                                     <>
@@ -155,7 +155,7 @@ export class ResumenCompra extends React.Component {
                                             </div>
 
                                             <div class="row">
-                                                <div class="editar-direccion" style={{marginLeft:221, width:'40%'}}>
+                                                <div class="editar-direccion" style={{ marginLeft: 221, width: '40%' }}>
                                                     {this.state.tipo_entrega == 0 ?
                                                         this.state.direccion.map(dir => (
                                                             <ul class="panel-direccion">
@@ -189,10 +189,10 @@ export class ResumenCompra extends React.Component {
                                                     }
 
                                                 </div>
-                                                <Link to={"/contenidocarrito"} style={{position:'relative', top:162}}>
+                                                <Link to={"/contenidocarrito"} style={{ position: 'relative', top: 162 }}>
                                                     <button style={{ height: 51 }} class="btncancel-resumen">Cancelar</button>
                                                 </Link>
-                                                <button style={{height:51, position:'relative', top:162}} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                <button style={{ height: 51, position: 'relative', top: 162 }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
 
                                             </div>
 
@@ -204,7 +204,7 @@ export class ResumenCompra extends React.Component {
                                                     <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
                                                         <CardContent>
                                                             <h2 class="direccion-title">Resumen de tu pedido</h2>
-                                                            <h5>Fecha de entrega:</h5>
+                                                            <h5>Fecha de entrega: {this.state.fecha_entrega}</h5>
                                                             <div class="morty-resumen">
                                                                 {this.state.arreglo.map(item => (
                                                                     item.Articulos.map(item2 => (
@@ -322,7 +322,7 @@ export class ResumenCompra extends React.Component {
         this.ConsultarCarrito(token).then(item => {
             var e = localStorage.getItem("productosencarrito");
             const datos = [];
-            this.setState({ arreglo: item }, () => {
+            this.setState({ arreglo: item, fecha_entrega: item.TickFechaEntrega }, () => {
                 console.log(this.state.arreglo);
                 this.state.arreglo.map(a => {
                     a.Articulos.map(item2 => {

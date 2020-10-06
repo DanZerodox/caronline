@@ -455,6 +455,9 @@ export class ContenidoCarrito extends React.Component {
                 if (item.Cantidad === 1) {
                     item.Cantidad -= 1;
                     item.Precio = (item.Cantidad * item.Precio)
+                    if (item.Cantidad < 1) {
+                        this.EliminarArticulo(item.Sku);
+                    }
                 }
                 else {
                     var punit = (item.Precio / item.Cantidad);

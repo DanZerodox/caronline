@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HeadTop } from './componentes/HeadTop';
-import { HeadBanner } from './componentes/HeadBanner';
-import { Banner } from './componentes/Banner';
-import { Productos } from './componentes/Productos';
-import { Footer } from './componentes/Footer';
+import { HeadTop } from '../componentes/HeadTop';
+import { HeadBanner } from '../componentes/HeadBanner';
+import { Banner } from '../componentes/Banner';
+import { Productos } from '../componentes/Productos';
+import { Footer } from '../componentes/Footer';
 import { BrowserRouter, Route, Link, Redirect, HashRouter } from "react-router-dom";
 import Carousel, { consts } from 'react-elastic-carousel';
-import { BarraInicio } from './componentes/BarraInicio';
+import { BarraInicio } from '../componentes/BarraInicio';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -20,7 +20,7 @@ import Col from 'react-bootstrap/Col';
 import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Media from 'react-media';
-import { Carusel } from './componentes/Carusel';
+import { Carusel } from '../componentes/Carusel';
 
 var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
 
@@ -39,7 +39,7 @@ function refreshPage() {
     //   this.props.history.push('/detalleproducto/100914')
 }
 
-export class DetalleProducto extends React.Component {
+export class DetallesSugeridos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -151,7 +151,7 @@ export class DetalleProducto extends React.Component {
                                                             <Typography style={{ borderBottom: '4px solid blue' }}>Descripción</Typography>
                                                         </Row>
                                                         <Row style={{ padding: 30 }}>
-                                                        <Carousel itemsToScroll={8} itemsToShow={3}>
+                                                            <Carousel itemsToScroll={8} itemsToShow={3}>
                                                                 {this.state.productossugeridos.map((item) => (
                                                                     <Card style={{ padding: 15 }}>
                                                                         <Typography>{item.ArtDesTv}</Typography>
@@ -165,7 +165,7 @@ export class DetalleProducto extends React.Component {
                                                                         </CardActionArea>
                                                                         <Typography style={{ color: '#ffaf02' }}>SKU: {item.ArtSku}</Typography>
                                                                         <Typography variant="h6">${item.ArtPVenta}.00</Typography>
-                                                                        <Link  to={"/detallesugeridos/" + item.ArtSku}>
+                                                                        <Link to={"/detalleproducto/" + item.ArtSku}>
                                                                             <Button variant="outlined" color="primary">
                                                                                 Agregar
                                                                             </Button>
@@ -174,7 +174,7 @@ export class DetalleProducto extends React.Component {
 
 
                                                                 ))}
-                                                            </Carousel>            
+                                                            </Carousel>
                                                         </Row>
                                                         <Footer></Footer>
                                                     </Col>
@@ -184,9 +184,8 @@ export class DetalleProducto extends React.Component {
                                                         </Row>
                                                         {this.state.mostrar == true ?
                                                             <>
-                                                                <Row style={{ overflowY: 'scroll', height: 360 }}>
-                                                                   <div style={{width:'100%', overflowY:'scroll', height:360}}>
-                                                                   {this.state.productosencarrito.map((produ) => (
+                                                                <div style={{ width: '100%', overflowY: 'scroll', height: 360 }}>
+                                                                    {this.state.productosencarrito.map((produ) => (
                                                                         <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                                                                             <Row>
                                                                                 <Col sm={2}>
@@ -217,8 +216,7 @@ export class DetalleProducto extends React.Component {
                                                                             </Row>
                                                                         </Card>
                                                                     ))}
-                                                                   </div>
-                                                                </Row>
+                                                                </div>
 
                                                                 <Row style={{ justifyContent: 'center' }}>
                                                                     <Button style={{ backgroundColor: '#10266b', width: '85%', height: '40px', position: 'absolute', bottom: 10 }} variant="contained" disableElevation>
