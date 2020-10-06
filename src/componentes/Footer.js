@@ -34,9 +34,9 @@ export class Footer extends React.Component{
 								<p style={{fontSize:10}}>Compra tus productos JUMEX favoritos en línea en la Tienda de Jumex oficial en México. Nuevos productos y promociones increíbles: ¡solo lo mejor de Jumex! Jumex cuenta con los mejores productos para ti: prueba los nuevos sabores entre diferentes productos de alta calidad.</p>
 								</Card.Title>
 								<div style={{display:'flex', justifyContent:'space-between', height:150}}>
-									<CardContent style={{textAlign:'center', lineHeight:10}}><CardMedia style={useStyles} image={require('../images/Jumex/envios.png')}></CardMedia><p>ENVIO A DOMICLIO</p></CardContent>
-									<CardContent style={{textAlign:'center', lineHeight:40}}><CardMedia style={useStyles} image={require('../images/Jumex/regalo.svg')}></CardMedia><p>VENTAJAS AL COMPRAR</p><p style={{lineHeight:0}}>EN LINEA</p></CardContent>
-									<CardContent style={{textAlign:'center', lineHeight:40}}><CardMedia style={useStyles} image={require('../images/Jumex/ayuda.svg')}></CardMedia><p>ASISTENTE VIRTUAL</p><p style={{lineHeight:0}}>LAS 24 HORAS</p></CardContent>
+									<CardContent style={{textAlign:'center'}}><CardMedia style={useStyles} image={require('../images/Jumex/envios.png')}></CardMedia><p>ENVIO A DOMICLIO</p></CardContent>
+									<CardContent style={{textAlign:'center', lineHeight:3}}><CardMedia style={useStyles} image={require('../images/Jumex/regalo.svg')}></CardMedia><p>VENTAJAS AL COMPRAR</p><p style={{lineHeight:0}}>EN LINEA</p></CardContent>
+									<CardContent style={{textAlign:'center', lineHeight:3}}><CardMedia style={useStyles} image={require('../images/Jumex/ayuda.svg')}></CardMedia><p>ASISTENTE VIRTUAL</p><p style={{lineHeight:0}}>LAS 24 HORAS</p></CardContent>
 									<CardContent style={{textAlign:'center'}}><CardMedia style={useStyles} image={require('../images/Jumex/tarjeta.svg')}></CardMedia><p>PAGO SEGURO</p></CardContent>
 								</div>
 						    </Card>
