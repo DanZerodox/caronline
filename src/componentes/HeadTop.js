@@ -43,7 +43,7 @@ export class HeadTop extends React.Component {
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="mr-auto">
-                                    {this.state.pxerfil != "" ?
+                                    {this.state.perfil != "" ?
                                         <>
                                             <Nav.Link to={'/'} style={{ color: '#ffffff', position:'absolute', right:222, top:21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
                                             <Nav.Link to={'/historico'} style={{ color: '#ffffff', position:'absolute', right:119, top:21 }}>Mis Pedidos</Nav.Link>
