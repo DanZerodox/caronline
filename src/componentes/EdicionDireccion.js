@@ -34,24 +34,27 @@ export class EdicionDireccion extends React.Component {
     }
 
     handleChangeColonia(event) {
-        this.setState({ area: event.target.value }, () => console.log(this.state.colonia))
+        this.setState({ area: event.target.value }, () => {
         var datos = { "Direccion": this.state.calles, "Municipio": this.state.municipio, "CP": this.state.cp, "Estado": this.state.state, "Colonia": this.state.area, "Referencia": this.state.referencias, "Longitud": this.state.longitud.toString(), "Latitud": this.state.latitud.toString() }
         console.log("mi direccion citch", datos);
-        localStorage.setItem('insertar_direccion', JSON.stringify(datos));
+        localStorage.setItem('editar_direccion', JSON.stringify(datos));
+        })
     }
 
     handleChangeCodigo(event) {
-        this.setState({ cp: event.target.value }, () => console.log(this.state.cp))
+        this.setState({ cp: event.target.value }, () => {
         var datos = { "Direccion": this.state.calles, "Municipio": this.state.municipio, "CP": this.state.cp, "Estado": this.state.state, "Colonia": this.state.area, "Referencia": this.state.referencias, "Longitud": this.state.longitud.toString(), "Latitud": this.state.latitud.toString() }
         console.log("mi direccion citch", datos);
-        localStorage.setItem('insertar_direccion', JSON.stringify(datos));
+        localStorage.setItem('editar_direccion', JSON.stringify(datos));
+        })
     }
 
     handleChangeReferencias(event) {
-        this.setState({ referencias: event.target.value }, () => console.log(this.state.referencias))
+        this.setState({ referencias: event.target.value }, () => {
         var datos = { "Direccion": this.state.calles, "Municipio": this.state.municipio, "CP": this.state.cp, "Estado": this.state.state, "Colonia": this.state.area, "Referencia": this.state.referencias, "Longitud": this.state.longitud.toString(), "Latitud": this.state.latitud.toString() }
         console.log("mi direccion citch", datos);
-        localStorage.setItem('insertar_direccion', JSON.stringify(datos));
+        localStorage.setItem('editar_direccion', JSON.stringify(datos));
+        })
     }
 
     render() {
