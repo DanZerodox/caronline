@@ -32,69 +32,102 @@ export class CarritoResponsivo extends React.Component {
         return (
             <Route>
                 <div>
-                <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
-                    <Typography>
-                        <Link to={'/'}>Inicio</Link>
-                        <span className="svg-wrapper">
-                                <svg className="icono" style={{width:20}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
-                        </span> Mi Carrito
+                    <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
+                        <Typography>
+                            <Link to={'/'}>Inicio</Link>
+                            <span className="svg-wrapper">
+                                <svg className="icono" style={{ width: 20 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><path d="M252.684 2.67l-35.33 35.331 186.999 187H0v49.97h404.353l-187 187.098 35.331 35.331 211.985-212.083L500 249.987l-35.33-35.331z" fill="#008aa4"></path></svg>
+                            </span> Mi Carrito
                     </Typography>
-                </div>
-                {this.state.mostrar==true?
-                <>
-                <Row style={{ width: '100%', overflowY:'scroll', height:360 }}>
-                    {this.state.productosencarrito.map((produ) => (
-                        <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
-                            <Row style={{ flexWrap: 'inherit' }}>
-                                <Col sm={2}>
-                                    <CardMedia style={{ height: 88, width: 46, float:'right' }} image={produ.Url}></CardMedia>
-                                </Col>
-                                <Col sm={7}>
-                                    <Typography>{produ.Des}</Typography>
-                                    <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
-                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
-                                        <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
-                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
-                                    </Row>
-                                </Col>
-                                <Col sm={3} style={{ padding: '21px 0px' }}>
-                                    <Typography> ${produ.Precio}.00</Typography>
-                                    <Button style={{width:'10%'}} onClick={()=>this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
+                    </div>
+                    {this.state.mostrar == true ?
+                        <>
+                            <Media queries={{ small: { maxWidth: 380 } }}>
+                                {matches =>
+                                    matches.small ? (
+                                        <Row style={{ width: '100%', overflowY: 'scroll', height: 290 }}>
+                                            {this.state.productosencarrito.map((produ) => (
+                                                <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                                                    <Row style={{ flexWrap: 'inherit' }}>
+                                                        <Col sm={2}>
+                                                            <CardMedia style={{ height: 88, width: 46, float: 'right' }} image={produ.Url}></CardMedia>
+                                                        </Col>
+                                                        <Col sm={7}>
+                                                            <Typography>{produ.Des}</Typography>
+                                                            <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                                                <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
+                                                                <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
+                                                            </Row>
+                                                        </Col>
+                                                        <Col sm={3} style={{ padding: '21px 0px' }}>
+                                                            <Typography> ${produ.Precio}.00</Typography>
+                                                            <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
 
-                                </Col>
+                                                        </Col>
+                                                    </Row>
+                                                </Card>
+                                            ))}
+                                        </Row>
+                                    )
+                                        :
+                                        (
+                                            <Row style={{ width: '100%', overflowY: 'scroll', height: 360 }}>
+                                                {this.state.productosencarrito.map((produ) => (
+                                                    <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                                                        <Row style={{ flexWrap: 'inherit' }}>
+                                                            <Col sm={2}>
+                                                                <CardMedia style={{ height: 88, width: 46, float: 'right' }} image={produ.Url}></CardMedia>
+                                                            </Col>
+                                                            <Col sm={7}>
+                                                                <Typography>{produ.Des}</Typography>
+                                                                <Row style={{ width: '100%', flexWrap: 'inherit', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                                                    <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                                                    <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '3', fontSize: 20 }}>{produ.Cantidad}</label></Col>
+                                                                    <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
+                                                                </Row>
+                                                            </Col>
+                                                            <Col sm={3} style={{ padding: '21px 0px' }}>
+                                                                <Typography> ${produ.Precio}.00</Typography>
+                                                                <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
+
+                                                            </Col>
+                                                        </Row>
+                                                    </Card>
+                                                ))}
+                                            </Row>
+                                        )
+                                }
+                            </Media>
+                            <Row style={{ justifyContent: 'center' }}>
+                                <Button style={{ width: '90%', height: 60, position: 'absolute', bottom: 80 }} variant="outlined" color="primary">
+                                    <Link to={'/'}>
+                                        Continuar Comprando
+                            </Link>
+                                </Button>
                             </Row>
-                        </Card>
-                    ))}
-                </Row>
-                <Row style={{justifyContent:'center'}}>
-                    <Button style={{ width: '90%', height: 60, position:'absolute', bottom: 80 }} variant="outlined" color="primary">
-                            <Link to={'/'}>
-                                Continuar Comprando
-                            </Link>
-                    </Button>
-                </Row>
-                <Row style={{ justifyContent: 'center' }}>
-                    <Button style={{ backgroundColor: '#10266b', width: '90%', height: '55px', position: 'absolute', bottom: 10 }} variant="contained" disableElevation>
-                        <Link style={{ color: '#ffffff' }} to={'/formulariocompra'}>
-                            Finalizar Compra
+                            <Row style={{ justifyContent: 'center' }}>
+                                <Button style={{ backgroundColor: '#10266b', width: '90%', height: '55px', position: 'absolute', bottom: 10 }} variant="contained" disableElevation>
+                                    <Link style={{ color: '#ffffff' }} to={'/formulariocompra'}>
+                                        Finalizar Compra
                         </Link>
-                    </Button>
-                </Row>
-                </>
-                :
-                <>
-                <p>No tienes productos en tu carrito.</p> 
-                <Row style={{ justifyContent: 'center' }}>
-                <Row style={{justifyContent:'center'}}>
-                    <Button style={{ width: '90%', height: 60, position:'absolute', bottom: 10 }} variant="outlined" color="primary">
-                            <Link to={'/'}>
-                                Continuar Comprando
+                                </Button>
+                            </Row>
+                        </>
+                        :
+                        <>
+                            <p>No tienes productos en tu carrito.</p>
+                            <Row style={{ justifyContent: 'center' }}>
+                                <Row style={{ justifyContent: 'center' }}>
+                                    <Button style={{ width: '90%', height: 60, position: 'absolute', bottom: 10 }} variant="outlined" color="primary">
+                                        <Link to={'/'}>
+                                            Continuar Comprando
                             </Link>
-                    </Button>
-                </Row>
-                </Row>
-                </>
-                }
+                                    </Button>
+                                </Row>
+                            </Row>
+                        </>
+                    }
                 </div>
             </Route>
         )
@@ -198,13 +231,16 @@ export class CarritoResponsivo extends React.Component {
             if (item.Sku === sku) {
                 if (item.Cantidad === 1) {
                     item.Cantidad -= 1;
-                    item.Precio = (item.Cantidad * item.Precio)
+                    item.Precio = (item.Cantidad * item.Precio);
+                    if (item.Cantidad < 1) {
+                        this.EliminarCarrito(item.Sku);
+                    }
                 }
                 else {
                     var punit = (item.Precio / item.Cantidad);
                     item.Cantidad -= 1;
                     item.Precio = (item.Cantidad * punit);
-                    if(item.Cantidad < 1){
+                    if (item.Cantidad < 1) {
                         this.EliminarCarrito(item.Sku);
                     }
                     console.log("entro", punit);

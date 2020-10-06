@@ -190,7 +190,7 @@ export class Direcciones extends React.Component {
                                                                             <div class="direccion-segundo">
                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                             </div>
-                                                                            <div><input class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
                                                                         </li>
                                                                         <div class="editar-direccion">
                                                                             <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
@@ -228,7 +228,7 @@ export class Direcciones extends React.Component {
                                                                                             <div class="direccion-segundo">
                                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                                             </div>
-                                                                                            <div><input class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
                                                                                         </li>
                                                                                         <div class="editar-direccion">
                                                                                             <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
@@ -246,7 +246,7 @@ export class Direcciones extends React.Component {
                                                                                             <div class="direccion-segundo">
                                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                                             </div>
-                                                                                            <div><input class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
                                                                                         </li>
                                                                                         <div class="editar-direccion">
                                                                                             <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
@@ -268,7 +268,7 @@ export class Direcciones extends React.Component {
                                                                 <span class="direccion-mun-col">Xalostoc</span>
                                                             </div>
 
-                                                            <div><input class="radio-direccion" onClick={() => this.GetIdDireccion("", 1)} type="radio"></input></div>
+                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion("", 1)} type="radio"></input></div>
                                                         </li>
 
                                                     </ul>

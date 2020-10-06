@@ -37,8 +37,9 @@ export class Historico extends React.Component {
                                             <Typography style={{ fontWeight: 600 }}>Número de Pedido: {item.TickId}</Typography>
                                             <CardContent>
                                                 <Row>
-                                                    <Col style={{ color: 'rgb(26, 147, 73)' }}>
-                                                        <label>Fecha de Solicitud: {item.TickFecha}</label>
+                                                    <Col>
+                                                        <label style={{ color: 'rgb(16, 38, 107)' }}>Fecha de Solicitud: {item.TickFecha}</label>
+                                                        <label style={{ color: 'rgb(26, 147, 73)' }}>Fecha de Entrega: {item.TickFechaEntrega}</label>
                                                     </Col>
                                                     <Col>
                                                         <label>Tipo de Entrega: {item.TickTipoEntregaDesc}</label>
@@ -53,8 +54,9 @@ export class Historico extends React.Component {
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ justifyContent: 'flex-end', marginRight: 10 }}>
-                                                    <Button variant="contained" color="primary" onClick={() => this.Detalle(item.TickId)}>Detalle</Button>
-                                                </Row>
+                                                <Link to={'/detallepedido/' + item.TickId}>
+                                                            <Button variant="contained" color="primary">Detalle</Button>
+                                                </Link>                                                </Row>
                                             </CardContent>
                                         </Card>
                                     ))}
@@ -70,8 +72,13 @@ export class Historico extends React.Component {
                                                 <Typography style={{ fontWeight: 600 }}>Número de Pedido: {item.TickId}</Typography>
                                                 <CardContent>
                                                     <Row>
-                                                        <Col style={{ color: 'rgb(26, 147, 73)' }}>
-                                                            <label>Fecha de Solicitud: {item.TickFecha}</label>
+                                                        <Col>
+                                                            <Row style={{ color: 'rgb(16, 38, 107)' }}>
+                                                                <label>Fecha de Solicitud: {item.TickFecha}</label>
+                                                            </Row>
+                                                            <Row style={{ color: 'rgb(26, 147, 73)' }}>
+                                                                <label>Fecha de Entrega: {item.TickFechaEntrega}</label>
+                                                            </Row>
                                                         </Col>
                                                         <Col>
                                                             <label>Tipo de Entrega: {item.TickTipoEntregaDesc}</label>

@@ -38,6 +38,7 @@ export class ResumenCompra extends React.Component {
                                         <Card style={{ width: '100%', boxShadow: '0 0 black' }}>
                                             <CardContent>
                                                 <h2 class="direccion-title">Resumen de tu pedido</h2>
+                                                <h4 style={{color:'rgb(26, 147, 73)'}}>Fecha de Entrega: {this.state.fecha_entrega}</h4>
                                                 <div class="morty-resumen">
                                                     {this.state.arreglo.map(item2 => (
                                                         item2.Articulos.map(item => (
@@ -322,7 +323,7 @@ export class ResumenCompra extends React.Component {
         this.ConsultarCarrito(token).then(item => {
             var e = localStorage.getItem("productosencarrito");
             const datos = [];
-            this.setState({ arreglo: item, fecha_entrega: item.TickFechaEntrega }, () => {
+            this.setState({ arreglo: item, fecha_entrega: item[0].TickFechaEntrega }, () => {
                 console.log(this.state.arreglo);
                 this.state.arreglo.map(a => {
                     a.Articulos.map(item2 => {
