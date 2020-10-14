@@ -56,11 +56,11 @@ export class HeadTop extends React.Component {
                                         </>
                                         :
                                         <>
-                                            <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
+                                            {/* <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
                                                 <Link push to={'/administrador'}  style={{ color: '#ffffff' }}>
                                                     Administrador
                                                 </Link>
-                                            </Nav.Link>
+                                            </Nav.Link> */}
                                             <Nav.Link style={{ color: "white", position: 'absolute', right: 0, marginRight: 20, top: 21 }}>
                                                 <Link push to={'/formulariocompra'} style={{ color: '#ffffff' }}>
                                                     Iniciar Sesión
