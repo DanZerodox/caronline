@@ -180,7 +180,7 @@ export class Productos extends React.Component {
                                     <div class="division">
                                         <div class="filtros"></div>
                                     </div>	
-                                    <div className="row" style={{display:'flex', flexWrap:'wrap', padding:'20px '+this.state.padding+'px'}}>
+                                    <div className style={{display:'flex', flexWrap:'wrap', padding:'20px '+this.state.padding+'px'}}>
                                         {
                                              this.state.productos.map(item=>(
                                                 <Card className='card' style={{ width: this.state.width+'%', height: this.state.heightcard, margin: 10, display: "inline-block" }}>

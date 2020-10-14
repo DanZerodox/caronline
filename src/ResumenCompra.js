@@ -38,7 +38,7 @@ export class ResumenCompra extends React.Component {
                                         <Card style={{ width: '100%', boxShadow: '0 0 black' }}>
                                             <CardContent>
                                                 <h2 class="direccion-title">Resumen de tu pedido</h2>
-                                                <h4 style={{color:'rgb(26, 147, 73)'}}>Fecha de Entrega: {this.state.fecha_entrega}</h4>
+                                                <h4 style={{ color: 'rgb(26, 147, 73)' }}>Fecha de Entrega: {this.state.fecha_entrega}</h4>
                                                 <div class="morty-resumen">
                                                     {this.state.arreglo.map(item2 => (
                                                         item2.Articulos.map(item => (
@@ -72,19 +72,19 @@ export class ResumenCompra extends React.Component {
                                                 <div class="editar-direccion">
                                                     {this.state.tipo_entrega == 0 ?
                                                         this.state.direccion.map(dir => (
-                                                            <ul class="panel-direccion">
-                                                                <li style={{ width: '100%' }} class="li-direccion-final-resumen">
-                                                                    <div class="direccion-primer">Dirección de entrega</div>
-                                                                    <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
-                                                                    </div>
-                                                                    <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
-                                                                    </div>
+                                                                <ul class="panel-direccion" style={{width:'100%'}}>
+                                                                    <li style={{ width: '100%' }} class="li-direccion-final-resumen">
+                                                                        <div class="direccion-primer">Dirección de entrega</div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Punto}</span>
+                                                                        </div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Ubicacion + ", Días de entrega: " + dir.Dias}</span>
+                                                                        </div>
 
-                                                                </li>
+                                                                    </li>
 
-                                                            </ul>
+                                                                </ul>
                                                         ))
                                                         :
                                                         <ul class="panel-direccion">
@@ -114,12 +114,12 @@ export class ResumenCompra extends React.Component {
                                 )
                                     : (matches.medium ? (
                                         <div>
-                                            <div class="row" style={{ justifyContent: 'center' }}>
-                                                <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                            <div style={{marginLeft:184 }}>
+                                                <Card style={{ width: '80%', boxShadow: '0 0 black' }}>
                                                     <CardContent>
                                                         <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                         <h5>Fecha de entrega:</h5>
-                                                        <div class="morty-resumen" style={{ height: 300 }}>
+                                                        <div class="morty-resumen" style={{ height: 200 }}>
                                                             {this.state.arreglo.map(item => (
                                                                 item.Articulos.map(item2 => (
                                                                     <>
@@ -159,19 +159,20 @@ export class ResumenCompra extends React.Component {
                                                 <div class="editar-direccion" style={{ marginLeft: 221, width: '40%' }}>
                                                     {this.state.tipo_entrega == 0 ?
                                                         this.state.direccion.map(dir => (
-                                                            <ul class="panel-direccion">
-                                                                <li class="li-direccion-final-resumen">
-                                                                    <div class="direccion-primer">Dirección de entrega</div>
-                                                                    <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
-                                                                    </div>
-                                                                    <div class="direccion-segundo">
-                                                                        <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
-                                                                    </div>
+                                                                <ul class="panel-direccion" style={{width:'100%'}}>
+                                                                    <li class="li-direccion-final-resumen">
+                                                                        <div class="direccion-primer">Dirección de entrega</div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Punto}</span>
+                                                                        </div>
+                                                                        <div class="direccion-segundo">
+                                                                            <span class="direccion-mun-col">{dir.Ubicacion + ", Días de entrega " + dir.Dias}</span>
+                                                                        </div>
 
-                                                                </li>
+                                                                    </li>
 
-                                                            </ul>
+                                                                </ul>
+                                                           
                                                         ))
                                                         :
                                                         <ul class="panel-direccion">
@@ -201,8 +202,8 @@ export class ResumenCompra extends React.Component {
                                     )
                                         : (
                                             <div>
-                                                <div class="row" style={{ justifyContent: 'center' }}>
-                                                    <Card style={{ width: '70%', boxShadow: '0 0 black' }}>
+                                                <div  style={{ justifyContent: 'center' }}>
+                                                    <Card style={{ width: '70%', boxShadow: '0 0 black', marginLeft:250 }}>
                                                         <CardContent>
                                                             <h2 class="direccion-title">Resumen de tu pedido</h2>
                                                             <h5>Fecha de entrega: {this.state.fecha_entrega}</h5>
@@ -242,23 +243,23 @@ export class ResumenCompra extends React.Component {
 
                                                 </div>
 
-                                                <div class="row" style={{ justifyContent: 'flex-end', width: '80%' }}>
-                                                    <div class="editar-direccion">
+                                                <div class="row" style={{ justifyContent: 'flex-end', width: '80%', marginBottom:40 }}>
+                                                    <div style={{width:400}} class="editar-direccion">
                                                         {this.state.tipo_entrega == 0 ?
                                                             this.state.direccion.map(dir => (
-                                                                <ul class="panel-direccion">
-                                                                    <li class="li-direccion-final-resumen">
-                                                                        <div class="direccion-primer">Dirección de entrega</div>
-                                                                        <div class="direccion-segundo">
-                                                                            <span class="direccion-mun-col">{dir.Direccion + " - " + dir.Municipio + ", " + dir.Estado}</span>
-                                                                        </div>
-                                                                        <div class="direccion-segundo">
-                                                                            <span class="direccion-mun-col">{dir.Colonia + ", C.P. " + dir.CP + " - " + dir.Referencia}</span>
-                                                                        </div>
+                                                                    <ul class="panel-direccion">
+                                                                        <li class="li-direccion-final-resumen">
+                                                                            <div class="direccion-primer">Dirección de entrega</div>
+                                                                            <div class="direccion-segundo">
+                                                                                <span class="direccion-mun-col">{dir.Punto}</span>
+                                                                            </div>
+                                                                            <div class="direccion-segundo">
+                                                                                <span class="direccion-mun-col">{dir.Ubicacion + ", Días de entrega " + dir.Dias}</span>
+                                                                            </div>
 
-                                                                    </li>
+                                                                        </li>
 
-                                                                </ul>
+                                                                    </ul>
                                                             ))
                                                             :
                                                             <ul class="panel-direccion">
@@ -278,9 +279,9 @@ export class ResumenCompra extends React.Component {
 
                                                     </div>
                                                     <Link to={"/contenidocarrito"}>
-                                                        <button style={{ height: 68 }} class="btncancel-resumen">Cancelar</button>
+                                                        <button style={{ height: 68, width:200 }} class="btncancel-resumen">Cancelar</button>
                                                     </Link>
-                                                    <button class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                    <button style={{width:200}} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
 
                                                 </div>
 
@@ -296,7 +297,7 @@ export class ResumenCompra extends React.Component {
                             <CardContent>
                                 <div class="mensajefinal">
                                     <img class="circlegreen" src={require('./images/Jumex/ok.png')}></img>
-                                    <p>Se ha confirmado tu compra, podrás dar seguimiento <Link to={'/historico'}>Aquí</Link> o desde el chat bot, Gracias por tu preferencia.</p>
+                                    <p>Se ha confirmado tu solicitud de producto, podrás dar seguimiento <Link to={'/historico'}>Aquí</Link>, Gracias por tu preferencia.</p>
                                     <Link to={'/'}><p>Ir a Inicio</p></Link>
                                     <img class="circlegreen" src={require('./images/Jumex/tucan.png')}></img>
                                 </div>
@@ -319,7 +320,7 @@ export class ResumenCompra extends React.Component {
         var e = localStorage.getItem("direccion_objeto");
         this.setState({
             direccion: JSON.parse(e),
-        });
+        },()=>{console.log("Mi direccion",this.state.direccion)});
         this.ConsultarCarrito(token).then(item => {
             var e = localStorage.getItem("productosencarrito");
             const datos = [];

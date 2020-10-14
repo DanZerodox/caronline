@@ -15,17 +15,28 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Button from "@material-ui/core/Button";
 import Media from 'react-media';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
 var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export class CarritoResponsivo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             productosencarrito: [],
-            productossugeridos: []
+            productossugeridos: [],
+            mostrar_dialogo: false
         }
     }
     render() {
@@ -129,6 +140,32 @@ export class CarritoResponsivo extends React.Component {
                         </>
                     }
                 </div>
+                {
+                        this.state.mostrar_dialogo == true ?
+                            <Dialog
+                                open={this.state.open}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={()=> this.handleClose()}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                            >
+                                <DialogTitle id="alert-dialog-slide-title">{"Limite Excedido"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                       Actualmente solo puedes agregar un limite de 10 unidades para este producto.
+                                </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                   
+                                    <Button onClick={() => this.handleClose()} color="primary">
+                                        Aceptar
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                            : null
+                    }
+
             </Route>
         )
     }
@@ -152,7 +189,20 @@ export class CarritoResponsivo extends React.Component {
             })
         }
     }
+    
+    handleClose(){
+        this.setState({
+            open:false,
+            mostrar_dialogo:false
+        })
+    }
 
+    handleClickOpen(){
+        this.setState({
+            open:true,
+            mostrar_dialogo:true
+        })    
+    }
     CargarProductosSugeridos() {
         var pro = [];
         const posturl = url_general + "api/Articulo/sugeridos";
@@ -204,6 +254,9 @@ export class CarritoResponsivo extends React.Component {
         const productos = this.state.productosencarrito.map(item => {
 
             if (item.Sku === sku) {
+               if (item.Cantidad > 9) {
+                this.handleClickOpen();
+               } else {
                 if (item.Cantidad === 1) {
                     item.Cantidad += 1;
                     item.Precio = (item.Cantidad * item.Precio)
@@ -216,6 +269,7 @@ export class CarritoResponsivo extends React.Component {
                 }
 
                 return item;
+               }
             }
 
             return item;

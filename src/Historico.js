@@ -64,7 +64,7 @@ export class Historico extends React.Component {
                             </div>
                         ) :
                             (
-                                <div class="row" style={{ justifyContent: 'center' }}>
+                                <div style={{ marginTop:30, marginLeft: 260, marginBottom: 40 }}>
                                     <div style={{ height: 400, overflowY: 'scroll', width: '80%' }}>
                                         <h4>Mis Compras</h4>
                                         {this.state.compras.map(item => (

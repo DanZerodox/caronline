@@ -8,12 +8,23 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Media from 'react-media';
 import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
 var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 
 export class ContenidoCarrito extends React.Component {
     constructor(props) {
@@ -73,8 +84,8 @@ export class ContenidoCarrito extends React.Component {
                         
                          <div style={{textAlign:'center'}}>
                          <Typography style={{ padding: 30, fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
-                             <Button style={{backgroundColor: '#10266b', width: '70%', height: 60}} variant="outlined" onClick={()=>this.RegistrarArticulos()}>
-                                 <label style={{color:'#ffffff'}}>Pasar a Pago</label>                                        
+                             <Button style={{backgroundColor: '#10266b', width: '70%', height: 60, marginBottom:70}} variant="outlined" onClick={()=>this.RegistrarArticulos()}>
+                                 <label style={{color:'#ffffff'}}>Pasar a validación</label>                                        
                              </Button>
                          </div>
                          </>
@@ -131,7 +142,7 @@ export class ContenidoCarrito extends React.Component {
                                          <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
                                      </Card>
                                      <Card>
-                                         <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} onClick={()=>this.RegistrarArticulos()} variant="contained" color="primary" disableElevation>Pasar a Pago</Button>
+                                         <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} onClick={()=>this.RegistrarArticulos()} variant="contained" color="primary" disableElevation>Pasar a validación</Button>
                                      </Card>
                                  </>
                              ) : (
@@ -184,7 +195,7 @@ export class ContenidoCarrito extends React.Component {
                                              <Typography style={{ padding: 30, float: 'right', fontSize: '2rem' }}>Total: ${this.state.total}.00</Typography>
                                          </Card>
                                          <Card>
-                                             <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} variant="contained" onClick={()=>this.RegistrarArticulos()} color="primary" disableElevation>Pasar a Pago</Button>
+                                             <Button style={{ backgroundColor: '#10266b', height: 70, float: 'right', marginRight: 26 }} variant="contained" onClick={()=>this.RegistrarArticulos()} color="primary" disableElevation>Pasar a Validación</Button>
                                          </Card>
                                      </>
                                  )
@@ -220,6 +231,31 @@ export class ContenidoCarrito extends React.Component {
              
               
                 <Footer></Footer>
+                {
+                        this.state.mostrar_dialogo == true ?
+                            <Dialog
+                                open={this.state.open}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={()=> this.handleClose()}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                            >
+                                <DialogTitle id="alert-dialog-slide-title">{"Limite Excedido"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                       Actualmente solo puedes agregar un limite de 10 unidades para este producto.
+                                </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                   
+                                    <Button onClick={() => this.handleClose()} color="primary">
+                                        Aceptar
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                            : null
+                    }
             </Route>
         )
     }
@@ -397,12 +433,26 @@ export class ContenidoCarrito extends React.Component {
 
         return result;
     }
-
+    handleClose(){
+        this.setState({
+            open:false,
+            mostrar_dialogo:false
+        })
+    }
+    handleClickOpen(){
+        this.setState({
+            open:true,
+            mostrar_dialogo:true
+        })    
+    }
     AgregarItem(sku) {
         const { productos: productosencarrito } = this.state;
         const productos = this.state.productosencarrito.map(item => {
 
             if (item.Sku === sku && item.carga===false) {
+              if (item.Cantidad > 9) {
+                  this.handleClickOpen();
+              } else {
                 if (item.Cantidad === 1) {
                     item.Cantidad += 1;
                     item.Precio = (item.Cantidad * item.Precio)
@@ -416,8 +466,12 @@ export class ContenidoCarrito extends React.Component {
                 }
 
                 return item;
+              }
             }
             else if(item.Sku === sku && item.carga===true){
+               if (item.Cantidad > 9) {
+                   this.handleClickOpen();
+               } else {
                 if (item.Cantidad === 1) {
                     item.Cantidad += 1;
                     item.Precio = (item.Cantidad * item.Precio)
@@ -431,6 +485,7 @@ export class ContenidoCarrito extends React.Component {
                 }
 
                 return item;
+               }
             }
 
             return item;

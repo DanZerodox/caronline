@@ -11,7 +11,8 @@ import Modal from 'react-bootstrap/Modal';
 import { json } from 'body-parser';
 import Button from '@material-ui/core/Button';
 import { EdicionDireccion } from './componentes/EdicionDireccion';
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
@@ -51,7 +52,8 @@ export class Direcciones extends React.Component {
             referencias: "",
             codigo_postal: "",
             telefono: "",
-            calles: ''
+            calles: '',
+            puntos_venta: []
         }
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -174,27 +176,25 @@ export class Direcciones extends React.Component {
                                         <CardContent>
                                             <h2 class="direccion-title">Elige dónde recibir tus productos Jumex</h2>
                                             <br></br>
-                                            <h4>En una de mis direcciones</h4>
-                                            {this.state.direcciones.map(item => (
+                                            <h4>Puntos de Entrega</h4>
+                                            {this.state.puntos_venta.map(item => (
                                                 <Media queries={{ iphone: { maxWidth: 400 }, small: { maxWidth: 480 }, medium: { maxWidth: 1300 }, large: { maxWidth: 1600 } }}>
                                                     {
                                                         matches =>
                                                             matches.iphone ?
                                                                 (
-                                                                    <ul class="panel-direccion" style={{ height: 260 }}>
+                                                                    <ul class="panel-direccion">
                                                                         <li class="li-direccion">
-                                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                                            <div class="direccion-primer">{item.Punto}</div>
                                                                             <div class="direccion-segundo">
-                                                                                <span class="direccion-mun-col">{item.Direccion + " - " + item.Colonia + ", " + item.Municipio}</span>
+                                                                                <span class="direccion-mun-col">Ubicación: {item.Ubicacion}, Día de entrega: {item.Dias}</span>
                                                                             </div>
                                                                             <div class="direccion-segundo">
                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                             </div>
-                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                            <div><input style={{ top: '-50px' }} name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.Id, 0)} type="radio"></input></div>
                                                                         </li>
-                                                                        <div class="editar-direccion">
-                                                                            <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
-                                                                        </div>
+
                                                                     </ul>
                                                                 )
                                                                 :
@@ -202,18 +202,18 @@ export class Direcciones extends React.Component {
                                                                     matches.small ? (
                                                                         <ul class="panel-direccion" style={{ height: 188 }}>
                                                                             <li class="li-direccion">
-                                                                                <div class="direccion-primer">CP {item.CP}</div>
+                                                                                <div class="direccion-primer">{item.Punto}</div>
                                                                                 <div class="direccion-segundo">
-                                                                                    <span class="direccion-mun-col">{item.Direccion + " - " + item.Colonia + ", " + item.Municipio}</span>
+                                                                                    <span class="direccion-mun-col">Ubicación: {item.Ubicacion}, Día de entrega: {item.Dias}</span>
                                                                                 </div>
                                                                                 <div class="direccion-segundo">
                                                                                     <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                                 </div>
-                                                                                <div><input class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                                <div><input class="radio-direccion" onClick={() => this.GetIdDireccion(item.Id, 0)} type="radio"></input></div>
                                                                             </li>
-                                                                            <div class="editar-direccion">
+                                                                            {/* <div class="editar-direccion">
                                                                                 <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
-                                                                            </div>
+                                                                            </div> */}
                                                                         </ul>
                                                                     ) :
                                                                         (
@@ -221,36 +221,36 @@ export class Direcciones extends React.Component {
                                                                                 <>
                                                                                     <ul class="panel-direccion">
                                                                                         <li class="li-direccion">
-                                                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                                                            <div class="direccion-primer">{item.Punto}</div>
                                                                                             <div class="direccion-segundo">
-                                                                                                <span class="direccion-mun-col">{item.Direccion + " - " + item.Colonia + ", " + item.Municipio}</span>
+                                                                                                <span class="direccion-mun-col">Ubicación: {item.Ubicacion}, Día de entrega: {item.Dias}</span>
                                                                                             </div>
                                                                                             <div class="direccion-segundo">
                                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                                             </div>
-                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.Id, 0)} type="radio"></input></div>
                                                                                         </li>
-                                                                                        <div class="editar-direccion">
+                                                                                        {/* <div class="editar-direccion">
                                                                                             <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
-                                                                                        </div>
+                                                                                        </div> */}
                                                                                     </ul>
                                                                                 </>
                                                                             ) :
                                                                                 (
                                                                                     <ul class="panel-direccion">
                                                                                         <li class="li-direccion">
-                                                                                            <div class="direccion-primer">CP {item.CP}</div>
+                                                                                            <div class="direccion-primer">{item.Punto}</div>
                                                                                             <div class="direccion-segundo">
-                                                                                                <span class="direccion-mun-col">{item.Direccion + " - " + item.Colonia + ", " + item.Municipio}</span>
+                                                                                                <span class="direccion-mun-col">Ubicación: {item.Ubicacion}, Día de entrega: {item.Dias}</span>
                                                                                             </div>
                                                                                             <div class="direccion-segundo">
                                                                                                 <span class="direccion-mun-col">{this.state.nombre}</span>
                                                                                             </div>
-                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.DirId, 0)} type="radio"></input></div>
+                                                                                            <div><input name="migrupo" class="radio-direccion" onClick={() => this.GetIdDireccion(item.Id, 0)} type="radio"></input></div>
                                                                                         </li>
-                                                                                        <div class="editar-direccion">
+                                                                                        {/* <div class="editar-direccion">
                                                                                             <label onClick={() => this.EditarDireccion()}><span class="direccion-edicion">Editar dirección</span></label>
-                                                                                        </div>
+                                                                                        </div> */}
                                                                                     </ul>
                                                                                 )
                                                                         )
@@ -258,7 +258,7 @@ export class Direcciones extends React.Component {
                                                     }
                                                 </Media>
                                             ))}
-                                            {this.state.tipo_sitio == 0 ?
+                                            {/* {this.state.tipo_sitio == 0 ?
                                                 <>
                                                     <br></br>
                                                     <ul class="panel-direccion">
@@ -275,8 +275,8 @@ export class Direcciones extends React.Component {
                                                 </>
                                                 :
                                                 null
-                                            }
-                                            <br></br>
+                                            } */}
+                                            {/* <br></br>
                                             <h4>En otra ubicación</h4>
                                             <Media queries={{ small: { maxWidth: 480 }, medium: { maxWidth: 1300 }, large: { maxWidth: 1600 } }}>
                                                 {
@@ -320,7 +320,9 @@ export class Direcciones extends React.Component {
                                                                     )
                                                             )
                                                 }
-                                            </Media>
+                                            </Media> */}
+
+
                                             {this.state.mostrarbtn == true ?
                                                 <Link to={"/resumen"}>
                                                     <button class="btnregistro">Continuar</button>
@@ -370,7 +372,7 @@ export class Direcciones extends React.Component {
                                                             height='300px'
                                                             zoom={15}
                                                         ></Map>
-                                                       
+
                                                         <button class="btnregistro" onClick={() => this.ValidarDireccion(2)}>Registrar</button>
                                                         <Link to={'/contenidocarrito'}>
                                                             <a href="#" className="regresar" class="regresar">Regresar</a>
@@ -449,6 +451,7 @@ export class Direcciones extends React.Component {
         if (token != null) {
             this.setState({ tipo_sitio: tipo_sitio });
             this.ProcesoInicial(token);
+            this.CargarPVenta(token);
 
             if (navigator.geolocation) {
 
@@ -473,6 +476,19 @@ export class Direcciones extends React.Component {
             this.DireccionWeb();
         }
     }
+
+    CargarPVenta(token) {
+        var venta = [
+            { "Id": "1", "Punto": "Oficinas Polanco", "Ubicacion": "Naucalpan", "Dias": "Jueves" },
+            { "Id": "2", "Punto": "Planta Botemex", "Ubicacion": "Ecatepec", "Dias": "Miercoles" },
+            { "Id": "3", "Punto": "Planta Juguera", "Ubicacion": "Ecatepec", "Dias": "Jueves" },
+            { "Id": "4", "Punto": "Jugomex", "Ubicacion": "Ecatepec", "Dias": "Sábado" },
+            { "Id": "5", "Punto": "CMD2", "Ubicacion": "Ecatepec", "Dias": "Martes" },
+            { "Id": "6", "Punto": "Oficinas Xalostoc", "Ubicacion": "Ecatepec", "Dias": "Viernes" }
+        ];
+        this.setState({ puntos_venta: venta })
+    }
+
     AbrirModal() {
         console.log('everybody');
         if (localStorage.getItem("insertar_direccion") != null) {
@@ -500,7 +516,7 @@ export class Direcciones extends React.Component {
         }
     }
 
-    DireccionWeb(){
+    DireccionWeb() {
         if (localStorage.getItem("insertar_direccion") != null) {
             var direccion = localStorage.getItem("insertar_direccion");
             console.log("esta es la direcion", direccion);
@@ -545,13 +561,28 @@ export class Direcciones extends React.Component {
             mostrarbtn: true,
             tipo_entrega: tipo
         }, () => {
-            if (this.state.tipo_entrega == 0) {
+            if (this.state.tipo_entrega == 1) {
                 this.state.direcciones.map(item => {
                     if (item.DirId == id) {
                         localStorage.removeItem("direccion_id");
                         localStorage.setItem("direccion_id", this.state.direccion_id);
                         localStorage.removeItem("direccion_objeto");
                         localStorage.setItem("direccion_objeto", JSON.stringify(this.state.direcciones));
+                    }
+                })
+            }
+            else {
+                this.state.puntos_venta.map(venta => {
+                    if (venta.Id == id) {
+                        localStorage.removeItem("direccion_id");
+                        localStorage.setItem("direccion_id", this.state.direccion_id);
+                        this.state.puntos_venta.map(item=>{
+                            if(item.Id===this.state.direccion_id){
+                                var punto=[{"Id":item.Id,"Punto":item.Punto,"Ubicacion":item.Ubicacion,"Dias":item.Dias}]
+                                localStorage.removeItem("direccion_objeto");
+                                localStorage.setItem("direccion_objeto", JSON.stringify(punto));
+                            }
+                        })
                     }
                 })
             }
@@ -569,16 +600,16 @@ export class Direcciones extends React.Component {
                 console.log('estas son las direcciones', this.state.direcciones);
                 if (this.state.direcciones.length == 0) {
                     this.setState({
-                        mostrar: true
+                        mostrar: false
                     })
                 }
             })
         })
     }
 
-    ValidarDireccion(tipo){
+    ValidarDireccion(tipo) {
         var token = localStorage.getItem("token");
-        this.RegistrarDireccion(token,tipo).then(item => {
+        this.RegistrarDireccion(token, tipo).then(item => {
             this.setState({
                 mensaje: item
             }, () => {
@@ -601,12 +632,12 @@ export class Direcciones extends React.Component {
         })
     }
 
-    RegistrarDireccion(token,tipo) {
+    RegistrarDireccion(token, tipo) {
         var pro;
         var data;
-        if (tipo===1) {
+        if (tipo === 1) {
             data = {
-                "Direccion": this.state.calles.toString()+", Casa/Depto: "+this.state.nocasa,
+                "Direccion": this.state.calles.toString() + ", Casa/Depto: " + this.state.nocasa,
                 "Municipio": this.state.municipio.toString(),
                 "CP": this.state.codigo_postal.toString(),
                 "Estado": this.state.estado.toString(),

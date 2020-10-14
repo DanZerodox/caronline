@@ -12,6 +12,7 @@ import { Historico } from './Historico';
 import { CarritoResponsivo } from './componentes/CarritoResponsivo';
 import { DetallePedido } from './componentes/DetallePedido';
 import { DetallesSugeridos } from './componentes/DetallesSugeridos';
+import { Administrador } from './Administrador';
 
 
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
           <Route path="/historico" exact={true} component={Historico}></Route>
           <Route path="/carritoresponsive" exact={true} component={CarritoResponsivo}></Route>
           <Route path="/" exact={true} component={Productos}></Route>
+          <Route path="/administrador" exact={true} component={Administrador}></Route>
         </HashRouter>
 
       </>

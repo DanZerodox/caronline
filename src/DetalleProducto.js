@@ -13,6 +13,12 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 import { CardHeader } from '@material-ui/core';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -23,6 +29,10 @@ import Media from 'react-media';
 import { Carusel } from './componentes/Carusel';
 
 var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const imagen_principal = {
     height: 360,
@@ -53,7 +63,9 @@ export class DetalleProducto extends React.Component {
             height: 0,
             width: 0,
             marginLeft: 0,
-            redirigir: false
+            redirigir: false,
+            mostrar_dialogo:false,
+            open: false
         }
     }
 
@@ -151,7 +163,7 @@ export class DetalleProducto extends React.Component {
                                                             <Typography style={{ borderBottom: '4px solid blue' }}>Descripción</Typography>
                                                         </Row>
                                                         <Row style={{ padding: 30 }}>
-                                                        <Carousel itemsToScroll={8} itemsToShow={3}>
+                                                            <Carousel itemsToScroll={8} itemsToShow={3}>
                                                                 {this.state.productossugeridos.map((item) => (
                                                                     <Card style={{ padding: 15 }}>
                                                                         <Typography>{item.ArtDesTv}</Typography>
@@ -165,7 +177,7 @@ export class DetalleProducto extends React.Component {
                                                                         </CardActionArea>
                                                                         <Typography style={{ color: '#ffaf02' }}>SKU: {item.ArtSku}</Typography>
                                                                         <Typography variant="h6">${item.ArtPVenta}.00</Typography>
-                                                                        <Link  to={"/detallesugeridos/" + item.ArtSku}>
+                                                                        <Link to={"/detallesugeridos/" + item.ArtSku}>
                                                                             <Button variant="outlined" color="primary">
                                                                                 Agregar
                                                                             </Button>
@@ -174,7 +186,7 @@ export class DetalleProducto extends React.Component {
 
 
                                                                 ))}
-                                                            </Carousel>            
+                                                            </Carousel>
                                                         </Row>
                                                         <Footer></Footer>
                                                     </Col>
@@ -185,39 +197,39 @@ export class DetalleProducto extends React.Component {
                                                         {this.state.mostrar == true ?
                                                             <>
                                                                 <Row style={{ overflowY: 'scroll', height: 360 }}>
-                                                                   <div style={{width:'100%', overflowY:'scroll', height:360}}>
-                                                                   {this.state.productosencarrito.map((produ) => (
-                                                                        <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
-                                                                            <Row>
-                                                                                <Col sm={2}>
-                                                                                    <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
-                                                                                </Col>
-                                                                                <Col sm={7}>
-                                                                                    <Media queries={{ small: { maxWidth: 1300 } }}>
-                                                                                        {matches =>
-                                                                                            matches.small ? (
-                                                                                                <Typography style={{ fontSize: '0.9rem' }}>{produ.Des}</Typography>
-                                                                                            )
-                                                                                                :
-                                                                                                (
-                                                                                                    <Typography>{produ.Des}</Typography>
+                                                                    <div style={{ width: '100%', overflowY: 'scroll', height: 360 }}>
+                                                                        {this.state.productosencarrito.map((produ) => (
+                                                                            <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                                                                                <Row>
+                                                                                    <Col sm={2}>
+                                                                                        <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
+                                                                                    </Col>
+                                                                                    <Col sm={7}>
+                                                                                        <Media queries={{ small: { maxWidth: 1300 } }}>
+                                                                                            {matches =>
+                                                                                                matches.small ? (
+                                                                                                    <Typography style={{ fontSize: '0.9rem' }}>{produ.Des}</Typography>
                                                                                                 )
-                                                                                        }
-                                                                                    </Media>
-                                                                                    <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '2.5' }}>{produ.Cantidad}</label></Col>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
-                                                                                    </Row>
-                                                                                </Col>
-                                                                                <Col sm={3} style={{ padding: '21px 0px' }}>
-                                                                                    <Typography> ${produ.Precio}.00</Typography>
-                                                                                    <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
-                                                                                </Col>
-                                                                            </Row>
-                                                                        </Card>
-                                                                    ))}
-                                                                   </div>
+                                                                                                    :
+                                                                                                    (
+                                                                                                        <Typography>{produ.Des}</Typography>
+                                                                                                    )
+                                                                                            }
+                                                                                        </Media>
+                                                                                        <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '2.5' }}>{produ.Cantidad}</label></Col>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
+                                                                                        </Row>
+                                                                                    </Col>
+                                                                                    <Col sm={3} style={{ padding: '21px 0px' }}>
+                                                                                        <Typography> ${produ.Precio}.00</Typography>
+                                                                                        <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
+                                                                                    </Col>
+                                                                                </Row>
+                                                                            </Card>
+                                                                        ))}
+                                                                    </div>
                                                                 </Row>
 
                                                                 <Row style={{ justifyContent: 'center' }}>
@@ -240,6 +252,32 @@ export class DetalleProducto extends React.Component {
                     </div>
 
                     {/* <Route path="/detalleproducto/:id" exact={true} component={DetalleProducto}></Route> */}
+
+                    {
+                        this.state.mostrar_dialogo == true ?
+                            <Dialog
+                                open={this.state.open}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={()=> this.handleClose()}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                            >
+                                <DialogTitle id="alert-dialog-slide-title">{"Limite Excedido"}</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                       Actualmente solo puedes agregar un limite de 10 unidades para este producto.
+                                </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                   
+                                    <Button onClick={() => this.handleClose()} color="primary">
+                                        Aceptar
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                            : null
+                    }
 
                 </Route>
             </HashRouter>
@@ -275,6 +313,8 @@ export class DetalleProducto extends React.Component {
         this.resize();
     }
 
+  
+
     AgregarCarritoResponsive(sku, descripcion, precio) {
         this.AgregarCarrito(sku, descripcion, precio);
         this.setState({
@@ -306,12 +346,33 @@ export class DetalleProducto extends React.Component {
 
         return result;
     }
+
+    handleClickOpen(){
+        this.setState({
+            open:true,
+            mostrar_dialogo:true
+        })    
+    }
+
+    handleClose(){
+        this.setState({
+            open:false,
+            mostrar_dialogo:false
+        })
+    }
+
     AgregarItem() {
         var pz = this.state.cantidad;
         var total = pz + 1;
-        this.setState({
-            cantidad: total
-        })
+        if (total > 10) {
+            this.handleClickOpen();
+            
+        } else {
+            this.setState({
+                cantidad: total
+            })
+        }
+       
     }
     AgregarItemCarrito(sku) {
 
@@ -320,6 +381,9 @@ export class DetalleProducto extends React.Component {
         const productos = this.state.productosencarrito.map(item => {
 
             if (item.Sku === sku) {
+               if (item.Cantidad > 9) {
+                this.handleClickOpen();
+               } else {
                 if (item.Cantidad === 1) {
                     item.Cantidad += 1;
                     item.Precio = (item.Cantidad * item.Precio)
@@ -333,6 +397,7 @@ export class DetalleProducto extends React.Component {
                 item.BanderaIngreso = true;
 
                 return item;
+               }
             }
 
             return item;
@@ -391,15 +456,19 @@ export class DetalleProducto extends React.Component {
             let items = [...this.state.productosencarrito];
             let item = { ...items[index] };
             item.Cantidad = (item.Cantidad + this.state.cantidad);
-            item.BanderaIngreso = true;
-            item.Precio = (item.Cantidad * precio)
-            items[index] = item;
-            this.setState({
-                productosencarrito: items
-            }, () => {
-                localStorage.removeItem("productosencarrito");
-                localStorage.setItem("productosencarrito", JSON.stringify(this.state.productosencarrito))
-            })
+            if (item.Cantidad > 10) {
+                this.handleClickOpen();
+            } else {
+                item.BanderaIngreso = true;
+                item.Precio = (item.Cantidad * precio)
+                items[index] = item;
+                this.setState({
+                    productosencarrito: items
+                }, () => {
+                    localStorage.removeItem("productosencarrito");
+                    localStorage.setItem("productosencarrito", JSON.stringify(this.state.productosencarrito))
+                })
+            }
         } else {
             var precio = (this.state.cantidad * precio);
             const producto = [{ "Sku": sku, "Url": url, "Des": descripcion, "Cantidad": this.state.cantidad, "Precio": precio, "BD": 0, "carga": false, "BanderaIngreso": true }];
