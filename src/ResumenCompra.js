@@ -155,7 +155,7 @@ export class ResumenCompra extends React.Component {
 
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row" style={{marginBottom:40}}>
                                                 <div class="editar-direccion" style={{ marginLeft: 221, width: '40%' }}>
                                                     {this.state.tipo_entrega == 0 ?
                                                         this.state.direccion.map(dir => (
