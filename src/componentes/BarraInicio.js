@@ -4,13 +4,13 @@ import { BrowserRouter,Route, Link } from "react-router-dom";
 export class BarraInicio extends React.Component{
     render(){
         return(
-            <BrowserRouter>
+            <Route>
              <Card>
                 <Card.Body style={{padding:'0.5rem', height:42, boxShadow:'0 0 8px rgba(0,0,0,.12)'}}>
                     <ul>
                         <li className="flecha">
-                            <Link to={'/'}> 
-                                <a style={{color:'#929db6', fontSize:12}} href="#" class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
+                            <Link push to={'/'}> 
+                                <a style={{color:'#929db6', fontSize:12}} class="breadcrumb-home-element" data-cat-name="home">Inicio</a>
                             </Link>   
                         </li>
                         <li>
@@ -22,7 +22,7 @@ export class BarraInicio extends React.Component{
                     </ul>
                 </Card.Body>
              </Card>
-            </BrowserRouter>
+            </Route>
         );
     }
 }

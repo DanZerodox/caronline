@@ -226,7 +226,7 @@ export class Productos extends React.Component {
                                                                 precision={0.5}
                                                             
                                                             />
-                                                            <Media queries={{iphone:{maxWidth:400},small:{maxWidth:1300}}}>
+                                                            <Media queries={{iphone:{maxWidth:400},small:{maxWidth:1300}, medium:{maxWidth:1500}}}>
                                                                         {matches=>
                                                                             matches.iphone?(
                                                                                 <Link to={'/detalleproducto/'+item.ArtSku}>
@@ -240,9 +240,16 @@ export class Productos extends React.Component {
                                                                                     <Button style={{marginLeft:48}}>Agregar</Button>
                                                                                     </Link>
                                                                                 ):(
+                                                                                   matches.medium?(
+                                                                                    <Link to={'/detalleproducto/'+item.ArtSku}>
+                                                                                    <Button style={{marginLeft:45}}>Agregar</Button>
+                                                                                    </Link>
+                                                                                   )
+                                                                                   :(
                                                                                     <Link to={'/detalleproducto/'+item.ArtSku}>
                                                                                     <Button style={{marginLeft:118}}>Agregar</Button>
                                                                                     </Link>
+                                                                                   )
                                                                                 )
                                                                             )
                                                                         }
