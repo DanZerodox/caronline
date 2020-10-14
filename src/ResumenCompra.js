@@ -191,10 +191,10 @@ export class ResumenCompra extends React.Component {
                                                     }
 
                                                 </div>
-                                                <Link to={"/contenidocarrito"} style={{ position: 'relative', top: 162 }}>
+                                                <Link to={"/contenidocarrito"} style={{ position: 'relative', top: 145 }}>
                                                     <button style={{ height: 51 }} class="btncancel-resumen">Cancelar</button>
                                                 </Link>
-                                                <button style={{ height: 51, position: 'relative', top: 162 }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                <button style={{ height: 51, position: 'relative', top: 145 }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
 
                                             </div>
 
