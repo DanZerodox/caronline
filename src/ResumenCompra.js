@@ -279,10 +279,10 @@ export class ResumenCompra extends React.Component {
                                                             }
 
                                                         </div>
-                                                        <Link style={{position:'relative',top:125}} to={"/contenidocarrito"}>
+                                                        <Link style={{position:'relative',top:115}} to={"/contenidocarrito"}>
                                                             <button style={{ height: 68, width: 200 }} class="btncancel-resumen">Cancelar</button>
                                                         </Link>
-                                                        <button style={{height:68, width: 200, position:'relative',top:125 }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                        <button style={{height:68, width: 200, position:'relative',top:115 }} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
 
                                                     </div>
 
@@ -330,11 +330,11 @@ export class ResumenCompra extends React.Component {
 
                                                 </div>
 
-                                                <div class="row" style={{ justifyContent: 'flex-end', width: '80%', marginBottom:40 }}>
+                                                <div class="row" style={{marginLeft:275, marginBottom:40 }}>
                                                     <div style={{width:400}} class="editar-direccion">
                                                         {this.state.tipo_entrega == 0 ?
                                                             this.state.direccion.map(dir => (
-                                                                    <ul class="panel-direccion">
+                                                                    <ul class="panel-direccion" style={{width:'100%',padding:21}}>
                                                                         <li class="li-direccion-final-resumen">
                                                                             <div class="direccion-primer">Dirección de entrega</div>
                                                                             <div class="direccion-segundo">
@@ -365,10 +365,10 @@ export class ResumenCompra extends React.Component {
                                                         }
 
                                                     </div>
-                                                    <Link to={"/contenidocarrito"}>
+                                                    <Link to={"/contenidocarrito"} style={{marginLeft:51}}>
                                                         <button style={{ height: 68, width:200 }} class="btncancel-resumen">Cancelar</button>
                                                     </Link>
-                                                    <button style={{width:200}} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
+                                                    <button style={{height:68, width:200}} class="btnfin-resumen" onClick={() => this.FinalizarPedido()}>Finalizar</button>
 
                                                 </div>
 
