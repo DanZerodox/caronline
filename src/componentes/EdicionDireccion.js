@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Card, CardContent, Typography, Box } from '@material-ui/core';
+import * as Constantes from '../componentes/Constantes';
 
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 
 
 export class EdicionDireccion extends React.Component {

@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import Media from 'react-media';
 import { Footer } from '../componentes/Footer';
 
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 
 export class DetallePedido extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ export class DetallePedido extends React.Component {
                                             <Card style={{ width: '100%', marginBottom: 10 }}>
                                                 <Row style={{width:'80%'}}>
                                                     <Col>
-                                                        <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.CONEXION_PRODUCCION + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
+                                                        <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.url_general + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
                                                     </Col>
                                                     <Col>
                                                         <Row>
@@ -65,7 +65,7 @@ export class DetallePedido extends React.Component {
                                                 <Card style={{ width: '100%', marginBottom: 10 }}>
                                                     <Row>
                                                         <Col sm={4}>
-                                                            <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.CONEXION_PRODUCCION + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
+                                                            <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.url_general + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
                                                         </Col>
                                                         <Col sm={8}>
                                                             <Row>

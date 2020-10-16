@@ -2,3 +2,4 @@
 [1012/162556.490:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
 [1013/103156.924:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\dmendozam\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\4c307a6b-46b4-40c2-ae53-3f5b980d629d: El sistema no puede encontrar la ruta especificada. (0x3)
 [1013/151505.746:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\dmendozam\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\1c87e02d-92b0-4228-bfaf-cdce37e99091: El sistema no puede encontrar la ruta especificada. (0x3)
+[1015/192858.342:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

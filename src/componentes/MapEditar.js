@@ -3,8 +3,10 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "reac
 import Autocomplete from 'react-google-autocomplete';
 import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import Geocode from "react-geocode";
+import * as Constantes from '../componentes/Constantes';
 
-var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
+var url_general=Constantes.url_general;
 Geocode.setApiKey("AIzaSyB_Dpl0sPNY7SnumRJvxAMAhonX9Bfi_3k");
 Geocode.enableDebug();
 class MapEditar extends React.Component{

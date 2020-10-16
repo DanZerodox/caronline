@@ -10,13 +10,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import * as Constantes from '../componentes/Constantes';
 
 
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 
 export class HeadTop extends React.Component {
     constructor(props) {
@@ -56,11 +57,11 @@ export class HeadTop extends React.Component {
                                         </>
                                         :
                                         <>
-                                            {/* <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
+                                            <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
                                                 <Link push to={'/administrador'}  style={{ color: '#ffffff' }}>
                                                     Administrador
                                                 </Link>
-                                            </Nav.Link> */}
+                                            </Nav.Link>
                                             <Nav.Link style={{ color: "white", position: 'absolute', right: 0, marginRight: 20, top: 21 }}>
                                                 <Link push to={'/formulariocompra'} style={{ color: '#ffffff' }}>
                                                     Iniciar Sesión

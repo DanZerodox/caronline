@@ -22,7 +22,7 @@ import Media from 'react-media';
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 
 const useStyles = makeStyles({
     root: {
@@ -103,7 +103,7 @@ export class Productos extends React.Component {
                                                                 }}>{item.ArtDesTv}
                                                                 </div>
                                                                 <Link to={'/detalleproducto/' + item.ArtSku}>
-                                                                    <CardMedia style={{ height: this.state.heightimg, width: 80, marginLeft: this.state.leftimg + '%' }} image={Constantes.CONEXION_PRODUCCION + "Content/Assets/Images/" + item.ArtSku + ".png"}>
+                                                                    <CardMedia style={{ height: this.state.heightimg, width: 80, marginLeft: this.state.leftimg + '%' }} image={Constantes.url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}>
 
                                                                     </CardMedia>
                                                                 </Link>
@@ -196,7 +196,7 @@ export class Productos extends React.Component {
                                                         }}>{item.ArtDesTv}
                                                         </div>
                                                        <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                           <CardMedia style={{height:this.state.heightimg, width:80, marginLeft:this.state.leftimg+'%'}} image={Constantes.CONEXION_PRODUCCION+"Content/Assets/Images/"+item.ArtSku+".png"}>
+                                                           <CardMedia style={{height:this.state.heightimg, width:80, marginLeft:this.state.leftimg+'%'}} image={Constantes.url_general+"Content/Assets/Images/"+item.ArtSku+".png"}>
                         
                                                            </CardMedia>
                                                        </Link>

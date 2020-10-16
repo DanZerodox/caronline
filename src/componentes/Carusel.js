@@ -8,9 +8,10 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { DetalleProducto } from "../DetalleProducto";
 import { useHistory } from "react-router-dom";
+import * as Constantes from '../componentes/Constantes';
 
 
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 
 
 export class Carusel extends React.Component {

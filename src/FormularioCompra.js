@@ -6,11 +6,12 @@ import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import { Footer } from './componentes/Footer';
 import * as Yup from 'yup';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
+import * as Constantes from './componentes/Constantes';
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 export class FormularioCompra extends React.Component {
     constructor(props) {
         super(props);

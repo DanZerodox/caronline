@@ -27,8 +27,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Media from 'react-media';
 import { Carusel } from './componentes/Carusel';
+import * as Constantes from './componentes/Constantes';
 
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+
+var url_general = Constantes.url_general;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

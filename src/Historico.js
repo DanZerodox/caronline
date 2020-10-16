@@ -8,12 +8,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from "@material-ui/core/Button";
 import Media from 'react-media';
+import * as Constantes from './componentes/Constantes';
 
 
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general = "https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general = Constantes.url_general;
 export class Historico extends React.Component {
     constructor(props) {
         super(props);

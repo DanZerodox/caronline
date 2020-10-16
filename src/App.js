@@ -14,7 +14,6 @@ import { DetallePedido } from './componentes/DetallePedido';
 import { DetallesSugeridos } from './componentes/DetallesSugeridos';
 import { Administrador } from './Administrador';
 
-
 class App extends React.Component {
   render() {
     return (

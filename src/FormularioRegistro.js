@@ -3,10 +3,12 @@ import { Card, CardContent, Typography, Box, colors } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import * as Constantes from './componentes/Constantes';
+
 //QA
 //var url_general="https://192.168.224.168:44387/qa_tiendajumex/";
 //PRODUCCION
-var url_general="https://manzana.jumex.com.mx/qao_tienda_jumex/";
+var url_general= Constantes.url_general;
 export class FormularioRegistro extends React.Component{
     constructor(props){
         super(props);
