@@ -9,8 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import * as Constantes from './componentes/Constantes';
-import { Download2 } from './componentes/Excel';
+// import { Download2 } from './componentes/Excel';
 
+import { ExportCSV } from './componentes/Excel';
 var url_general = Constantes.url_general;
 
 
@@ -20,17 +21,30 @@ export class Administrador extends React.Component {
         this.state = {
             productos: [],
             paginaporhoja: 5,
-            page: 0
+            page: 0,
+            boton: false
         }
-        this.handleChangePage = this.handleChangePage(this);
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
-       
-    } 
-    handleChangePage = (event) =>{
+        this.handleChangePage = this.handleChangePage.bind(this);
+
     }
-    handleChangeRowsPerPage = (event) =>{
-         this.setState({paginaporhoja:event.target.value})        
+
+    handleChangeRowsPerPage = (event) => {
+        this.setState({ paginaporhoja: event.target.value })
     }
+
+    handleChangePage = (event) => {
+        var pagina = this.state.page + 1;
+        console.log(pagina);
+        this.setState({ page: pagina })
+    }
+
+    handleBackPage = (event) => {
+        var pagina = this.state.page - 1;
+        console.log(pagina);
+        this.setState({ page: pagina })
+    }
+
     render() {
         return (
             <div style={{ padding: 30 }}>
@@ -41,13 +55,15 @@ export class Administrador extends React.Component {
                             <TableRow>
                                 <TableCell>No. Pedido</TableCell>
                                 <TableCell>Colaborador</TableCell>
-                                <TableCell align="right">No. Empleado</TableCell>
-                                <TableCell align="right">Cantidad</TableCell>
-                                <TableCell align="right">Fecha Solicitud</TableCell>
+                                <TableCell>No. Empleado</TableCell>
+                                <TableCell>Tipo de Entrega</TableCell>
+                                <TableCell>Cantidad</TableCell>
+                                <TableCell>Fecha Solicitud</TableCell>
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.productos.slice(1, this.state.paginaporhoja).map((row) => (
+                            {this.state.productos.slice(this.state.page * this.state.paginaporhoja, this.state.page * this.state.paginaporhoja + this.state.paginaporhoja).map((row) => (
                                 <TableRow key={row.TickId}>
                                     <TableCell component="th" scope="row">
                                         {row.TickId}
@@ -55,9 +71,10 @@ export class Administrador extends React.Component {
                                     <TableCell component="th" scope="row">
                                         {row.Nombre}
                                     </TableCell>
-                                    <TableCell align="right">{row.Empleado}</TableCell>
-                                    <TableCell align="right">{row.TotalArts}</TableCell>
-                                    <TableCell align="right">{row.TickFecha}</TableCell>
+                                    <TableCell>{row.Empleado}</TableCell>
+                                    <TableCell>{row.TickTipoEntregaDesc}</TableCell>
+                                    <TableCell>{row.TotalArts}</TableCell>
+                                    <TableCell>{row.TickFecha}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -70,12 +87,16 @@ export class Administrador extends React.Component {
                     count={this.state.productos.length}
                     rowsPerPage={this.state.paginaporhoja}
                     page={this.state.page}
-                    onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    nextIconButtonProps={{ 'arial-label': 'Siguiente', 'onClick': this.handleChangePage }}
+                    backIconButtonProps={{ 'arial-label': 'Anterior', 'onClick': this.handleBackPage }}
                 >
 
                 </TablePagination>
-                <Download2></Download2>
+                {this.state.boton === true ?
+                    <ExportCSV csvData={this.state.productos} fileName={"prueba"} />
+                    :null
+                }
             </div>
         );
     }
@@ -83,9 +104,14 @@ export class Administrador extends React.Component {
     componentDidMount() {
         var token = localStorage.getItem("token");
         this.CargarPedidos(token).then(item => {
-            this.setState({ productos: item }, () => { console.log("Productos", this.state.productos) })
+            this.setState({ productos: item }, () => {
+                if (this.state.productos.length > 0) {
+                    this.setState({ boton: true })
+                }
+            })
         });
     }
+
 
     CargarPedidos(token) {
         var pro = [];
@@ -111,5 +137,5 @@ export class Administrador extends React.Component {
         return result;
     }
 
-  
+
 }

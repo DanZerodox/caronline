@@ -106,6 +106,7 @@ export class FormularioCompra extends React.Component {
 
     IniciarSesion() {
         this.ValidarDatos().then(item => {
+            console.log("zero",item);
             this.setState({
                 token: item[0],
                 sitio: item[0].Sitio,
@@ -119,7 +120,11 @@ export class FormularioCompra extends React.Component {
                     localStorage.setItem("token", this.state.token.AccessToken);
                     
                     window.location.reload();
-                
+
+                    this.setState({
+                        redirect:true
+                    })
+
                 }
                 else{
                        this.setState({

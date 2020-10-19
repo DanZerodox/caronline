@@ -206,7 +206,7 @@ export class ContenidoCarrito extends React.Component {
 
                 :
                 <>
-                 <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
+                 {/* <div style={{ padding: 15, borderBottom: '1px solid #dedede' }}>
                             <Typography>
                             <Link to={'/'}>Inicio</Link>
                             <span className="svg-wrapper">
@@ -221,7 +221,20 @@ export class ContenidoCarrito extends React.Component {
                                  Ver Productos
                              </Link>    
                     </Button>
-                </div>
+                </div> */}
+                 <div className='primer-panel'>
+                        <Card>
+                            <CardContent>
+                                <div class="mensajefinal">
+                                    <img class="circlegreen" src={require('./images/Jumex/triste.png')}></img>
+                                    <p>No cuentas con ningun producto en tu carrito.</p>
+                                    <Link to={'/'}><p>Ir a Inicio</p></Link>
+                                    <img class="circlegreen" src={require('./images/Jumex/tucan.png')}></img>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        {/* <Footer></Footer> */}
+                    </div>
                 </>
                 }
                

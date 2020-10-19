@@ -46,22 +46,27 @@ export class HeadTop extends React.Component {
                                 <Nav className="mr-auto">
                                     {this.state.perfil != "" ?
                                         <>
-                                            <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 222, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
+                                            {this.state.perfil.PerfilDesc === "ADMIN" ?
+                                                <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 362, top: 21 }}>
+                                                    <Link push to={'/administrador'} style={{ color: '#ffffff' }}>
+                                                        Administrador
+                                                     </Link>
+                                                </Nav.Link>
+                                                :
+                                                null
+                                            }
+                                            <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
+
                                             <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
-                                                <Link push to={'/historico'}  style={{ color: '#ffffff' }}>
+                                                <Link push to={'/historico'} style={{ color: '#ffffff' }}>
                                                     Mis Pedidos
                                                 </Link>
                                             </Nav.Link>
-                                            
+
                                             <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 5, top: 21 }} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
                                         </>
                                         :
                                         <>
-                                            <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
-                                                <Link push to={'/administrador'}  style={{ color: '#ffffff' }}>
-                                                    Administrador
-                                                </Link>
-                                            </Nav.Link>
                                             <Nav.Link style={{ color: "white", position: 'absolute', right: 0, marginRight: 20, top: 21 }}>
                                                 <Link push to={'/formulariocompra'} style={{ color: '#ffffff' }}>
                                                     Iniciar Sesión
@@ -102,6 +107,7 @@ export class HeadTop extends React.Component {
         var token = localStorage.getItem("token");
         if (token != null) {
             this.CargarPerfil(token).then(item => {
+                console.log("Perfil", item);
                 this.setState({
                     perfil: item,
                     mostrar: true
@@ -114,6 +120,7 @@ export class HeadTop extends React.Component {
 
         }
     }
+
     Redirigir() {
         this.setState({
             redirigir: true

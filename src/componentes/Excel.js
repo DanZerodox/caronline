@@ -1,43 +1,49 @@
-import React from "react";
-import ReactExport from "react-export-excel";
+import * as React from 'react';
+import Button from 'react-bootstrap/Button';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 import * as Constantes from '../componentes/Constantes';
-import { Button, FormGroup, FormControl } from "react-bootstrap";
 
 var url_general = Constantes.url_general;
 
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+export const ExportCSV = ({csvData, fileName}) => {
 
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const fileExtension = '.xlsx';
 
-export class Download2 extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            reporte:[]
+    const exportToCSV = (csvData, fileName) => {
+        console.log("CVDATA",csvData);
+        const array=[];
+        var i =0;
+        for (let index = 0; index < csvData.length; index++) {
+            csvData[index].Articulos.map(item=>(
+                array.push({"No. Pedido":csvData[index].TickId,"Tipo de Entrega":csvData[index].TickTipoEntregaDesc,"Sku":item.ArtSku, "Descripción":item.ArtDesTv, "Presentación":item.ArtPres, "Cantidad":item.TickDetCant})
+            ))
+            index = index +1;
+            
         }
+        console.log("maira",array)
+        const  ws= XLSX.utils.json_to_sheet(array);
+        // if (csvData.Articulos === null) {
+        //    ws= XLSX.utils.json_to_sheet(csvData);
+        // }
+        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const data = new Blob([excelBuffer], {type: fileType});
+        FileSaver.saveAs(data, fileName + fileExtension);
+
+        window.location.reload();
     }
 
-    render() {
-        return (
-            <ExcelFile filename="Productos" element={(<Button>Generar Excel</Button>)}>
-                <ExcelSheet data={this.state.reporte.Articulos} name="Pedidos">
-                    <ExcelColumn label="Sku" value="ArtSku"/>
-                    <ExcelColumn label="Descripción" value="ArtDesTv"/>
-                    <ExcelColumn label="Cantidad" value="TickDetCant"/>
-                </ExcelSheet>
-            </ExcelFile>
-        );
-    }
-
-    componentDidMount(){
+    const ExportarExcel=()=> {
         var token = localStorage.getItem("token");
-        this.GenerarReporte(token).then(item=>{
-            this.setState({reporte:item},()=>console.log("articulos",this.state.reporte))
+        GenerarReporte(token).then(item => {
+            console.log("item",item.Reporte[0]);
+            exportToCSV(item.Reporte,"Pedidos");
         })
     }
 
-    GenerarReporte(token){
+    const GenerarReporte=(token)=> {
         var pro = [];
         const posturl = url_general + "api/Administrador/reporte/generar";
         var result = new Promise(function (resolve, reject) {
@@ -60,4 +66,11 @@ export class Download2 extends React.Component {
 
         return result;
     }
+
+    return (
+        <Button variant="success" onClick={() => ExportarExcel()}>Exportar Excel</Button>
+    )
+
+   
 }
+
