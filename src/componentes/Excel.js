@@ -17,7 +17,7 @@ export const ExportCSV = ({csvData, fileName}) => {
         var i =0;
         for (let index = 0; index < csvData.length; index++) {
             csvData[index].Articulos.map(item=>(
-                array.push({"No. Pedido":csvData[index].TickId,"Tipo de Entrega":csvData[index].TickTipoEntregaDesc,"Sku":item.ArtSku, "Descripción":item.ArtDesTv, "Presentación":item.ArtPres, "Cantidad":item.TickDetCant})
+                array.push({"No. Pedido":csvData[index].TickId,"Tipo de Entrega":csvData[index].TickTipoEntregaDesc,"Sku":item.ArtSku, "Descripción":item.ArtDesTv, "Presentación":item.ArtPres, "Cantidad":item.TickDetCant, "No. Empleado":csvData[index].Empleado, "Nombre":csvData[index].Nombre, "Correo":csvData[index].Usuario, "Fecha Solicitud":csvData[index].TickFecha})
             ))
             index = index +1;
             
