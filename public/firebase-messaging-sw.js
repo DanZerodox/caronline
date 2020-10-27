@@ -8,8 +8,7 @@ if ('serviceWorker' in navigator) {
       }).catch(function(err) {
         console.log('Service worker registration failed, error:', err);
       });
-    }
-    
+    } 
 firebase.initializeApp({
     messagingSenderId: "1049411931781"
 })
