@@ -12,6 +12,8 @@
     "bootstrap": "^4.5.2",
     "clsx": "^1.1.1",
     "file-saver": "^2.0.2",
+    "firebase": "^8.0.0",
+    "firebase-admin": "^9.3.0",
     "formik": "^2.1.5",
     "formik-material-ui": "^3.0.0-alpha.0",
     "prop-types": "^15.7.2",

@@ -13,7 +13,7 @@ import { CarritoResponsivo } from './componentes/CarritoResponsivo';
 import { DetallePedido } from './componentes/DetallePedido';
 import { DetallesSugeridos } from './componentes/DetallesSugeridos';
 import { Administrador } from './Administrador';
-
+import firebase from './firebase';
 class App extends React.Component {
   render() {
     return (
@@ -36,5 +36,14 @@ class App extends React.Component {
       </>
     );
   };
+
+  componentDidMount(){
+    const messaging = firebase.messaging()
+    messaging.getToken().then(token=>{
+      console.log('Token_mensajes',token);
+    }).catch((err)=>{
+      console.log('Error_mensaje',err);
+    })
+  }
 }
-export default App;
+export default App; 
