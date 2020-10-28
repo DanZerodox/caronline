@@ -13,8 +13,12 @@ import { CarritoResponsivo } from './componentes/CarritoResponsivo';
 import { DetallePedido } from './componentes/DetallePedido';
 import { DetallesSugeridos } from './componentes/DetallesSugeridos';
 import { Administrador } from './Administrador';
+import { AdministradorDetalle } from './AdministradorDetalle';
 import firebase from './firebase';
+
+
 class App extends React.Component {
+ 
   render() {
     return (
       <>
@@ -31,6 +35,8 @@ class App extends React.Component {
           <Route path="/carritoresponsive" exact={true} component={CarritoResponsivo}></Route>
           <Route path="/" exact={true} component={Productos}></Route>
           <Route path="/administrador" exact={true} component={Administrador}></Route>
+          <Route path="/administradordetalle/:id" exact={true} component={AdministradorDetalle}></Route>
+
         </HashRouter>
 
       </>
@@ -39,11 +45,14 @@ class App extends React.Component {
 
   componentDidMount(){
     const messaging = firebase.messaging()
-    messaging.getToken().then(token=>{
-      console.log('Token_mensajes',token);
+    messaging.requestPermission().then(()=>{
+      return messaging.getToken()
+    }).then((token)=>{
+      console.log('token_inicial',token)
     }).catch((err)=>{
-      console.log('Error_mensaje',err);
+      console.log('error',err);
     })
   }
+ 
 }
-export default App; 
+export default App;

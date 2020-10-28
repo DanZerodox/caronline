@@ -31,7 +31,7 @@ export class DetallePedido extends React.Component {
                                     {this.state.productos.map(item => (
                                         item.Articulos.map(pro => (
                                             <Card style={{ width: '100%', marginBottom: 10 }}>
-                                                <Row style={{width:'80%'}}>
+                                                <Row>
                                                     <Col>
                                                         <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.url_general + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
                                                     </Col>
@@ -45,6 +45,13 @@ export class DetallePedido extends React.Component {
                                                         <Row>
                                                             <label>SubTotal: ${pro.TickDetSubTotal}.00</label>
                                                         </Row>
+                                                    </Col>
+                                                    <Col>
+                                                        {pro.TickDetVentaDesc === 'Despachado' ?
+                                                            <label style={{ marginTop: 45, color: 'rgb(26, 147, 73)' }}>Aprobado</label>
+                                                            :
+                                                            <label style={{ marginTop: 45, color: 'red' }}>Rechazado</label>
+                                                        }
                                                     </Col>
                                                 </Row>
                                             </Card>
@@ -63,19 +70,31 @@ export class DetallePedido extends React.Component {
                                         {this.state.productos.map(item => (
                                             item.Articulos.map(pro => (
                                                 <Card style={{ width: '100%', marginBottom: 10 }}>
-                                                    <Row>
-                                                        <Col sm={4}>
+                                                    <Row style={{ padding: 15 }}>
+                                                        <Col sm={2}>
                                                             <CardMedia style={{ height: 90, width: 60, backgroundPositionX: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }} image={Constantes.url_general + "Content/Assets/Images/" + pro.ArtSku + ".png"}></CardMedia>
                                                         </Col>
-                                                        <Col sm={8}>
+                                                        <Col sm={4}>
+                                                            <Row>
+                                                                <Typography>{pro.ArtDesTv}</Typography>
+                                                            </Row>
                                                             <Row>
                                                                 <Typography style={{ color: 'rgb(26, 147, 73)' }}>Sku: {pro.ArtSku}</Typography>
                                                             </Row>
                                                             <Row>
                                                                 <label>Cantidad: {pro.TickDetCant} Unidad: {pro.ArtUnidad}</label>
                                                             </Row>
+                                                        </Col>
+                                                        <Col sm={6}>
                                                             <Row>
-                                                                <label>SubTotal: ${pro.TickDetSubTotal}.00</label>
+                                                                {pro.TickDetVentaDesc === 'Despachado' ?
+                                                                    <label style={{color: 'rgb(26, 147, 73)' }}>Aprobado</label>
+                                                                    :
+                                                                    <label style={{color: 'red' }}>Rechazado</label>
+                                                                }
+                                                            </Row>
+                                                            <Row>
+                                                                <label style={{ fontWeight: 600, fontSize: 30 }}>SubTotal: ${pro.TickDetSubTotal}.00</label>
                                                             </Row>
                                                         </Col>
                                                     </Row>

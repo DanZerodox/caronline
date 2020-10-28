@@ -11,6 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import * as Constantes from './componentes/Constantes';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 
 
 // import { Download2 } from './componentes/Excel';
@@ -58,135 +59,137 @@ export class Administrador extends React.Component {
 
     render() {
         return (
-            <>
-                <Modal show={this.state.show} onHide={() => this.CerrarModal()}>
-                    <Modal.Header closeButton>
-                        <h5>Rechazo del Articulo {this.state.descripcion}</h5>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <label>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}</label>
-                        <Button variant="danger" style={{ width: '100%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
-                    </Modal.Body>
-                </Modal>
+            <Route>
+                <>
+                    <Modal show={this.state.show} onHide={() => this.CerrarModal()}>
+                        <Modal.Header closeButton>
+                            <h5>Rechazo del Articulo {this.state.descripcion}</h5>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <label>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}</label>
+                            <Button variant="danger" style={{ width: '100%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
+                        </Modal.Body>
+                    </Modal>
 
-                {this.state.mostrardetalle === false ?
-                    <div style={{ padding: 30 }}>
-                        <h6>Pedidos</h6>
-                        <label>Mostrar Articulos por Fruta</label>
-                        <input style={{ marginLeft: 10 }} type="checkbox" onClick={() => this.OrdenarporFruta()}></input>
-                        <TableContainer component={Paper}>
-                            <Table aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>No. Pedido</TableCell>
-                                        <TableCell>Colaborador</TableCell>
-                                        <TableCell>No. Empleado</TableCell>
-                                        <TableCell>Tipo de Entrega</TableCell>
-                                        <TableCell>Cantidad</TableCell>
-                                        <TableCell>Fecha Solicitud</TableCell>
-                                        <TableCell></TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.productos.slice(this.state.page * this.state.paginaporhoja, this.state.page * this.state.paginaporhoja + this.state.paginaporhoja).map((row) => (
-                                        <TableRow key={row.TickId}>
-                                            <TableCell component="th" scope="row">
-                                                {row.TickId}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {row.Nombre}
-                                            </TableCell>
-                                            <TableCell>{row.Empleado}</TableCell>
-                                            <TableCell>{row.TickTipoEntregaDesc}</TableCell>
-                                            <TableCell>{row.TotalArts}</TableCell>
-                                            <TableCell>{row.TickFecha}</TableCell>
-                                            <TableCell><Button variant="primary">Detalle</Button></TableCell>
+                    {this.state.mostrardetalle === false ?
+                        <div style={{ padding: 30 }}>
+                            <h6>Pedidos</h6>
+                            <label>Mostrar Articulos por Fruta</label>
+                            <input style={{ marginLeft: 10 }} type="checkbox" onClick={() => this.OrdenarporFruta()}></input>
+                            <TableContainer component={Paper}>
+                                <Table aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>No. Pedido</TableCell>
+                                            <TableCell>Colaborador</TableCell>
+                                            <TableCell>No. Empleado</TableCell>
+                                            <TableCell>Tipo de Entrega</TableCell>
+                                            <TableCell>Cantidad</TableCell>
+                                            <TableCell>Fecha Solicitud</TableCell>
+                                            {/* <TableCell></TableCell> */}
                                         </TableRow>
-                                    ))}
-                                </TableBody>
+                                    </TableHead>
+                                    <TableBody>
+                                        {this.state.productos.slice(this.state.page * this.state.paginaporhoja, this.state.page * this.state.paginaporhoja + this.state.paginaporhoja).map((row) => (
+                                            <TableRow key={row.TickId}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.TickId}
+                                                </TableCell>
+                                                <TableCell component="th" scope="row">
+                                                    {row.Nombre}
+                                                </TableCell>
+                                                <TableCell>{row.Empleado}</TableCell>
+                                                <TableCell>{row.TickTipoEntregaDesc}</TableCell>
+                                                <TableCell>{row.TotalArts}</TableCell>
+                                                <TableCell>{row.TickFecha}</TableCell>
+                                                {/* <TableCell><Link to={'/administradordetalle/'+row.TickId}><Button variant="primary">Detalle</Button></Link></TableCell> */}
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
 
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={this.state.productos.length}
-                            rowsPerPage={this.state.paginaporhoja}
-                            page={this.state.page}
-                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                            nextIconButtonProps={{ 'arial-label': 'Siguiente', 'onClick': this.handleChangePage }}
-                            backIconButtonProps={{ 'arial-label': 'Anterior', 'onClick': this.handleBackPage }}
-                        >
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                component="div"
+                                count={this.state.productos.length}
+                                rowsPerPage={this.state.paginaporhoja}
+                                page={this.state.page}
+                                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                nextIconButtonProps={{ 'arial-label': 'Siguiente', 'onClick': this.handleChangePage }}
+                                backIconButtonProps={{ 'arial-label': 'Anterior', 'onClick': this.handleBackPage }}
+                            >
 
-                        </TablePagination>
-                        {this.state.boton === true ?
-                            <ExportCSV csvData={this.state.productos} fileName={"prueba"} />
-                            : null
-                        }
-                    </div>
-                    :
-                    <div style={{ padding: 30 }}>
-                        <h6>Pedidos</h6>
-                        <label>Mostrar Articulos por Fruta</label>
-                        <input style={{ marginLeft: 10 }} type="checkbox" onClick={() => this.OrdenarporPedido()}></input>
-                        <TableContainer component={Paper}>
-                            <Table aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>No. Pedido</TableCell>
-                                        <TableCell>Sku</TableCell>
-                                        <TableCell>Descripción</TableCell>
-                                        <TableCell>Presentación</TableCell>
-                                        <TableCell>Cantidad</TableCell>
-                                        {/* <TableCell></TableCell> */}
-                                        <TableCell></TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.productosfruta.slice(this.state.page * this.state.paginaporhoja, this.state.page * this.state.paginaporhoja + this.state.paginaporhoja).map((row) => (
-                                        <TableRow key={row.TickId}>
-                                            <TableCell component="th" scope="row">
-                                                {row.TickId}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {row.ArtSku}
-                                            </TableCell>
-                                            <TableCell>{row.ArtDesTv}</TableCell>
-                                            <TableCell>{row.ArtPres}</TableCell>
-                                            <TableCell>{row.TickDetCant}</TableCell>
-                                            {/* <TableCell><Button variant="success" onClick={()=>this.AprobarArticulo(row.TickId, row.ArtSku)}>Aprobar</Button></TableCell> */}
-                                            <TableCell>
-                                                {row.TickDetVentaDesc !== "Sin despachar" ?
-                                                    <Button variant="danger" onClick={() => this.MostrarModal(row.TickId, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
-                                                    :
-                                                    <label style={{ color: 'red' }}>Rechazado</label>
-                                                }
-                                            </TableCell>
+                            </TablePagination>
+                            {this.state.boton === true ?
+                                <ExportCSV csvData={this.state.productos} fileName={"prueba"} />
+                                : null
+                            }
+                        </div>
+                        :
+                        <div style={{ padding: 30 }}>
+                            <h6>Pedidos</h6>
+                            <label>Mostrar Articulos por Fruta</label>
+                            <input style={{ marginLeft: 10 }} type="checkbox" onClick={() => this.OrdenarporPedido()}></input>
+                            <TableContainer component={Paper}>
+                                <Table aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>No. Pedido</TableCell>
+                                            <TableCell>Sku</TableCell>
+                                            <TableCell>Descripción</TableCell>
+                                            <TableCell>Presentación</TableCell>
+                                            <TableCell>Cantidad</TableCell>
+                                            {/* <TableCell></TableCell> */}
+                                            <TableCell></TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
+                                    </TableHead>
+                                    <TableBody>
+                                        {this.state.productosfruta.slice(this.state.page * this.state.paginaporhoja, this.state.page * this.state.paginaporhoja + this.state.paginaporhoja).map((row) => (
+                                            <TableRow key={row.TickId}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.TickId}
+                                                </TableCell>
+                                                <TableCell component="th" scope="row">
+                                                    {row.ArtSku}
+                                                </TableCell>
+                                                <TableCell>{row.ArtDesTv}</TableCell>
+                                                <TableCell>{row.ArtPres}</TableCell>
+                                                <TableCell>{row.TickDetCant}</TableCell>
+                                                {/* <TableCell><Button variant="success" onClick={()=>this.AprobarArticulo(row.TickId, row.ArtSku)}>Aprobar</Button></TableCell> */}
+                                                <TableCell>
+                                                    {row.TickDetVentaDesc !== "Sin despachar" ?
+                                                        <Button variant="danger" onClick={() => this.MostrarModal(row.TickId, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
+                                                        :
+                                                        <label style={{ color: 'red' }}>Rechazado</label>
+                                                    }
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
 
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={this.state.productosfruta.length}
-                            rowsPerPage={this.state.paginaporhoja}
-                            page={this.state.page}
-                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                            nextIconButtonProps={{ 'arial-label': 'Siguiente', 'onClick': this.handleChangePage }}
-                            backIconButtonProps={{ 'arial-label': 'Anterior', 'onClick': this.handleBackPage }}
-                        >
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                component="div"
+                                count={this.state.productosfruta.length}
+                                rowsPerPage={this.state.paginaporhoja}
+                                page={this.state.page}
+                                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                                nextIconButtonProps={{ 'arial-label': 'Siguiente', 'onClick': this.handleChangePage }}
+                                backIconButtonProps={{ 'arial-label': 'Anterior', 'onClick': this.handleBackPage }}
+                            >
 
-                        </TablePagination>
-                        {this.state.boton === true ?
-                            <ExportCSV csvData={this.state.productos} fileName={"prueba"} />
-                            : null
-                        }
-                    </div>
-                }
-            </>
+                            </TablePagination>
+                            {this.state.boton === true ?
+                                <ExportCSV csvData={this.state.productos} fileName={"prueba"} />
+                                : null
+                            }
+                        </div>
+                    }
+                </>
+            </Route>
         );
     }
 
@@ -307,17 +310,17 @@ export class Administrador extends React.Component {
     RechazarArticulo(id, sku) {
         console.log("btnRechazar", id);
         var token = localStorage.getItem("token");
-        this.ApiRechazo(id,sku, token).then(item=>{
+        this.ApiRechazo(id, sku, token).then(item => {
             this.setState({
-                show:false,
-                productosfruta:[]
-            },()=>{        
+                show: false,
+                productosfruta: []
+            }, () => {
                 this.OrdenarporFruta();
             })
         });
     }
 
-    ApiRechazo(id, sku, token){
+    ApiRechazo(id, sku, token) {
         var pro = [];
         const posturl = url_general + "api/Administrador/ticket/" + id + "/articulo/" + sku + "/rechazar";
         var result = new Promise(function (resolve, reject) {

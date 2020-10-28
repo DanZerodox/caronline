@@ -17,14 +17,15 @@ import { ExportCSV } from './componentes/Excel';
 var url_general = Constantes.url_general;
 
 
-export class Administrador extends React.Component {
+export class AdministradorDetalle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             productos: [],
             paginaporhoja: 5,
             page: 0,
-            boton: false
+            boton: false,
+            ticketid: props.match.params.id,
         }
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         this.handleChangePage = this.handleChangePage.bind(this);
