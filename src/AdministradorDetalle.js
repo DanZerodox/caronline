@@ -90,11 +90,13 @@ export class AdministradorDetalle extends React.Component {
                                             <TableCell component="th" scope="row">
                                                 {row.TickDetCant}
                                             </TableCell>
+                                            <TableCell>
                                             {row.TickDetVentaDesc !== "Sin despachar" ?
                                                 <Button variant="danger" onClick={() => this.MostrarModal(this.state.ticketid, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
                                                 :
                                                 <label style={{ color: 'red' }}>Rechazado</label>
                                             }
+                                            </TableCell>
                                         </TableRow>
 
 
@@ -180,7 +182,8 @@ export class AdministradorDetalle extends React.Component {
                 show: false,
                 productos_deta: []
             }, () => {
-                this.CargarPedidos(token);
+                // this.CargarPedidos(token);
+                window.location.reload();
             })
         });
     }

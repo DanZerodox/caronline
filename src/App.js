@@ -43,16 +43,16 @@ class App extends React.Component {
     );
   };
 
-  componentDidMount(){
-    const messaging = firebase.messaging()
-    messaging.requestPermission().then(()=>{
-      return messaging.getToken()
-    }).then((token)=>{
-      console.log('token_inicial',token)
-    }).catch((err)=>{
-      console.log('error',err);
-    })
-  }
+  // componentDidMount(){
+  //   const messaging = firebase.messaging()
+  //   messaging.requestPermission().then(()=>{
+  //     return messaging.getToken()
+  //   }).then((token)=>{
+  //     console.log('token_inicial',token)
+  //   }).catch((err)=>{
+  //     console.log('error',err);
+  //   })
+  // }
  
 }
 export default App;
