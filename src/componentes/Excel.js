@@ -68,7 +68,7 @@ export const ExportCSV = ({csvData, fileName}) => {
     }
 
     return (
-        <Button variant="success" onClick={() => ExportarExcel()}>Exportar Excel</Button>
+        <Button style={{padding:'1% 2%'}} variant="success" onClick={() => ExportarExcel()}>Exportar Excel</Button>
     )
 
    

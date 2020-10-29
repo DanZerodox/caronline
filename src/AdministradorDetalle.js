@@ -62,8 +62,8 @@ export class AdministradorDetalle extends React.Component {
                             <h5>Rechazo del Articulo {this.state.descripcion}</h5>
                         </Modal.Header>
                         <Modal.Body>
-                            <label>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}</label>
-                            <Button variant="danger" style={{ width: '100%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
+                            <label style={{marginBottom:2}}>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}?</label>
+                            <Button variant="danger" style={{ width: '100%', padding:'2% 2%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
                         </Modal.Body>
                     </Modal>
                     <div style={{ padding: 30 }}>
@@ -92,7 +92,7 @@ export class AdministradorDetalle extends React.Component {
                                             </TableCell>
                                             <TableCell>
                                             {row.TickDetVentaDesc !== "Sin despachar" ?
-                                                <Button variant="danger" onClick={() => this.MostrarModal(this.state.ticketid, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
+                                                <Button variant="danger" style={{padding:'2% 2%'}} onClick={() => this.MostrarModal(this.state.ticketid, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
                                                 :
                                                 <label style={{ color: 'red' }}>Rechazado</label>
                                             }

@@ -66,8 +66,8 @@ export class Administrador extends React.Component {
                             <h5>Rechazo del Articulo {this.state.descripcion}</h5>
                         </Modal.Header>
                         <Modal.Body>
-                            <label>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}</label>
-                            <Button variant="danger" style={{ width: '100%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
+                            <label style={{marginBottom:2}}>¿Seguro que desea rechazar el articulo con sku: {this.state.sku}?</label>
+                            <Button variant="danger" style={{ width: '100%', padding:'2% 2%' }} onClick={() => this.RechazarArticulo(this.state.id, this.state.sku)} >Rechazar</Button>
                         </Modal.Body>
                     </Modal>
 
@@ -104,7 +104,7 @@ export class Administrador extends React.Component {
                                                 <TableCell>{row.TotalArts}</TableCell>
                                                 <TableCell>{row.TickFecha}</TableCell>
                                                 <TableCell>{row.TickStatusDesc}</TableCell>
-                                                <TableCell><Link to={'/administradordetalle/'+row.TickId}><Button variant="primary">Detalle</Button></Link></TableCell>
+                                                <TableCell><Link to={'/administradordetalle/'+row.TickId}><Button variant="primary" style={{padding:'2% 2%'}}>Detalle</Button></Link></TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -161,7 +161,7 @@ export class Administrador extends React.Component {
                                                 {/* <TableCell><Button variant="success" onClick={()=>this.AprobarArticulo(row.TickId, row.ArtSku)}>Aprobar</Button></TableCell> */}
                                                 <TableCell>
                                                     {row.TickDetVentaDesc !== "Sin despachar" ?
-                                                        <Button variant="danger" onClick={() => this.MostrarModal(row.TickId, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
+                                                        <Button variant="danger" style={{padding:'2% 2%'}} onClick={() => this.MostrarModal(row.TickId, row.ArtSku, row.ArtDesTv)}>Rechazar</Button>
                                                         :
                                                         <label style={{ color: 'red' }}>Rechazado</label>
                                                     }
