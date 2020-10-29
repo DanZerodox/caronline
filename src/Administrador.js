@@ -86,7 +86,8 @@ export class Administrador extends React.Component {
                                             <TableCell>Tipo de Entrega</TableCell>
                                             <TableCell>Cantidad</TableCell>
                                             <TableCell>Fecha Solicitud</TableCell>
-                                            {/* <TableCell></TableCell> */}
+                                            <TableCell>Estado</TableCell>
+                                            <TableCell></TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -102,7 +103,8 @@ export class Administrador extends React.Component {
                                                 <TableCell>{row.TickTipoEntregaDesc}</TableCell>
                                                 <TableCell>{row.TotalArts}</TableCell>
                                                 <TableCell>{row.TickFecha}</TableCell>
-                                                {/* <TableCell><Link to={'/administradordetalle/'+row.TickId}><Button variant="primary">Detalle</Button></Link></TableCell> */}
+                                                <TableCell>{row.TickStatusDesc}</TableCell>
+                                                <TableCell><Link to={'/administradordetalle/'+row.TickId}><Button variant="primary">Detalle</Button></Link></TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
