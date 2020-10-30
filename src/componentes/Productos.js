@@ -161,47 +161,50 @@ export class Productos extends React.Component {
                                                     ))
                                                 }
                                             </div>
+                                            <div style={{ textAlign: 'center', fontSize: 20, marginBottom: 15 }} >
+                                                <Link to={'/productosall'} >Ver más</Link>
+                                            </div>
                                         </div>
                                         <Footer></Footer>
 
                                     </div>
                                 )
-                                :(
-                                    <div  style={{backgroundColor:"#e5e8f0"}}>
-                                    <div className="productoprincipal">
-                                    <BarraInicio></BarraInicio>
-                                    {/* <Banner></Banner> */}
-                                    <div class="cell large-3 hide-for-xlarge paging-information">
-                                            <div class="clp-all-title">
-                                            <span>Todo</span>
-                        
-                                            </div>
-                                            </div>
-                                    <div class="division">
-                                        <div class="filtros"></div>
-                                    </div>	
-                                    <div className style={{display:'flex', flexWrap:'wrap', padding:'20px '+this.state.padding+'px'}}>
-                                        {
-                                             this.state.productos.map(item=>(
-                                                <Card className='card' style={{ width: this.state.width+'%', height: this.state.heightcard, margin: 10, display: "inline-block" }}>
-                                                    <CardActionArea>
-                                                        <div style={{
-                                                                marginLeft: 8,
-                                                                fontWeight: "bold",
-                                                                whiteSpace: "nowrap",
-                                                                overflow: "hidden",
-                                                                fontSize: 15,
-                                                                textOverflow: "ellipsis",
-                                                                padding:10
-                                                        }}>{item.ArtDesTv}
-                                                        </div>
-                                                       <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                           <CardMedia style={{height:this.state.heightimg, width:80, marginLeft:this.state.leftimg+'%'}} image={Constantes.url_general+"Content/Assets/Images/"+item.ArtSku+".png"}>
-                        
-                                                           </CardMedia>
-                                                       </Link>
-                                                        <CardContent style={{ height: 80 }}>
-                                                            {/* <div
+                                    : (
+                                        <div style={{ backgroundColor: "#e5e8f0" }}>
+                                            <div className="productoprincipal">
+                                                <BarraInicio></BarraInicio>
+                                                {/* <Banner></Banner> */}
+                                                <div class="cell large-3 hide-for-xlarge paging-information">
+                                                    <div class="clp-all-title">
+                                                        <span>Todo</span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="division">
+                                                    <div class="filtros"></div>
+                                                </div>
+                                                <div className style={{ display: 'flex', flexWrap: 'wrap', padding: '20px ' + this.state.padding + 'px' }}>
+                                                    {
+                                                        this.state.productos.map(item => (
+                                                            <Card className='card' style={{ width: this.state.width + '%', height: this.state.heightcard, margin: 10, display: "inline-block" }}>
+                                                                <CardActionArea>
+                                                                    <div style={{
+                                                                        marginLeft: 8,
+                                                                        fontWeight: "bold",
+                                                                        whiteSpace: "nowrap",
+                                                                        overflow: "hidden",
+                                                                        fontSize: 15,
+                                                                        textOverflow: "ellipsis",
+                                                                        padding: 10
+                                                                    }}>{item.ArtDesTv}
+                                                                    </div>
+                                                                    <Link to={'/detalleproducto/' + item.ArtSku}>
+                                                                        <CardMedia style={{ height: this.state.heightimg, width: 80, marginLeft: this.state.leftimg + '%' }} image={Constantes.url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}>
+
+                                                                        </CardMedia>
+                                                                    </Link>
+                                                                    <CardContent style={{ height: 80 }}>
+                                                                        {/* <div
                                                             style={{
                                                                 marginLeft: 5,
                                                                 fontWeight: "bold",
@@ -212,61 +215,65 @@ export class Productos extends React.Component {
                                                             >
                                                             {item.ArtDesTv}
                                                             </div> */}
-                                                            <div style={{ margin: 5 }}>Precio: ${item.ArtPVenta}.00 x 1 Caja</div>
-                                                            <div style={{ color: "#1a9349", fontWeight: "bold", margin: 5 }}>
-                                                                    SKU: {item.ArtSku}
-                                                            </div>    
-                                                        </CardContent>
-                                                        <CardActions
-                                                            style={{ display: "flex", alignItems: "center", height: 45, padding:'8px 15px'}}
-                                                            >
-                                                           <Rating
-                                                                name="hover-feedback"
-                                                                value={2}
-                                                                precision={0.5}
-                                                            
-                                                            />
-                                                            <Media queries={{iphone:{maxWidth:400},small:{maxWidth:1300}, medium:{maxWidth:1500}}}>
-                                                                        {matches=>
-                                                                            matches.iphone?(
-                                                                                <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                                                <Button style={{marginLeft:25}}>Agregar</Button>
-                                                                                </Link>
-                                                                            )
-                                                                            :
-                                                                            ( 
-                                                                                matches.small?(
-                                                                                    <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                                                    <Button style={{marginLeft:48}}>Agregar</Button>
+                                                                        <div style={{ margin: 5 }}>Precio: ${item.ArtPVenta}.00 x 1 Caja</div>
+                                                                        <div style={{ color: "#1a9349", fontWeight: "bold", margin: 5 }}>
+                                                                            SKU: {item.ArtSku}
+                                                                        </div>
+                                                                    </CardContent>
+                                                                    <CardActions
+                                                                        style={{ display: "flex", alignItems: "center", height: 45, padding: '8px 15px' }}
+                                                                    >
+                                                                        <Rating
+                                                                            name="hover-feedback"
+                                                                            value={2}
+                                                                            precision={0.5}
+
+                                                                        />
+                                                                        <Media queries={{ iphone: { maxWidth: 400 }, small: { maxWidth: 1300 }, medium: { maxWidth: 1500 } }}>
+                                                                            {matches =>
+                                                                                matches.iphone ? (
+                                                                                    <Link to={'/detalleproducto/' + item.ArtSku}>
+                                                                                        <Button style={{ marginLeft: 25 }}>Agregar</Button>
                                                                                     </Link>
-                                                                                ):(
-                                                                                   matches.medium?(
-                                                                                    <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                                                    <Button style={{marginLeft:45}}>Agregar</Button>
-                                                                                    </Link>
-                                                                                   )
-                                                                                   :(
-                                                                                    <Link to={'/detalleproducto/'+item.ArtSku}>
-                                                                                    <Button style={{marginLeft:118}}>Agregar</Button>
-                                                                                    </Link>
-                                                                                   )
                                                                                 )
-                                                                            )
-                                                                        }
-                                                            </Media>
-                                                          
-                                                        </CardActions>
-                                                    </CardActionArea>                               
-                                                </Card>
-                                            ))
-                                        }
-                                    </div>
-                                    </div>
-                                    <Footer></Footer>  
-                        
-                                    </div>
-                                )
-                }
+                                                                                    :
+                                                                                    (
+                                                                                        matches.small ? (
+                                                                                            <Link to={'/detalleproducto/' + item.ArtSku}>
+                                                                                                <Button style={{ marginLeft: 48 }}>Agregar</Button>
+                                                                                            </Link>
+                                                                                        ) : (
+                                                                                                matches.medium ? (
+                                                                                                    <Link to={'/detalleproducto/' + item.ArtSku}>
+                                                                                                        <Button style={{ marginLeft: 45 }}>Agregar</Button>
+                                                                                                    </Link>
+                                                                                                )
+                                                                                                    : (
+                                                                                                        <Link to={'/detalleproducto/' + item.ArtSku}>
+                                                                                                            <Button style={{ marginLeft: 118 }}>Agregar</Button>
+                                                                                                        </Link>
+                                                                                                    )
+                                                                                            )
+                                                                                    )
+                                                                            }
+                                                                        </Media>
+
+                                                                    </CardActions>
+                                                                </CardActionArea>
+                                                            </Card>
+                                                        ))
+                                                    }
+
+                                                </div>
+                                                <div style={{ textAlign: 'center', fontSize: 20, marginBottom: 15 }} >
+                                                    <Link to={'/productosall'} >Ver más</Link>
+                                                </div>
+                                            </div>
+                                            <Footer></Footer>
+
+                                        </div>
+                                    )
+                        }
                     </Media>
                 </>
 

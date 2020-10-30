@@ -14,6 +14,7 @@ import { DetallePedido } from './componentes/DetallePedido';
 import { DetallesSugeridos } from './componentes/DetallesSugeridos';
 import { Administrador } from './Administrador';
 import { AdministradorDetalle } from './AdministradorDetalle';
+import { ProductosAll } from './componentes/ProductosAll';
 import firebase from './firebase';
 
 
@@ -36,7 +37,7 @@ class App extends React.Component {
           <Route path="/" exact={true} component={Productos}></Route>
           <Route path="/administrador" exact={true} component={Administrador}></Route>
           <Route path="/administradordetalle/:id" exact={true} component={AdministradorDetalle}></Route>
-
+          <Route path="/productosall" exact={true} component={ProductosAll}></Route>
         </HashRouter>
 
       </>

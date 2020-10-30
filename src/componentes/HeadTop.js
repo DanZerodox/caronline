@@ -47,16 +47,17 @@ export class HeadTop extends React.Component {
                                     {this.state.perfil != "" ?
                                         <>
                                             {this.state.perfil.PerfilDesc === "ADMIN" ?
-                                                <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 362, top: 21 }}>
-                                                    <Link push to={'/administrador'} style={{ color: '#ffffff' }}>
-                                                        Administrador
+                                                <>
+                                                    <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
+                                                    <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 362, top: 21 }}>
+                                                        <Link push to={'/administrador'} style={{ color: '#ffffff' }}>
+                                                            Administrador
                                                      </Link>
-                                                </Nav.Link>
+                                                    </Nav.Link>
+                                                </>
                                                 :
-                                                null
+                                                <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
                                             }
-                                            <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
-
                                             <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
                                                 <Link push to={'/historico'} style={{ color: '#ffffff' }}>
                                                     Mis Pedidos
