@@ -32,8 +32,8 @@ img{max-width:100%;}
 body{
 	font-family: 'Open Sans', sans-serif;
 	background:#ffffff;
-	/* overflow: hidden; */
-	overflow-x: hidden;
+	overflow-x: visible;
+
 }
 
 .nav-link{

@@ -285,6 +285,7 @@ export class Productos extends React.Component {
     }
 
     componentDidMount() {
+        console.log("scroll",window.scrollbars.visible);
         this.CargarProductos().then(item => {
             this.setState({
                 productos: item[0]

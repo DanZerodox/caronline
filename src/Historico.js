@@ -75,10 +75,10 @@ export class Historico extends React.Component {
                                                     <Row>
                                                         <Col>
                                                             <Row style={{ color: 'rgb(16, 38, 107)' }}>
-                                                                <label>Fecha de Solicitud: {item.TickFecha}</label>
+                                        <label>Fecha de Solicitud: {item.TickFecha[3]}{item.TickFecha[4]}/{item.TickFecha[0]}{item.TickFecha[1]}/{item.TickFecha[6]}{item.TickFecha[7]}{item.TickFecha[8]}{item.TickFecha[9]}</label>
                                                             </Row>
                                                             <Row style={{ color: 'rgb(26, 147, 73)' }}>
-                                                                <label>Fecha de Entrega: {item.TickFechaEntrega}</label>
+                                                                <label>Fecha de Entrega: {item.TickFechaEntrega[3]}{item.TickFechaEntrega[4]}/{item.TickFechaEntrega[0]}{item.TickFechaEntrega[1]}/{item.TickFechaEntrega[6]}{item.TickFechaEntrega[7]}{item.TickFechaEntrega[8]}{item.TickFechaEntrega[9]}</label>
                                                             </Row>
                                                         </Col>
                                                         <Col>

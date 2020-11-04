@@ -36,8 +36,8 @@ export class HeadTop extends React.Component {
                 <Route>
                     <>
                         <Navbar expand="lg" style={{ backgroundColor: '#10266b' }}>
-                            <Navbar.Brand>
-                                <Link to={'/'}>
+                            <Navbar.Brand style={{width:'67%'}}>
+                                <Link to={'/'} onClick={() => {window.location.href="/"}}>
                                     <img src={require('../images/logo.png')} style={{ width: 100 }}></img>
                                 </Link>
                             </Navbar.Brand>

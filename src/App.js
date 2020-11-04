@@ -15,7 +15,6 @@ import { DetallesSugeridos } from './componentes/DetallesSugeridos';
 import { Administrador } from './Administrador';
 import { AdministradorDetalle } from './AdministradorDetalle';
 import { ProductosAll } from './componentes/ProductosAll';
-import firebase from './firebase';
 
 
 class App extends React.Component {
@@ -43,7 +42,9 @@ class App extends React.Component {
       </>
     );
   };
+componentDidMount(){
 
+}
   // componentDidMount(){
   //   const messaging = firebase.messaging()
   //   messaging.requestPermission().then(()=>{
