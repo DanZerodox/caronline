@@ -66,7 +66,7 @@ export class DetalleProducto extends React.Component {
             width: 0,
             marginLeft: 0,
             redirigir: false,
-            mostrar_dialogo:false,
+            mostrar_dialogo: false,
             open: false
         }
     }
@@ -189,7 +189,12 @@ export class DetalleProducto extends React.Component {
 
                                                                 ))}
                                                             </Carousel>
+
+
                                                         </Row>
+                                                        <div style={{textAlign:'center', marginBottom:10}}>
+                                                            <Link to={'/'}>Ver más</Link>
+                                                        </div>
                                                         <Footer></Footer>
                                                     </Col>
                                                     <Col sm={4}>
@@ -261,18 +266,18 @@ export class DetalleProducto extends React.Component {
                                 open={this.state.open}
                                 TransitionComponent={Transition}
                                 keepMounted
-                                onClose={()=> this.handleClose()}
+                                onClose={() => this.handleClose()}
                                 aria-labelledby="alert-dialog-slide-title"
                                 aria-describedby="alert-dialog-slide-description"
                             >
                                 <DialogTitle id="alert-dialog-slide-title">{"Limite Excedido"}</DialogTitle>
                                 <DialogContent>
                                     <DialogContentText id="alert-dialog-slide-description">
-                                       Actualmente solo puedes agregar un limite de 10 unidades para este producto.
+                                        Actualmente solo puedes agregar un limite de 10 unidades para este producto.
                                 </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                   
+
                                     <Button onClick={() => this.handleClose()} color="primary">
                                         Aceptar
                                     </Button>
@@ -315,7 +320,7 @@ export class DetalleProducto extends React.Component {
         this.resize();
     }
 
-  
+
 
     AgregarCarritoResponsive(sku, descripcion, precio) {
         this.AgregarCarrito(sku, descripcion, precio);
@@ -349,17 +354,17 @@ export class DetalleProducto extends React.Component {
         return result;
     }
 
-    handleClickOpen(){
+    handleClickOpen() {
         this.setState({
-            open:true,
-            mostrar_dialogo:true
-        })    
+            open: true,
+            mostrar_dialogo: true
+        })
     }
 
-    handleClose(){
+    handleClose() {
         this.setState({
-            open:false,
-            mostrar_dialogo:false
+            open: false,
+            mostrar_dialogo: false
         })
     }
 
@@ -368,13 +373,13 @@ export class DetalleProducto extends React.Component {
         var total = pz + 1;
         if (total > 10) {
             this.handleClickOpen();
-            
+
         } else {
             this.setState({
                 cantidad: total
             })
         }
-       
+
     }
     AgregarItemCarrito(sku) {
 
@@ -383,23 +388,23 @@ export class DetalleProducto extends React.Component {
         const productos = this.state.productosencarrito.map(item => {
 
             if (item.Sku === sku) {
-               if (item.Cantidad > 9) {
-                this.handleClickOpen();
-               } else {
-                if (item.Cantidad === 1) {
-                    item.Cantidad += 1;
-                    item.Precio = (item.Cantidad * item.Precio)
-                }
-                else {
-                    var punit = (item.Precio / item.Cantidad);
-                    item.Cantidad += 1;
-                    item.Precio = (item.Cantidad * punit)
-                    console.log("entro", punit)
-                }
-                item.BanderaIngreso = true;
+                if (item.Cantidad > 9) {
+                    this.handleClickOpen();
+                } else {
+                    if (item.Cantidad === 1) {
+                        item.Cantidad += 1;
+                        item.Precio = (item.Cantidad * item.Precio)
+                    }
+                    else {
+                        var punit = (item.Precio / item.Cantidad);
+                        item.Cantidad += 1;
+                        item.Precio = (item.Cantidad * punit)
+                        console.log("entro", punit)
+                    }
+                    item.BanderaIngreso = true;
 
-                return item;
-               }
+                    return item;
+                }
             }
 
             return item;

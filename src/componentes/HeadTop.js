@@ -48,23 +48,23 @@ export class HeadTop extends React.Component {
                                         <>
                                             {this.state.perfil.PerfilDesc === "ADMIN" ?
                                                 <>
-                                                    <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
-                                                    <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 362, top: 21 }}>
+                                                    <Nav.Link to={'/'} style={{ color: '#ffffff'}} >{this.state.perfil.UsrNombre}</Nav.Link>
+                                                    <Nav.Link style={{ color: '#ffffff'}}>
                                                         <Link push to={'/administrador'} style={{ color: '#ffffff' }}>
                                                             Administrador
                                                      </Link>
                                                     </Nav.Link>
                                                 </>
                                                 :
-                                                <Nav.Link to={'/'} style={{ color: '#ffffff', position: 'absolute', right: 229, top: 21 }} >{this.state.perfil.UsrNombre}</Nav.Link>
+                                                <Nav.Link to={'/'} style={{ color: '#ffffff'}} >{this.state.perfil.UsrNombre}</Nav.Link>
                                             }
-                                            <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 119, top: 21 }}>
+                                            <Nav.Link style={{ color: '#ffffff'}}>
                                                 <Link push to={'/historico'} style={{ color: '#ffffff' }}>
                                                     Mis Pedidos
                                                 </Link>
                                             </Nav.Link>
 
-                                            <Nav.Link style={{ color: '#ffffff', position: 'absolute', right: 5, top: 21 }} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
+                                            <Nav.Link style={{ color: '#ffffff'}} href="#" onClick={() => this.CerrarSesion()}>Cerrar Sesión</Nav.Link>
                                         </>
                                         :
                                         <>

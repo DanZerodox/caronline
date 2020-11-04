@@ -189,7 +189,7 @@ export class ProductosAll extends React.Component {
                                                 </div>
                                             }
 
-                                            <div>
+                                            <div style={{marginBottom:15}}>
                                                 <Pagination style={{ justifyContent: 'center' }}>
                                                     <Pagination.First />
                                                     <Pagination.Prev onClick={() => this.AnteriorPagina()} />
