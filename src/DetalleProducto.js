@@ -193,7 +193,7 @@ export class DetalleProducto extends React.Component {
 
                                                         </Row>
                                                         <div style={{textAlign:'center', marginBottom:15}}>
-                                                            <Link onClick={() => {window.location.href="/productosall"}}>Ver más</Link>
+                                                            <Link to={"/productosall"}>Ver más</Link>
                                                         </div>
                                                         <Footer></Footer>
                                                     </Col>

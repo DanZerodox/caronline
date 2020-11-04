@@ -344,7 +344,7 @@ export class Productos extends React.Component {
             this.setState({ padding: 58, width: 100, heightimg: 180, leftimg: 38, heightcard: 360, marginright: 60 }, () => { console.log(this.state.height) });
         } else {
             this.setState({ padding: 144, width: 30, heightimg: 135, leftimg: 36, heightcard: 314, marginright: 42 }, () => { console.log(this.state.height) });
-
+            document.body.style.overflow = "scroll";
         }
     }
 

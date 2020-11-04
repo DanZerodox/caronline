@@ -189,7 +189,7 @@ export class ProductosAll extends React.Component {
                                                 </div>
                                             }
 
-                                            <div style={{marginBottom:15}}>
+                                            <div>
                                                 <Pagination style={{ justifyContent: 'center' }}>
                                                     <Pagination.First />
                                                     <Pagination.Prev onClick={() => this.AnteriorPagina()} />
@@ -293,7 +293,7 @@ export class ProductosAll extends React.Component {
                                                 }
 
 
-                                                <div>
+                                                <div style={{marginBottom: 15}}>
                                                     <Pagination style={{ justifyContent: 'center' }}>
                                                         <Pagination.First />
                                                         <Pagination.Prev onClick={() => this.AnteriorPagina()} />
@@ -466,7 +466,7 @@ export class ProductosAll extends React.Component {
             this.setState({ padding: 58, width: 100, heightimg: 180, leftimg: 38, heightcard: 360, marginright: 60 }, () => { console.log(this.state.height) });
         } else {
             this.setState({ padding: 144, width: 30, heightimg: 135, leftimg: 36, heightcard: 314, marginright: 42 }, () => { console.log(this.state.height) });
-
+            document.body.style.overflow = "scroll";
         }
     }
 
