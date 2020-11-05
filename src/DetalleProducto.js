@@ -203,8 +203,8 @@ export class DetalleProducto extends React.Component {
                                                         </Row>
                                                         {this.state.mostrar == true ?
                                                             <>
-                                                                <Row style={{ overflowY: 'scroll', height: 360 }}>
-                                                                    <div style={{ width: '100%', overflowY: 'scroll', height: 360 }}>
+                                                                <Row style={{ overflowY: 'scroll', height: 500 }}>
+                                                                    <div style={{ width: '100%', overflowY: 'scroll', height: '100%' }}>
                                                                         {this.state.productosencarrito.map((produ) => (
                                                                             <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                                                                                 <Row>

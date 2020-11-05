@@ -38,7 +38,7 @@ export class HeadTop extends React.Component {
                         <Navbar expand="lg" style={{ backgroundColor: '#10266b' }}>
                             <Navbar.Brand style={{width:'67%'}}>
                                 <Link to={'/'}>
-                                    <img src={require('../images/logo.png')} style={{ width: 100 }}></img>
+                                    <img src={require('../images/Jumex/grupo.png')} style={{ width: 100 }}></img>
                                 </Link>
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -108,12 +108,10 @@ export class HeadTop extends React.Component {
         var token = localStorage.getItem("token");
         if (token != null) {
             this.CargarPerfil(token).then(item => {
-                console.log("Perfil", item);
                 this.setState({
                     perfil: item,
                     mostrar: true
                 }, () => {
-                    console.log("aqui esta el nombre", this.state.perfil.UsrNombre)
                     localStorage.setItem("nombre-usuario", this.state.perfil.UsrNombre);
 
                 })
@@ -159,7 +157,6 @@ export class HeadTop extends React.Component {
         return result;
     }
     CerrarSesion() {
-        console.log('entro');
         localStorage.clear();
         this.setState({ cerrar: true, perfil: "" })
 
