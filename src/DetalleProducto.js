@@ -67,7 +67,8 @@ export class DetalleProducto extends React.Component {
             marginLeft: 0,
             redirigir: false,
             mostrar_dialogo: false,
-            open: false
+            open: false,
+            altura_carrito: 500
         }
     }
 
@@ -170,12 +171,14 @@ export class DetalleProducto extends React.Component {
                                                                     <Card style={{ padding: 15 }}>
                                                                         <Typography>{item.ArtDesTv}</Typography>
                                                                         <CardActionArea>
-                                                                            <CardMedia style={{
-                                                                                height: 115,
-                                                                                backgroundSize: 'contain',
-                                                                                backgroundPositionX: 'center',
-                                                                                backgroundRepeat: 'no-repeat'
-                                                                            }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                            <Link to={"/detallesugeridos/" + item.ArtSku}>
+                                                                                <CardMedia style={{
+                                                                                    height: 115,
+                                                                                    backgroundSize: 'contain',
+                                                                                    backgroundPositionX: 'center',
+                                                                                    backgroundRepeat: 'no-repeat'
+                                                                                }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                            </Link>
                                                                         </CardActionArea>
                                                                         <Typography style={{ color: '#ffaf02' }}>SKU: {item.ArtSku}</Typography>
                                                                         <Typography variant="h6">${item.ArtPVenta}.00</Typography>
@@ -192,18 +195,18 @@ export class DetalleProducto extends React.Component {
 
 
                                                         </Row>
-                                                        <div style={{textAlign:'center', marginBottom:15}}>
+                                                        <div style={{ textAlign: 'center', marginBottom: 15 }}>
                                                             <Link to={"/productosall"}>Ver más</Link>
                                                         </div>
                                                         <Footer></Footer>
                                                     </Col>
-                                                    <Col sm={4}>
+                                                    <Col sm={4} style={{ borderLeft: '1px solid rgb(222, 222, 222)' }}>
                                                         <Row style={{ padding: 15, justifyContent: 'center', borderBottom: '1px solid #dedede' }}>
                                                             <Typography>Mi Carrito</Typography>
                                                         </Row>
                                                         {this.state.mostrar == true ?
                                                             <>
-                                                                <Row style={{ overflowY: 'scroll', height: 500 }}>
+                                                                <Row style={{ overflowY: 'scroll', height: this.state.altura_carrito }}>
                                                                     <div style={{ width: '100%', overflowY: 'scroll', height: '100%' }}>
                                                                         {this.state.productosencarrito.map((produ) => (
                                                                             <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
@@ -231,7 +234,10 @@ export class DetalleProducto extends React.Component {
                                                                                     </Col>
                                                                                     <Col sm={3} style={{ padding: '21px 0px' }}>
                                                                                         <Typography> ${produ.Precio}.00</Typography>
-                                                                                        <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
+                                                                                        {/* <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button> */}
+                                                                                        <a>
+                                                                                            <img style={{ width: '18%' }} src={require("./images/Jumex/trash.png")} onClick={() => this.EliminarCarrito(produ.Sku)}></img>
+                                                                                        </a>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Card>
@@ -536,12 +542,36 @@ export class DetalleProducto extends React.Component {
 
     resize() {
         const height = window.innerWidth;
+        let zoom = ((window.outerWidth - 10) / window.innerWidth) * 100;
+        console.log("Mi altura", Math.ceil(zoom));
+        if (Math.ceil(zoom) == 50) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 1200 })
+        }
+        else if (Math.ceil(zoom) == 67) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 860 })
+        }
+        else if (Math.ceil(zoom) == 75) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 740 })
+        }
+        else if (Math.ceil(zoom) == 80) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 690 })
+        }
+        else if (Math.ceil(zoom) == 90) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 580 })
+        }
         if (height > 800) {
             document.body.style.overflow = "hidden";
         }
         else {
             document.body.style.overflow = "scroll";
         }
+
+
     }
 }
 

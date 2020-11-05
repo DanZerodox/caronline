@@ -23,7 +23,7 @@ import Media from 'react-media';
 import { Carusel } from '../componentes/Carusel';
 import * as Constantes from '../componentes/Constantes';
 
-var url_general = Constantes.url_general ;
+var url_general = Constantes.url_general;
 
 const imagen_principal = {
     height: 360,
@@ -157,12 +157,14 @@ export class DetallesSugeridos extends React.Component {
                                                                     <Card style={{ padding: 15 }}>
                                                                         <Typography>{item.ArtDesTv}</Typography>
                                                                         <CardActionArea>
-                                                                            <CardMedia style={{
-                                                                                height: 115,
-                                                                                backgroundSize: 'contain',
-                                                                                backgroundPositionX: 'center',
-                                                                                backgroundRepeat: 'no-repeat'
-                                                                            }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                            <Link to={"/detalleproducto/" + item.ArtSku}>
+                                                                                <CardMedia style={{
+                                                                                    height: 115,
+                                                                                    backgroundSize: 'contain',
+                                                                                    backgroundPositionX: 'center',
+                                                                                    backgroundRepeat: 'no-repeat'
+                                                                                }} image={url_general + "Content/Assets/Images/" + item.ArtSku + ".png"}></CardMedia>
+                                                                            </Link>
                                                                         </CardActionArea>
                                                                         <Typography style={{ color: '#ffaf02' }}>SKU: {item.ArtSku}</Typography>
                                                                         <Typography variant="h6">${item.ArtPVenta}.00</Typography>
@@ -177,47 +179,55 @@ export class DetallesSugeridos extends React.Component {
                                                                 ))}
                                                             </Carousel>
                                                         </Row>
+                                                        <div style={{ textAlign: 'center', marginBottom: 15 }}>
+                                                            <Link to={"/productosall"}>Ver más</Link>
+                                                        </div>
                                                         <Footer></Footer>
                                                     </Col>
-                                                    <Col sm={4}>
+                                                    <Col sm={4} style={{ borderLeft: '1px solid rgb(222, 222, 222)' }}>
                                                         <Row style={{ padding: 15, justifyContent: 'center', borderBottom: '1px solid #dedede' }}>
                                                             <Typography>Mi Carrito</Typography>
                                                         </Row>
                                                         {this.state.mostrar == true ?
                                                             <>
-                                                                <div style={{ width: '100%', overflowY: 'scroll', height: 500 }}>
-                                                                    {this.state.productosencarrito.map((produ) => (
-                                                                        <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
-                                                                            <Row>
-                                                                                <Col sm={2}>
-                                                                                    <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
-                                                                                </Col>
-                                                                                <Col sm={7}>
-                                                                                    <Media queries={{ small: { maxWidth: 1300 } }}>
-                                                                                        {matches =>
-                                                                                            matches.small ? (
-                                                                                                <Typography style={{ fontSize: '0.9rem' }}>{produ.Des}</Typography>
-                                                                                            )
-                                                                                                :
-                                                                                                (
-                                                                                                    <Typography>{produ.Des}</Typography>
+                                                                <Row style={{ overflowY: 'scroll', height: 500 }}>
+                                                                    <div style={{ width: '100%', overflowY: 'scroll', height: '100%' }}>
+                                                                        {this.state.productosencarrito.map((produ) => (
+                                                                            <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
+                                                                                <Row>
+                                                                                    <Col sm={2}>
+                                                                                        <CardMedia style={{ height: 88, width: 46 }} image={produ.Url}></CardMedia>
+                                                                                    </Col>
+                                                                                    <Col sm={7}>
+                                                                                        <Media queries={{ small: { maxWidth: 1300 } }}>
+                                                                                            {matches =>
+                                                                                                matches.small ? (
+                                                                                                    <Typography style={{ fontSize: '0.9rem' }}>{produ.Des}</Typography>
                                                                                                 )
-                                                                                        }
-                                                                                    </Media>
-                                                                                    <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '2.5' }}>{produ.Cantidad}</label></Col>
-                                                                                        <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
-                                                                                    </Row>
-                                                                                </Col>
-                                                                                <Col sm={3} style={{ padding: '21px 0px' }}>
-                                                                                    <Typography> ${produ.Precio}.00</Typography>
-                                                                                    <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button>
-                                                                                </Col>
-                                                                            </Row>
-                                                                        </Card>
-                                                                    ))}
-                                                                </div>
+                                                                                                    :
+                                                                                                    (
+                                                                                                        <Typography>{produ.Des}</Typography>
+                                                                                                    )
+                                                                                            }
+                                                                                        </Media>
+                                                                                        <Row style={{ width: '100%', border: '1px solid #cacaca', borderRadius: '4px', marginBottom: 10, marginLeft: 0 }}>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.QuitarItemCarrito(produ.Sku)}>-</button></Col>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><label style={{ lineHeight: '2.5' }}>{produ.Cantidad}</label></Col>
+                                                                                            <Col style={{ textAlign: 'center' }} sm={4}><button class="btnagregarnum" onClick={() => this.AgregarItemCarrito(produ.Sku)}>+</button></Col>
+                                                                                        </Row>
+                                                                                    </Col>
+                                                                                    <Col sm={3} style={{ padding: '21px 0px' }}>
+                                                                                        <Typography> ${produ.Precio}.00</Typography>
+                                                                                        {/* <Button style={{ width: '10%' }} onClick={() => this.EliminarCarrito(produ.Sku)}>Eliminar</Button> */}
+                                                                                        <a>
+                                                                                            <img style={{ width: '18%' }} src={require("../images/Jumex/trash.png")} onClick={() => this.EliminarCarrito(produ.Sku)}></img>
+                                                                                        </a>
+                                                                                    </Col>
+                                                                                </Row>
+                                                                            </Card>
+                                                                        ))}
+                                                                    </div>
+                                                                </Row>
 
                                                                 <Row style={{ justifyContent: 'center' }}>
                                                                     <Button style={{ backgroundColor: '#10266b', width: '85%', height: '40px', position: 'absolute', bottom: 10 }} variant="contained" disableElevation>
@@ -459,6 +469,28 @@ export class DetallesSugeridos extends React.Component {
 
     resize() {
         const height = window.innerWidth;
+        let zoom = ((window.outerWidth - 10) / window.innerWidth) * 100;
+        console.log("Mi altura", Math.ceil(zoom));
+        if (Math.ceil(zoom) == 50) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 1200 })
+        }
+        else if (Math.ceil(zoom) == 67) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 860 })
+        }
+        else if (Math.ceil(zoom) == 75) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 740 })
+        }
+        else if (Math.ceil(zoom) == 80) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 690 })
+        }
+        else if (Math.ceil(zoom) == 90) {
+            document.body.style.overflow = "hidden";
+            this.setState({ altura_carrito: 580 })
+        }
         if (height > 800) {
             document.body.style.overflow = "hidden";
         }
