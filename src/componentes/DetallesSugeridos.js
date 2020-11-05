@@ -185,7 +185,7 @@ export class DetallesSugeridos extends React.Component {
                                                         </Row>
                                                         {this.state.mostrar == true ?
                                                             <>
-                                                                <div style={{ width: '100%', overflowY: 'scroll', height: 360 }}>
+                                                                <div style={{ width: '100%', overflowY: 'scroll', height: 500 }}>
                                                                     {this.state.productosencarrito.map((produ) => (
                                                                         <Card style={{ width: '100%', padding: 15, borderBottom: '1px solid #dedede', borderRadius: 0, boxShadow: 'none' }}>
                                                                             <Row>
